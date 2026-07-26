@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>File_Basic - Xs 文档</title>
+    <link rel="stylesheet" href="../css/docs.css">
+</head>
+<body>
+<div class="layout">
+    <aside class="toc">
+        <nav class="toc-inner">
+            <div class="toc-title">File_Basic</div>
+            <ul>
+                <li><a href="#exists">存在判断</a></li>
+                <li><a href="#create">创建目录</a></li>
+                <li><a href="#remove">删除</a></li>
+                <li><a href="#rename">重命名</a></li>
+                <li><a href="#copy">复制</a></li>
+                <li><a href="#list">遍历</a></li>
+                <li><a href="#size">文件大小</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="container">
+        <nav class="breadcrumb">
+            <a href="../index.html">Xs 文档</a> /
+            <a href="File_All.html">File 类</a> /
+            File_Basic
+        </nav>
+
+        <header class="page-header">
+            <h1>File_Basic</h1>
+            <p class="metadata">命名空间：<code>xs</code> | 所属类：<code>XFile</code></p>
+        </header>
+
+        <section id="exists">
+            <h2>存在判断</h2>
+
+            <h3 id="exists-fn">Exists</h3>
+            <pre><code> <span class="kw">bool</span> <span class="fn">Exists</span>(<span class="kw">const</span> <span class="tpl">Path</span>&amp; path);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>path</code></td><td><code class="kw">const</code> <code class="tpl">Path</code>&amp;</td><td>要判断的文件或文件夹路径。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>路径存在返回 <code class="kw">true</code>，否则返回 <code class="kw">false</code>。</p>
+
+            <h3 id="isfile-fn">IsFile</h3>
+            <pre><code> <span class="kw">bool</span> <span class="fn">IsFile</span>(<span class="kw">const</span> <span class="tpl">Path</span>&amp; path);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>path</code></td><td><code class="kw">const</code> <code class="tpl">Path</code>&amp;</td><td>要判断的路径。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>路径指向一个文件返回 <code class="kw">true</code>，否则返回 <code class="kw">false</code>。</p>
+
+            <h3 id="isdirectory-fn">IsDirectory</h3>
+            <pre><code> <span class="kw">bool</span> <span class="fn">IsDirectory</span>(<span class="kw">const</span> <span class="tpl">Path</span>&amp; path);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>path</code></td><td><code class="kw">const</code> <code class="tpl">Path</code>&amp;</td><td>要判断的路径。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>路径指向一个文件夹返回 <code class="kw">true</code>，否则返回 <code class="kw">false</code>。</p>
+        </section>
+
+        <section id="create">
+            <h2>创建目录</h2>
+
+            <h3 id="createdirectory-fn">CreateDirectory</h3>
+            <pre><code> <span class="kw">bool</span> <span class="fn">CreateDirectory</span>(<span class="kw">const</span> <span class="tpl">Path</span>&amp; path);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>path</code></td><td><code class="kw">const</code> <code class="tpl">Path</code>&amp;</td><td>要创建的目录路径（最子级目录）。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>创建成功返回 <code class="kw">true</code>，失败（权限不足、路径非法等）返回 <code class="kw">false</code>。</p>
+            <div class="note">
+                会自动递归创建所有不存在的父目录。
+            </div>
+        </section>
+
+        <section id="remove">
+            <h2>删除</h2>
+
+            <h3 id="remove-fn">Remove</h3>
+            <pre><code> <span class="kw">bool</span> <span class="fn">Remove</span>(<span class="kw">const</span> <span class="tpl">Path</span>&amp; path);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>path</code></td><td><code class="kw">const</code> <code class="tpl">Path</code>&amp;</td><td>要删除的文件或文件夹路径。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>删除成功返回 <code class="kw">true</code>，失败返回 <code class="kw">false</code>。</p>
+            <div class="warning">
+                删除文件夹时不会弹出确认，请谨慎调用。
+            </div>
+        </section>
+
+        <section id="rename">
+            <h2>重命名 / 移动</h2>
+
+            <h3 id="rename-fn">Rename</h3>
+            <pre><code> <span class="kw">bool</span> <span class="fn">Rename</span>(<span class="kw">const</span> <span class="tpl">Path</span>&amp; src, <span class="kw">const</span> <span class="tpl">Path</span>&amp; dst);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>src</code></td><td><code class="kw">const</code> <code class="tpl">Path</code>&amp;</td><td>源文件路径。</td></tr>
+                    <tr><td><code>dst</code></td><td><code class="kw">const</code> <code class="tpl">Path</code>&amp;</td><td>新文件路径（可跨目录，实现移动效果）。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>重命名成功返回 <code class="kw">true</code>，失败返回 <code class="kw">false</code>。</p>
+        </section>
+
+        <section id="copy">
+            <h2>复制</h2>
+
+            <h3 id="copy-fn">Copy</h3>
+            <pre><code> <span class="kw">bool</span> <span class="fn">Copy</span>(<span class="kw">const</span> <span class="tpl">Path</span>&amp; src, <span class="kw">const</span> <span class="tpl">Path</span>&amp; dst, <span class="kw">bool</span> overwrite = <span class="kw">true</span>);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>src</code></td><td><code class="kw">const</code> <code class="tpl">Path</code>&amp;</td><td>源文件路径。</td></tr>
+                    <tr><td><code>dst</code></td><td><code class="kw">const</code> <code class="tpl">Path</code>&amp;</td><td>目标文件路径。</td></tr>
+                    <tr><td><code>overwrite</code></td><td><code class="ty">bool</code></td><td>是否覆盖已存在的目标文件，默认 <code class="kw">true</code>。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>复制成功返回 <code class="kw">true</code>，失败返回 <code class="kw">false</code>。</p>
+        </section>
+
+        <section id="list">
+            <h2>遍历</h2>
+
+            <h3 id="listfiles-fn">ListFiles</h3>
+            <pre><code> std::<span class="ty">vector</span>&lt;<span class="tpl">Path</span>&gt; <span class="fn">ListFiles</span>(<span class="kw">const</span> <span class="tpl">Path</span>&amp; dir);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>dir</code></td><td><code class="kw">const</code> <code class="tpl">Path</code>&amp;</td><td>要遍历的文件夹路径。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回该文件夹下所有<b>文件</b>的路径数组（不含子文件夹）。</p>
+
+            <h3 id="listdirectories-fn">ListDirectories</h3>
+            <pre><code> std::<span class="ty">vector</span>&lt;<span class="tpl">Path</span>&gt; <span class="fn">ListDirectories</span>(<span class="kw">const</span> <span class="tpl">Path</span>&amp; dir);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>dir</code></td><td><code class="kw">const</code> <code class="tpl">Path</code>&amp;</td><td>要遍历的文件夹路径。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回该文件夹下所有<b>子文件夹</b>的路径数组（不含文件）。</p>
+
+            <h3 id="listall-fn">ListAll</h3>
+            <pre><code> std::<span class="ty">vector</span>&lt;<span class="tpl">Path</span>&gt; <span class="fn">ListAll</span>(<span class="kw">const</span> <span class="tpl">Path</span>&amp; dir);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>dir</code></td><td><code class="kw">const</code> <code class="tpl">Path</code>&amp;</td><td>要遍历的文件夹路径。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回该文件夹下所有<b>文件和子文件夹</b>的路径数组。</p>
+        </section>
+
+        <section id="size">
+            <h2>文件大小</h2>
+
+            <h3 id="size-fn">Size</h3>
+            <pre><code> <span class="ty">uint64_t</span> <span class="fn">Size</span>(<span class="kw">const</span> <span class="tpl">Path</span>&amp; path);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>path</code></td><td><code class="kw">const</code> <code class="tpl">Path</code>&amp;</td><td>要获取大小的文件路径。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回文件大小（字节）；路径无效时返回 <code class="nm">0</code>。</p>
+        </section>
+
+        <section>
+            <h2>另请参阅</h2>
+            <ul>
+                <li><a href="File_All.html">File 类总览</a></li>
+                <li><a href="File_Path.html">File_Path — 路径查询</a></li>
+                <li><a href="File_GetDir.html">File_GetDir — 系统目录</a></li>
+            </ul>
+        </section>
+    </main>
+</div>
+<script src="../js/toc.js"></script>
+</body>
+</html>

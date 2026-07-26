@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>File_Pick - Xs 文档</title>
+    <link rel="stylesheet" href="../css/docs.css">
+</head>
+<body>
+<div class="layout">
+    <aside class="toc">
+        <nav class="toc-inner">
+            <div class="toc-title">File_Pick</div>
+            <ul>
+                <li><a href="#filter">文件过滤器</a></li>
+                <li><a href="#pickfiles-w">PickFiles（宽字符）</a></li>
+                <li><a href="#pickfiles-a">PickFiles（窄字符）</a></li>
+                <li><a href="#pickfolder-w">PickFolder（宽字符）</a></li>
+                <li><a href="#pickfolder-a">PickFolder（窄字符）</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="container">
+        <nav class="breadcrumb">
+            <a href="../index.html">Xs 文档</a> /
+            <a href="File_All.html">File 类</a> /
+            File_Pick
+        </nav>
+
+        <header class="page-header">
+            <h1>File_Pick</h1>
+            <p class="metadata">命名空间：<code>xs</code>  | 所属类：<code>XFile::Pick</code></p>
+        </header>
+
+        <section id="filter">
+            <h2>文件过滤器</h2>
+            <p>用于限制对话框中可显示的文件类型，由描述与扩展名组成。</p>
+
+            <h3>类型定义</h3>
+            <pre><code><span class="kw">using</span> <span class="tpl">FileFilter</span>  = std::<span class="ty">pair</span>&lt;std::<span class="ty">wstring</span>, std::<span class="ty">wstring</span>&gt;;
+<span class="kw">using</span> <span class="tpl">FileFilters</span> = std::<span class="ty">vector</span>&lt;<span class="tpl">FileFilter</span>&gt;;</code></pre>
+
+            <h3>过滤器示例</h3>
+            <pre><code><span class="cm">// 描述 + 扩展名（分号分隔多个）</span>
+{ L<span class="nm">"图片文件"</span>, L<span class="nm">"*.png;*.jpg;*.bmp"</span> }
+{ L<span class="nm">"文本文件"</span>, L<span class="nm">"*.txt"</span> }
+{ L<span class="nm">"所有文件"</span>, L<span class="nm">"*.*"</span> }</code></pre>
+        </section>
+
+        <section id="pickfiles-w">
+            <h2>PickFiles（宽字符）</h2>
+
+            <h3 id="pickfiles-w-fn">PickFiles</h3>
+            <pre><code> std::<span class="ty">vector</span>&lt;<span class="tpl">Path</span>&gt;
+<span class="fn">PickFiles</span>(
+    <span class="kw">const</span> std::<span class="ty">wstring</span>&amp; title = L<span class="nm">"选择文件"</span>,
+    <span class="kw">const</span> <span class="tpl">FileFilters</span>&amp; filters = {},
+    <span class="kw">const</span> std::<span class="ty">wstring</span>&amp; initialDir = {},
+    <span class="kw">bool</span> multiSelect = <span class="kw">true</span>
+);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>title</code></td><td><code class="kw">const</code> std::<code class="ty">wstring</code>&amp;</td><td>对话框标题，默认 <code class="nm">L"选择文件"</code>。</td></tr>
+                    <tr><td><code>filters</code></td><td><code class="kw">const</code> <code class="tpl">FileFilters</code>&amp;</td><td>文件过滤器列表，为空则显示所有文件。</td></tr>
+                    <tr><td><code>initialDir</code></td><td><code class="kw">const</code> std::<code class="ty">wstring</code>&amp;</td><td>初始打开的文件夹路径，为空则使用上次位置。</td></tr>
+                    <tr><td><code>multiSelect</code></td><td><code class="ty">bool</code></td><td>是否允许多选，默认 <code class="kw">true</code>。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回用户选择的文件路径数组；用户取消时返回空数组。</p>
+
+            <h4>示例</h4>
+            <pre><code><span class="cm">// 选择多个图片</span>
+<span class="tpl">FileFilters</span> filters = {
+    { L<span class="nm">"图片"</span>, L<span class="nm">"*.png;*.jpg;*.bmp"</span> }
+};
+<span class="kw">auto</span> files = <span class="tpl">XFile::Pick::</span><span class="fn">PickFiles</span>(L<span class="nm">"请选择图片"</span>, filters, L<span class="nm">""</span>, <span class="kw">true</span>);</code></pre>
+        </section>
+
+        <section id="pickfiles-a">
+            <h2>PickFiles（窄字符）</h2>
+
+            <h3 id="pickfiles-a-fn">PickFiles</h3>
+            <pre><code> std::<span class="ty">vector</span>&lt;<span class="tpl">Path</span>&gt;
+<span class="fn">PickFiles</span>(
+    <span class="kw">const</span> std::<span class="ty">string</span>&amp; title = <span class="nm">"Select File"</span>,
+    <span class="kw">const</span> std::<span class="ty">vector</span>&lt;std::<span class="ty">pair</span>&lt;std::<span class="ty">string</span>, std::<span class="ty">string</span>&gt;&gt;&amp; filters = {},
+    <span class="kw">const</span> std::<span class="ty">string</span>&amp; initialDir = {},
+    <span class="kw">bool</span> multiSelect = <span class="kw">true</span>
+);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>title</code></td><td><code class="kw">const</code> std::<code class="ty">string</code>&amp;</td><td>对话框标题，默认 <code class="nm">"Select File"</code>。</td></tr>
+                    <tr><td><code>filters</code></td><td><code class="kw">const</code> std::<code class="ty">vector</code>&lt;std::<code class="ty">pair</code>&lt;std::<code class="ty">string</code>, std::<code class="ty">string</code>&gt;&gt;&amp;</td><td>文件过滤器列表。</td></tr>
+                    <tr><td><code>initialDir</code></td><td><code class="kw">const</code> std::<code class="ty">string</code>&amp;</td><td>初始打开的文件夹路径。</td></tr>
+                    <tr><td><code>multiSelect</code></td><td><code class="ty">bool</code></td><td>是否允许多选，默认 <code class="kw">true</code>。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回用户选择的文件路径数组；用户取消时返回空数组。</p>
+        </section>
+
+        <section id="pickfolder-w">
+            <h2>PickFolder（宽字符）</h2>
+
+            <h3 id="pickfolder-w-fn">PickFolder</h3>
+            <pre><code> <span class="tpl">Path</span>
+<span class="fn">PickFolder</span>(
+    <span class="kw">const</span> std::<span class="ty">wstring</span>&amp; title = L<span class="nm">"选择文件夹"</span>,
+    <span class="kw">const</span> std::<span class="ty">wstring</span>&amp; initialDir = {}
+);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>title</code></td><td><code class="kw">const</code> std::<code class="ty">wstring</code>&amp;</td><td>对话框标题，默认 <code class="nm">L"选择文件夹"</code>。</td></tr>
+                    <tr><td><code>initialDir</code></td><td><code class="kw">const</code> std::<code class="ty">wstring</code>&amp;</td><td>初始打开的文件夹路径，为空则使用默认位置。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回用户选择的文件夹路径；用户取消时返回空路径。</p>
+        </section>
+
+        <section id="pickfolder-a">
+            <h2>PickFolder（窄字符）</h2>
+
+            <h3 id="pickfolder-a-fn">PickFolder</h3>
+            <pre><code> <span class="tpl">Path</span>
+<span class="fn">PickFolder</span>(
+    <span class="kw">const</span> std::<span class="ty">string</span>&amp; title = <span class="nm">"Select Folder"</span>,
+    <span class="kw">const</span> std::<span class="ty">string</span>&amp; initialDir = {}
+);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>title</code></td><td><code class="kw">const</code> std::<code class="ty">string</code>&amp;</td><td>对话框标题，默认 <code class="nm">"Select Folder"</code>。</td></tr>
+                    <tr><td><code>initialDir</code></td><td><code class="kw">const</code> std::<code class="ty">string</code>&amp;</td><td>初始打开的文件夹路径。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回用户选择的文件夹路径；用户取消时返回空路径。</p>
+        </section>
+
+        <section>
+            <h2>另请参阅</h2>
+            <ul>
+                <li><a href="File_All.html">File 类总览</a></li>
+                <li><a href="File_Basic.html">File_Basic — 文件操作</a></li>
+            </ul>
+        </section>
+    </main>
+</div>
+<script src="../js/toc.js"></script>
+</body>
+</html>
