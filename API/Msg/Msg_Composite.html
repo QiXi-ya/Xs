@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Msg_Composite - Xs 文档</title>
+    <link rel="stylesheet" href="../css/docs.css">
+</head>
+<body>
+<div class="layout">
+    <aside class="toc">
+        <nav class="toc-inner">
+            <div class="toc-title">Msg_Composite</div>
+            <ul>
+                <li><a href="#rect">区域复合检测</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="container">
+        <nav class="breadcrumb">
+            <a href="../index.html">Xs 文档</a> / <a href="Msg_All.html">Msg 类</a> / Msg_Composite
+        </nav>
+
+        <header class="page-header">
+            <h1>Msg_Composite</h1>
+            <p class="metadata">命名空间：<code>xs</code>  | 所属类：<code>XMsg::Composite</code></p>
+        </header>
+
+        <section id="rect">
+            <h2>区域复合检测</h2>
+
+            <h3 id="ismouseinrectdown">IsMouseInRectDown</h3>
+            <p>判断指定鼠标键是否在指定矩形区域内被按下。</p>
+            <pre><code><span class="kw">bool</span> <span class="fn">IsMouseInRectDown</span>(<span class="tpl">VK</span>::<span class="en">VKC</span> VK, <span class="ty">int</span> x, <span class="ty">int</span> y, <span class="ty">int</span> w, <span class="ty">int</span> h);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>VK</code></td><td><code class="tpl">VK::VKC</code></td><td>要检测的鼠标键。</td></tr>
+                    <tr><td><code>x</code>, <code>y</code></td><td><code class="ty">int</code></td><td>区域左上角坐标。</td></tr>
+                    <tr><td><code>w</code>, <code>h</code></td><td><code class="ty">int</code></td><td>区域宽高。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>在区域内按下返回 <code class="kw">true</code>。</p>
+
+            <h3 id="getmouserectwheel">GetMouseRectWheel</h3>
+            <p>获取鼠标在指定区域内的滚轮值。</p>
+            <pre><code><span class="ty">int</span> <span class="fn">GetMouseRectWheel</span>(<span class="ty">int</span> x, <span class="ty">int</span> y, <span class="ty">int</span> w, <span class="ty">int</span> h);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>x</code>, <code>y</code></td><td><code class="ty">int</code></td><td>区域左上角坐标。</td></tr>
+                    <tr><td><code>w</code>, <code>h</code></td><td><code class="ty">int</code></td><td>区域宽高。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回滚轮值，为 120 的整数倍。</p>
+        </section>
+
+        <section>
+            <h2>另请参阅</h2>
+            <ul>
+                <li><a href="Msg_All.html">Msg 类总览</a></li>
+                <li><a href="Msg_Mouse.html">Msg_Mouse</a></li>
+                <li><a href="Msg_Key.html">Msg_Key</a></li>
+            </ul>
+        </section>
+    </main>
+</div>
+<script src="../js/toc.js"></script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Msg_Basic - Xs 文档</title>
+    <link rel="stylesheet" href="../css/docs.css">
+</head>
+<body>
+<div class="layout">
+    <aside class="toc">
+        <nav class="toc-inner">
+            <div class="toc-title">Msg_Basic</div>
+            <ul>
+                <li><a href="#xmsg">消息类</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="container">
+        <nav class="breadcrumb">
+            <a href="../index.html">Xs 文档</a> / <a href="Msg_All.html">Msg 类</a> / Msg_Basic
+        </nav>
+
+        <header class="page-header">
+            <h1>Msg_Basic</h1>
+            <p class="metadata">命名空间：<code>xs</code> | 所属类：<code>XMsg</code></p>
+        </header>
+
+        <section id="xmsg">
+            <h2>XMsg — 消息主类</h2>
+
+            <h3 id="updatemsg">UpdateMsg</h3>
+            <p>更新窗口消息队列，每帧必须调用一次。</p>
+            <pre><code><span class="kw">void</span> <span class="fn">UpdateMsg</span>(<span class="tpl">RenWin</span>&amp; Dest);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>Dest</code></td><td><code class="tpl">RenWin</code>&amp;</td><td>目标窗口，消息将绑定到此窗口。</td></tr>
+                </tbody>
+            </table>
+
+            <h3 id="isclose">IsClose</h3>
+            <p>判断当前窗口是否收到关闭消息。</p>
+            <pre><code><span class="kw">bool</span> <span class="fn">IsClose</span>(<span class="tpl">RenWin</span>&amp; window);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>window</code></td><td><code class="tpl">RenWin</code>&amp;</td><td>目标窗口。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>窗口被请求关闭时返回 <code class="kw">true</code>，否则返回 <code class="kw">false</code>。</p>
+
+            <h3 id="resetclosemsg">ResetCloseMsg</h3>
+            <p>重置关闭消息状态，调用后 <code>IsClose</code> 将返回 <code>false</code>。</p>
+            <pre><code><span class="kw">void</span> <span class="fn">ResetCloseMsg</span>();</code></pre>
+        
+            <h3 id="setsleeptime">SetSleepTime</h3>
+            <p>设置消息循环的睡眠时间（毫秒），用于控制主循环节奏。</p>
+            <pre><code><span class="kw">void</span> <span class="fn">SetSleepTime</span>(<span class="ty">int</span> time);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>time</code></td><td><code class="ty">int</code></td><td>睡眠时间（毫秒）。</td></tr>
+                </tbody>
+            </table>
+
+            <h3 id="clearmsg">ClearMsg</h3>
+            <p>清理消息缓冲区，丢弃所有未处理的消息。</p>
+            <pre><code><span class="kw">void</span> <span class="fn">ClearMsg</span>();</code></pre>
+            
+        </section>
+
+        <section>
+            <h2>另请参阅</h2>
+            <ul>
+                <li><a href="Msg_All.html">Msg 类总览</a></li>
+                <li><a href="Msg_Global.html">Msg_Global — 窗口消息与全局控制</a></li>
+                <li><a href="Msg_Mouse.html">Msg_Mouse</a></li>
+            </ul>
+        </section>
+    </main>
+</div>
+<script src="../js/toc.js"></script>
+</body>
+</html>

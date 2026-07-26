@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Msg_Global - Xs 文档</title>
+    <link rel="stylesheet" href="../css/docs.css">
+</head>
+<body>
+<div class="layout">
+    <aside class="toc">
+        <nav class="toc-inner">
+            <div class="toc-title">Msg_Global</div>
+            <ul>
+                <li><a href="#windowmsg">窗口消息</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="container">
+        <nav class="breadcrumb">
+            <a href="../index.html">Xs 文档</a> / <a href="Msg_All.html">Msg 类</a> / Msg_Global
+        </nav>
+
+        <header class="page-header">
+            <h1>Msg_Touch</h1>
+            <p class="metadata">命名空间：<code>xs</code> | 所属类：<code>XMsg::WindowMsg</code></p>
+        </header>
+
+        <!-- ===== WindowMsg ===== -->
+        <section id="windowmsg">
+            <h2>WindowMsg — 窗口消息</h2>
+            <p>查询当前窗口的状态变化（移动、缩放、最小化、最大化、关闭请求）。</p>
+
+            <h3>IsWindowMove</h3>
+            <p>判断窗口是否正在被拖动移动。</p>
+            <pre><code><span class="kw">bool</span> <span class="fn">IsWindowMove</span>();</code></pre>
+
+            <h3>IsWindowResize</h3>
+            <p>判断窗口是否正在被调整大小。</p>
+            <pre><code><span class="kw">bool</span> <span class="fn">IsWindowResize</span>();</code></pre>
+
+            <h3>IsWindowNeedClose</h3>
+            <p>判断窗口是否需要关闭（系统发来的关闭请求）。</p>
+            <pre><code><span class="kw">bool</span> <span class="fn">IsWindowNeedClose</span>();</code></pre>
+
+            <h3>IsWindowMin</h3>
+            <p>判断窗口是否处于最小化状态。</p>
+            <pre><code><span class="kw">bool</span> <span class="fn">IsWindowMin</span>();</code></pre>
+
+            <h3>IsWindowMax</h3>
+            <p>判断窗口是否处于最大化状态。</p>
+            <pre><code><span class="kw">bool</span> <span class="fn">IsWindowMax</span>();</code></pre>
+        </section>
+
+        <section>
+            <h2>另请参阅</h2>
+            <ul>
+                <li><a href="Msg_All.html">Msg 类总览</a></li>
+                <li><a href="Msg_Basic.html">Msg_Basic — 消息主类</a></li>
+                <li><a href="Msg_Mouse.html">Msg_Mouse</a></li>
+            </ul>
+        </section>
+    </main>
+</div>
+<script src="../js/toc.js"></script>
+</body>
+</html>

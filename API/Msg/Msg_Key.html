@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Msg_Key - Xs 文档</title>
+    <link rel="stylesheet" href="../css/docs.css">
+</head>
+<body>
+<div class="layout">
+    <aside class="toc">
+        <nav class="toc-inner">
+            <div class="toc-title">Msg_Key</div>
+            <ul>
+                <li><a href="#keystate">按键状态</a></li>
+                <li><a href="#keydown">按键按下</a></li>
+                <li><a href="#keyreleased">按键松开</a></li>
+                <li><a href="#input">字符输入</a></li>
+                <li><a href="#ime">IME 设置</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="container">
+        <nav class="breadcrumb">
+            <a href="../index.html">Xs 文档</a> / <a href="Msg_All.html">Msg 类</a> / Msg_Key
+        </nav>
+
+        <header class="page-header">
+            <h1>Msg_Key</h1>
+            <p class="metadata">命名空间：<code>xs</code> | 所属类：<code>XMsg::KeyMsg</code></p>
+        </header>
+
+        <!-- ===== Keystate ===== -->
+        <section id="keystate">
+            <h2>按键状态（持续检测）</h2>
+
+            <h3 id="keystate-vkc">Keystate（VKC 重载）</h3>
+            <p>判断指定虚拟键码对应的按键当前是否被按住。</p>
+            <pre><code><span class="kw">bool</span> <span class="fn">Keystate</span>(<span class="tpl">VK</span>::<span class="en">VKC</span> VK);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>VK</code></td><td><code class="tpl">VK::VKC</code></td><td>虚拟键码枚举值。</td></tr>
+                </tbody>
+            </table>
+
+            <h3 id="keystate-int">Keystate（int 重载）</h3>
+            <p>同上，接受整数形式的虚拟键码。</p>
+            <pre><code><span class="kw">bool</span> <span class="fn">Keystate</span>(<span class="ty">int</span> VK);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>VK</code></td><td><code class="ty">int</code></td><td>虚拟键码整数值。</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ===== IsKeyDown ===== -->
+        <section id="keydown">
+            <h2>按键按下（边沿触发）</h2>
+
+            <h3 id="iskeydown-vkc">IsKeyDown（VKC 重载）</h3>
+            <p>检查指定按键是否在本帧被按下（仅第一帧为 true）。</p>
+            <pre><code><span class="kw">bool</span> <span class="fn">IsKeyDown</span>(<span class="tpl">VK</span>::<span class="en">VKC</span> VK);</code></pre>
+
+            <h3 id="iskeydown-int">IsKeyDown（int 重载）</h3>
+            <pre><code><span class="kw">bool</span> <span class="fn">IsKeyDown</span>(<span class="ty">int</span> VK);</code></pre>
+        </section>
+
+        <!-- ===== IsKeyReleased ===== -->
+        <section id="keyreleased">
+            <h2>按键松开（边沿触发）</h2>
+
+            <h3 id="iskeyreleased-vkc">IsKeyReleased（VKC 重载）</h3>
+            <p>检查指定按键是否在本帧被松开（仅第一帧为 true）。</p>
+            <pre><code><span class="kw">bool</span> <span class="fn">IsKeyReleased</span>(<span class="tpl">VK</span>::<span class="en">VKC</span> VK);</code></pre>
+
+            <h3 id="iskeyreleased-int">IsKeyReleased（int 重载）</h3>
+            <pre><code><span class="kw">bool</span> <span class="fn">IsKeyReleased</span>(<span class="ty">int</span> VK);</code></pre>
+        </section>
+
+        <!-- ===== 字符输入 ===== -->
+        <section id="input">
+            <h2>字符输入</h2>
+
+            <h3 id="getinput">GetInPut</h3>
+            <p>获取本帧输入的字符。</p>
+            <pre><code>std::<span class="ty">string</span> <span class="fn">GetInPut</span>();</code></pre>
+            <h4>返回值</h4>
+            <p>有输入时返回字符；退格返回 <code>\b</code>，回车返回 <code>\n</code>，无输入返回空串。</p>
+
+            <h3 id="getinputnumber">GetInPutNumber</h3>
+            <p>在已有字符串基础上追加合法数字输入，过滤非数字字符。</p>
+            <pre><code>std::<span class="ty">string</span> <span class="fn">GetInPutNumber</span>(std::<span class="ty">string</span> str);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>str</code></td><td><code class="ty">std::string</code></td><td>当前已输入的字符串，函数会在此基础上追加。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回追加了合法数字输入的新字符串；输入不合法时返回原字符串。</p>
+        </section>
+
+        <!-- ===== IME ===== -->
+        <section id="ime">
+            <h2>IME 设置</h2>
+
+            <h3 id="setimepos">SetIMEPos</h3>
+            <p>设置 IME 候选窗口的屏幕坐标位置。</p>
+            <pre><code><span class="kw">void</span> <span class="fn">SetIMEPos</span>(<span class="ty">int</span> x, <span class="ty">int</span> y);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>x</code>, <code>y</code></td><td><code class="ty">int</code></td><td>候选窗口的屏幕坐标。</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>另请参阅</h2>
+            <ul>
+                <li><a href="Msg_All.html">Msg 类总览</a></li>
+                <li><a href="VK.html">VK 虚拟键码</a></li>
+                <li><a href="Msg_HotKey.html">Msg_HotKey</a></li>
+            </ul>
+        </section>
+    </main>
+</div>
+<script src="../js/toc.js"></script>
+</body>
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>VK — 虚拟键码 - Xs 文档</title>
+    <link rel="stylesheet" href="../css/docs.css">
+</head>
+<body>
+<div class="layout">
+    <aside class="toc">
+        <nav class="toc-inner">
+            <div class="toc-title">VK 虚拟键码</div>
+            <ul>
+                <li><a href="#mouse">鼠标键</a></li>
+                <li><a href="#control">控制键</a></li>
+                <li><a href="#nav">方向键与导航</a></li>
+                <li><a href="#func">功能键 F1–F12</a></li>
+                <li><a href="#alpha">字母键</a></li>
+                <li><a href="#num-main">大键盘数字</a></li>
+                <li><a href="#num-pad">小键盘</a></li>
+                <li><a href="#symbol">符号键</a></li>
+                <li><a href="#lock">锁定键</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="container">
+        <nav class="breadcrumb">
+            <a href="../index.html">Xs 文档</a> / <a href="Msg_All.html">XMsg 类</a> / VK 虚拟键码
+        </nav>
+
+        <header class="page-header">
+            <h1>Msg_Touch</h1>
+            <p class="metadata">命名空间：<code>xs</code> | 所属类：<code>XMsg::VK</code></p>
+        </header>
+
+        <header class="page-header">
+            <h1>VK — 虚拟键码</h1>
+            <p class="metadata">命名空间：<code>xs::VK::VKC</code></p>
+        </header>
+
+        <section id="overview">
+            <h2>概述</h2>
+            <p><code>xs::VK</code> 类内嵌枚举 <code>VKC</code>，统一管理键盘、鼠标、功能键的虚拟键码。供 <code>MouseMsg</code>、<code>KeyMsg</code>、<code>Composite</code>、<code>HotKey</code> 等类使用。</p>
+            <div class="warning">注意：请使用键码名而不是十六进制</div>
+            <pre><code><span class="kw">enum</span> <span class="ty">VKC</span> {
+    <span class="en">MouseLeft</span>   = <span class="nm">0x01</span>,  <span class="cm">// 鼠标左键</span>
+    <span class="en">A</span>           = <span class="nm">0x41</span>,  <span class="cm">// 字母键 A</span>
+    <span class="en">Fn1</span>         = <span class="nm">0x70</span>,  <span class="cm">// 功能键 F1</span>
+    <span class="cm">// ... 完整列表见下方</span>
+};</code></pre>
+        </section>
+
+        <section id="mouse">
+            <h2>鼠标键</h2>
+            <table class="doc-table">
+                <thead><tr><th>键码</th><th>值</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code class="en">MouseLeft</code></td><td><code class="nm">0x01</code></td><td>鼠标左键</td></tr>
+                    <tr><td><code class="en">MouseRight</code></td><td><code class="nm">0x02</code></td><td>鼠标右键</td></tr>
+                    <tr><td><code class="en">MouseMiddle</code></td><td><code class="nm">0x04</code></td><td>鼠标中键</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="control">
+            <h2>控制键</h2>
+            <table class="doc-table">
+                <thead><tr><th>键码</th><th>值</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code class="en">Back</code></td><td><code class="nm">0x08</code></td><td>退格键</td></tr>
+                    <tr><td><code class="en">Tab</code></td><td><code class="nm">0x09</code></td><td>Tab 键</td></tr>
+                    <tr><td><code class="en">Enter</code></td><td><code class="nm">0x0d</code></td><td>回车键</td></tr>
+                    <tr><td><code class="en">Shift</code></td><td><code class="nm">0x10</code></td><td>Shift 键（通用）</td></tr>
+                    <tr><td><code class="en">Ctrl</code></td><td><code class="nm">0x11</code></td><td>Ctrl 键（通用）</td></tr>
+                    <tr><td><code class="en">Alt</code></td><td><code class="nm">0x12</code></td><td>Alt 键（通用）</td></tr>
+                    <tr><td><code class="en">Pause</code></td><td><code class="nm">0x13</code></td><td>Pause 键</td></tr>
+                    <tr><td><code class="en">CapsLock</code></td><td><code class="nm">0x14</code></td><td>大写锁定键</td></tr>
+                    <tr><td><code class="en">Esc</code></td><td><code class="nm">0x1b</code></td><td>Esc 键</td></tr>
+                    <tr><td><code class="en">Space</code></td><td><code class="nm">0x20</code></td><td>空格键</td></tr>
+                    <tr><td><code class="en">WinLeft</code></td><td><code class="nm">0x5b</code></td><td>左 Windows 徽标键</td></tr>
+                    <tr><td><code class="en">WinRight</code></td><td><code class="nm">0x5c</code></td><td>右 Windows 徽标键</td></tr>
+                    <tr><td><code class="en">Sleep</code></td><td><code class="nm">0x5f</code></td><td>休眠键</td></tr>
+                    <tr><td><code class="en">ShiftL</code></td><td><code class="nm">0xa0</code></td><td>左 Shift</td></tr>
+                    <tr><td><code class="en">ShiftR</code></td><td><code class="nm">0xa1</code></td><td>右 Shift</td></tr>
+                    <tr><td><code class="en">CtrlL</code></td><td><code class="nm">0xa2</code></td><td>左 Ctrl</td></tr>
+                    <tr><td><code class="en">CtrlR</code></td><td><code class="nm">0xa3</code></td><td>右 Ctrl</td></tr>
+                    <tr><td><code class="en">AltL</code></td><td><code class="nm">0xa4</code></td><td>左 Alt</td></tr>
+                    <tr><td><code class="en">AltR</code></td><td><code class="nm">0xa5</code></td><td>右 Alt</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="nav">
+            <h2>方向键与导航键</h2>
+            <table class="doc-table">
+                <thead><tr><th>键码</th><th>值</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code class="en">PageUp</code></td><td><code class="nm">0x21</code></td><td>向上翻页</td></tr>
+                    <tr><td><code class="en">PageDown</code></td><td><code class="nm">0x22</code></td><td>向下翻页</td></tr>
+                    <tr><td><code class="en">Home</code></td><td><code class="nm">0x23</code></td><td>Home</td></tr>
+                    <tr><td><code class="en">End</code></td><td><code class="nm">0x24</code></td><td>End</td></tr>
+                    <tr><td><code class="en">Left</code></td><td><code class="nm">0x25</code></td><td>← 左方向键</td></tr>
+                    <tr><td><code class="en">Up</code></td><td><code class="nm">0x26</code></td><td>↑ 上方向键</td></tr>
+                    <tr><td><code class="en">Right</code></td><td><code class="nm">0x27</code></td><td>→ 右方向键</td></tr>
+                    <tr><td><code class="en">Down</code></td><td><code class="nm">0x28</code></td><td>↓ 下方向键</td></tr>
+                    <tr><td><code class="en">Insert</code></td><td><code class="nm">0x2d</code></td><td>插入键</td></tr>
+                    <tr><td><code class="en">Delete</code></td><td><code class="nm">0x2e</code></td><td>删除键</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="func">
+            <h2>功能键 F1–F12</h2>
+            <table class="doc-table">
+                <thead><tr><th>键码</th><th>值</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code class="en">Fn1</code></td><td><code class="nm">0x70</code></td><td>功能键 F1</td></tr>
+                    <tr><td><code class="en">Fn2</code></td><td><code class="nm">0x71</code></td><td>功能键 F2</td></tr>
+                    <tr><td><code class="en">Fn3</code></td><td><code class="nm">0x72</code></td><td>功能键 F3</td></tr>
+                    <tr><td><code class="en">Fn4</code></td><td><code class="nm">0x73</code></td><td>功能键 F4</td></tr>
+                    <tr><td><code class="en">Fn5</code></td><td><code class="nm">0x74</code></td><td>功能键 F5</td></tr>
+                    <tr><td><code class="en">Fn6</code></td><td><code class="nm">0x75</code></td><td>功能键 F6</td></tr>
+                    <tr><td><code class="en">Fn7</code></td><td><code class="nm">0x76</code></td><td>功能键 F7</td></tr>
+                    <tr><td><code class="en">Fn8</code></td><td><code class="nm">0x77</code></td><td>功能键 F8</td></tr>
+                    <tr><td><code class="en">Fn9</code></td><td><code class="nm">0x78</code></td><td>功能键 F9</td></tr>
+                    <tr><td><code class="en">Fn10</code></td><td><code class="nm">0x79</code></td><td>功能键 F10</td></tr>
+                    <tr><td><code class="en">Fn11</code></td><td><code class="nm">0x7a</code></td><td>功能键 F11</td></tr>
+                    <tr><td><code class="en">Fn12</code></td><td><code class="nm">0x7b</code></td><td>功能键 F12</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="alpha">
+            <h2>字母键 A–Z</h2>
+            <table class="doc-table">
+                <thead><tr><th>键码</th><th>值</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code class="en">A</code>–<code class="en">Z</code></td><td><code class="nm">0x41</code>–<code class="nm">0x5a</code></td><td>字母键 A 至 Z</td></tr>
+                </tbody>
+            </table>
+            <p>完整列表：</p>
+            <table class="doc-table">
+                <thead><tr><th>键码</th><th>值</th><th>键码</th><th>值</th></tr></thead>
+                <tbody>
+                    <tr><td><code class="en">A</code></td><td><code class="nm">0x41</code></td><td><code class="en">N</code></td><td><code class="nm">0x4e</code></td></tr>
+                    <tr><td><code class="en">B</code></td><td><code class="nm">0x42</code></td><td><code class="en">O</code></td><td><code class="nm">0x4f</code></td></tr>
+                    <tr><td><code class="en">C</code></td><td><code class="nm">0x43</code></td><td><code class="en">P</code></td><td><code class="nm">0x50</code></td></tr>
+                    <tr><td><code class="en">D</code></td><td><code class="nm">0x44</code></td><td><code class="en">Q</code></td><td><code class="nm">0x51</code></td></tr>
+                    <tr><td><code class="en">E</code></td><td><code class="nm">0x45</code></td><td><code class="en">R</code></td><td><code class="nm">0x52</code></td></tr>
+                    <tr><td><code class="en">F</code></td><td><code class="nm">0x46</code></td><td><code class="en">S</code></td><td><code class="nm">0x53</code></td></tr>
+                    <tr><td><code class="en">G</code></td><td><code class="nm">0x47</code></td><td><code class="en">T</code></td><td><code class="nm">0x54</code></td></tr>
+                    <tr><td><code class="en">H</code></td><td><code class="nm">0x48</code></td><td><code class="en">U</code></td><td><code class="nm">0x55</code></td></tr>
+                    <tr><td><code class="en">I</code></td><td><code class="nm">0x49</code></td><td><code class="en">V</code></td><td><code class="nm">0x56</code></td></tr>
+                    <tr><td><code class="en">J</code></td><td><code class="nm">0x4a</code></td><td><code class="en">W</code></td><td><code class="nm">0x57</code></td></tr>
+                    <tr><td><code class="en">K</code></td><td><code class="nm">0x4b</code></td><td><code class="en">X</code></td><td><code class="nm">0x58</code></td></tr>
+                    <tr><td><code class="en">L</code></td><td><code class="nm">0x4c</code></td><td><code class="en">Y</code></td><td><code class="nm">0x59</code></td></tr>
+                    <tr><td><code class="en">M</code></td><td><code class="nm">0x4d</code></td><td><code class="en">Z</code></td><td><code class="nm">0x5a</code></td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="num-main">
+            <h2>大键盘数字键 0–9</h2>
+            <table class="doc-table">
+                <thead><tr><th>键码</th><th>值</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code class="en">Big0</code>–<code class="en">Big9</code></td><td><code class="nm">0x30</code>–<code class="nm">0x39</code></td><td>大键盘数字键 0 至 9</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="num-pad">
+            <h2>小键盘</h2>
+            <table class="doc-table">
+                <thead><tr><th>键码</th><th>值</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code class="en">Min0</code>–<code class="en">Min9</code></td><td><code class="nm">0x60</code>–<code class="nm">0x69</code></td><td>小键盘数字 0–9</td></tr>
+                    <tr><td><code class="en">MinMultiply</code></td><td><code class="nm">0x6a</code></td><td>小键盘 ×（乘号）</td></tr>
+                    <tr><td><code class="en">MinAdd</code></td><td><code class="nm">0x6b</code></td><td>小键盘 +（加号）</td></tr>
+                    <tr><td><code class="en">MinSeparator</code></td><td><code class="nm">0x6c</code></td><td>小键盘分隔符</td></tr>
+                    <tr><td><code class="en">MinSubtract</code></td><td><code class="nm">0x6d</code></td><td>小键盘 −（减号）</td></tr>
+                    <tr><td><code class="en">MinDecimal</code></td><td><code class="nm">0x6e</code></td><td>小键盘 .（小数点）</td></tr>
+                    <tr><td><code class="en">MinDivide</code></td><td><code class="nm">0x6f</code></td><td>小键盘 /（除号）</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="symbol">
+            <h2>符号键</h2>
+            <table class="doc-table">
+                <thead><tr><th>键码</th><th>值</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code class="en">Semicolon</code></td><td><code class="nm">0xba</code></td><td>分号 <code>;</code></td></tr>
+                    <tr><td><code class="en">Plus</code></td><td><code class="nm">0xbb</code></td><td>加号 <code>+</code></td></tr>
+                    <tr><td><code class="en">Comma</code></td><td><code class="nm">0xbc</code></td><td>逗号 <code>,</code></td></tr>
+                    <tr><td><code class="en">Minus</code></td><td><code class="nm">0xbd</code></td><td>减号 <code>-</code></td></tr>
+                    <tr><td><code class="en">Period</code></td><td><code class="nm">0xbe</code></td><td>句号 <code>.</code></td></tr>
+                    <tr><td><code class="en">Slash</code></td><td><code class="nm">0xbf</code></td><td>斜杠 <code>/</code></td></tr>
+                    <tr><td><code class="en">Tilde</code></td><td><code class="nm">0xc0</code></td><td>波浪号 <code>~</code></td></tr>
+                    <tr><td><code class="en">Lbrace</code></td><td><code class="nm">0xdb</code></td><td>左方括号 <code>[</code></td></tr>
+                    <tr><td><code class="en">Backslash</code></td><td><code class="nm">0xdc</code></td><td>反斜杠 <code>\</code></td></tr>
+                    <tr><td><code class="en">Rbrace</code></td><td><code class="nm">0xdd</code></td><td>右方括号 <code>]</code></td></tr>
+                    <tr><td><code class="en">Quote</code></td><td><code class="nm">0xde</code></td><td>引号 <code>'</code></td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="lock">
+            <h2>打印与锁定键</h2>
+            <table class="doc-table">
+                <thead><tr><th>键码</th><th>值</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code class="en">Print</code></td><td><code class="nm">0x2a</code></td><td>打印键</td></tr>
+                    <tr><td><code class="en">PrintScreen</code></td><td><code class="nm">0x2c</code></td><td>截屏键</td></tr>
+                    <tr><td><code class="en">MinNumlock</code></td><td><code class="nm">0x90</code></td><td>小键盘数字锁定</td></tr>
+                    <tr><td><code class="en">ScrollLock</code></td><td><code class="nm">0x91</code></td><td>滚动锁定键</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>另请参阅</h2>
+            <ul>
+                <li><a href="Msg.html">XMsg 类</a></li>
+                <li><a href="../index.html">返回首页</a></li>
+            </ul>
+        </section>
+    </main>
+</div>
+<script src="../js/toc.js"></script>
+</body>
+</html>

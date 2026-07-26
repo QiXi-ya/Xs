@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Msg_Touch - Xs 文档</title>
+    <link rel="stylesheet" href="../css/docs.css">
+</head>
+<body>
+<div class="layout">
+    <aside class="toc">
+        <nav class="toc-inner">
+            <div class="toc-title">Msg_Touch</div>
+            <ul>
+                <li><a href="#state">触控状态</a></li>
+                <li><a href="#pos-size">位置与大小</a></li>
+                <li><a href="#wheel">触控滚轮</a></li>
+                <li><a href="#support">设备支持</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="container">
+        <nav class="breadcrumb">
+            <a href="../index.html">Xs 文档</a> / <a href="Msg_All.html">Msg 类</a> / Msg_Touch
+        </nav>
+
+        <header class="page-header">
+            <h1>Msg_Touch</h1>
+            <p class="metadata">命名空间：<code>xs</code> | 所属类：<code>XMsg::TouchMsg</code></p>
+        </header>
+
+        <section id="state">
+            <h2>触控状态</h2>
+
+            <h3 id="istouching">IsTouching</h3>
+            <p>判断当前是否有触控点正在接触屏幕。</p>
+            <pre><code><span class="kw">bool</span> <span class="fn">IsTouching</span>();</code></pre>
+
+            <h3 id="gettouchnum">GetTouchNum</h3>
+            <p>获取当前触控点数量。</p>
+            <pre><code><span class="ty">int</span> <span class="fn">GetTouchNum</span>();</code></pre>
+        </section>
+
+        <section id="pos-size">
+            <h2>位置与大小</h2>
+
+            <h3 id="gettouchpos">GetTouchPos</h3>
+            <p>获取第一个触控点的位置。</p>
+            <pre><code><span class="tpl">Vector2i</span> <span class="fn">GetTouchPos</span>();</code></pre>
+            <h4>返回值</h4>
+            <p>返回触控点的 <code class="tpl">Vector2i</code> 像素坐标。</p>
+
+            <h3 id="gettouchsize">GetTouchSize</h3>
+            <p>获取触控接触区域的大小。</p>
+            <pre><code><span class="ty">int</span> <span class="fn">GetTouchSize</span>();</code></pre>
+            <h4>返回值</h4>
+            <p>返回触控接触区域的直径（像素）。</p>
+        </section>
+
+        <section id="wheel">
+            <h2>触控滚轮</h2>
+
+            <h3 id="gettouchwheel">GetTouchWheel</h3>
+            <p>获取触控产生的滚轮值。</p>
+            <pre><code><span class="ty">int</span> <span class="fn">GetTouchWheel</span>();</code></pre>
+            <h4>返回值</h4>
+            <p>返回滚轮值，为 120 的整数倍。</p>
+        </section>
+
+        <section id="support">
+            <h2>设备支持</h2>
+
+            <h3 id="istouchsupported">IsTouchSupported</h3>
+            <p>判断当前设备是否支持触控输入。</p>
+            <pre><code><span class="kw">bool</span> <span class="fn">IsTouchSupported</span>();</code></pre>
+            <h4>返回值</h4>
+            <p>支持返回 <code class="kw">true</code>，否则返回 <code class="kw">false</code>。</p>
+        </section>
+
+        <section>
+            <h2>另请参阅</h2>
+            <ul>
+                <li><a href="Msg_All.html">Msg 类总览</a></li>
+                <li><a href="Msg_Mouse.html">Msg_Mouse</a></li>
+            </ul>
+        </section>
+    </main>
+</div>
+<script src="../js/toc.js"></script>
+</body>
+</html>

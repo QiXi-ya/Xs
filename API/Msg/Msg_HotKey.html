@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Msg_HotKey - Xs 文档</title>
+    <link rel="stylesheet" href="../css/docs.css">
+</head>
+<body>
+<div class="layout">
+    <aside class="toc">
+        <nav class="toc-inner">
+            <div class="toc-title">Msg_HotKey</div>
+            <ul>
+                <li><a href="#register">注册热键</a></li>
+                <li><a href="#check">查询热键</a></li>
+                <li><a href="#unregister">注销热键</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="container">
+        <nav class="breadcrumb">
+            <a href="../index.html">Xs 文档</a> / <a href="Msg_All.html">Msg 类</a> / Msg_HotKey
+        </nav>
+
+        <header class="page-header">
+            <h1>Msg_HotKey</h1>
+            <p class="metadata">命名空间：<code>xs</code> | 所属类：<code>XMsg::KeyMsg::HotKey</code></p>
+        </header>
+
+        <section id="register">
+            <h2>注册热键</h2>
+
+            <h3 id="registerhotkey">RegisterHotKey</h3>
+            <p>注册或更新一个热键组合。同名热键重复注册会覆盖旧值。</p>
+            <pre><code><span class="kw">void</span> <span class="fn">RegisterHotKey</span>(<span class="kw">const</span> std::<span class="ty">string</span>&amp; name, std::<span class="ty">vector</span>&lt;<span class="tpl">VK</span>::<span class="en">VKC</span>&gt; VK);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>name</code></td><td><code class="ty">const std::string</code>&amp;</td><td>热键标识名，用于后续查询与注销。</td></tr>
+                    <tr><td><code>VK</code></td><td><code class="ty">std::vector&lt;VK::VKC&gt;</code></td><td>热键组合（可包含修饰键 + 主键）。</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="check">
+            <h2>查询热键</h2>
+
+            <h3 id="ishotkeypressed">IsHotKeyPressed</h3>
+            <p>判断指定热键是否在本帧被按下。</p>
+            <pre><code><span class="kw">bool</span> <span class="fn">IsHotKeyPressed</span>(<span class="kw">const</span> std::<span class="ty">string</span>&amp; name);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>name</code></td><td><code class="ty">const std::string</code>&amp;</td><td>热键标识名。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>按下返回 <code class="kw">true</code>，否则返回 <code class="kw">false</code>。</p>
+        </section>
+
+        <section id="unregister">
+            <h2>注销热键</h2>
+
+            <h3 id="unregisterhotkey">UnRegisterHotKey</h3>
+            <p>注销指定热键，注销后该名称可重新注册。</p>
+            <pre><code><span class="kw">void</span> <span class="fn">UnRegisterHotKey</span>(<span class="kw">const</span> std::<span class="ty">string</span>&amp; name);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>name</code></td><td><code class="ty">const std::string</code>&amp;</td><td>要注销的热键标识名。</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>另请参阅</h2>
+            <ul>
+                <li><a href="Msg_All.html">Msg 类总览</a></li>
+                <li><a href="VK.html">VK 虚拟键码</a></li>
+                <li><a href="Msg_Key.html">Msg_Key</a></li>
+            </ul>
+        </section>
+    </main>
+</div>
+<script src="../js/toc.js"></script>
+</body>
+</html>

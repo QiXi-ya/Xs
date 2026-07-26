@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Msg_Mouse - Xs 文档</title>
+    <link rel="stylesheet" href="../css/docs.css">
+</head>
+<body>
+<div class="layout">
+    <aside class="toc">
+        <nav class="toc-inner">
+            <div class="toc-title">Msg_Mouse</div>
+            <ul>
+                <li><a href="#pos">鼠标位置</a></li>
+                <li><a href="#wheel">滚轮</a></li>
+                <li><a href="#button">按键状态</a></li>
+                <li><a href="#zone">区域检测</a></li>
+                <li><a href="#ban">禁用区</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="container">
+        <nav class="breadcrumb">
+            <a href="../index.html">Xs 文档</a> / <a href="Msg_All.html">Msg 类</a> / Msg_Mouse
+        </nav>
+
+        <header class="page-header">
+            <h1>Msg_Mouse</h1>
+            <p class="metadata">命名空间：<code>xs</code> | 所属类：<code>XMsg::MouseMsg</code></p>
+        </header>
+
+        <!-- ===== 鼠标位置 ===== -->
+        <section id="pos">
+            <h2>鼠标位置</h2>
+
+            <h3 id="getmouseposwindow">GetMousePosWindow</h3>
+            <p>获取鼠标在指定窗口上的像素坐标。</p>
+            <pre><code><span class="tpl">Vector2i</span> <span class="fn">GetMousePosWindow</span>();</code></pre>
+            <h4>返回值</h4>
+            <p>返回鼠标在窗口坐标系中的 <code class="tpl">Vector2i</code> 位置。</p>
+
+            <h3 id="getmouseposwindownormalization">GetMousePosWindowNormalization</h3>
+            <p>获取鼠标在窗口上的归一化坐标（0~1）。</p>
+            <pre><code><span class="tpl">Vector2f</span> <span class="fn">GetMousePosWindowNormalization</span>(<span class="ty">int</span> x = <span class="nm">-1</span>, <span class="ty">int</span> y = <span class="nm">-1</span>, <span class="ty">int</span> w = <span class="nm">-1</span>, <span class="ty">int</span> h = <span class="nm">-1</span>);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>x</code>, <code>y</code></td><td><code class="ty">int</code></td><td>基准区域左上角；<code class="nm">-1</code> 表示使用整个窗口。</td></tr>
+                    <tr><td><code>w</code>, <code>h</code></td><td><code class="ty">int</code></td><td>基准区域宽高；<code class="nm">-1</code> 表示使用整个窗口。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回归一化的 <code class="tpl">Vector2f</code>（范围 0~1）。</p>
+
+            <h3 id="getmouseposscreen">GetMousePosScreen</h3>
+            <p>获取鼠标在屏幕上的像素坐标。</p>
+            <pre><code><span class="tpl">Vector2i</span> <span class="fn">GetMousePosScreen</span>();</code></pre>
+
+            <h3 id="getmouseposscreennormalization">GetMousePosScreenNormalization</h3>
+            <p>获取鼠标在屏幕上的归一化坐标。</p>
+            <pre><code><span class="tpl">Vector2f</span> <span class="fn">GetMousePosScreenNormalization</span>(<span class="ty">int</span> x = <span class="nm">-1</span>, <span class="ty">int</span> y = <span class="nm">-1</span>, <span class="ty">int</span> w = <span class="nm">-1</span>, <span class="ty">int</span> h = <span class="nm">-1</span>);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>x</code>, <code>y</code></td><td><code class="ty">int</code></td><td>基准区域左上角（屏幕坐标）。</td></tr>
+                    <tr><td><code>w</code>, <code>h</code></td><td><code class="ty">int</code></td><td>基准区域宽高。</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ===== 滚轮 ===== -->
+        <section id="wheel">
+            <h2>滚轮</h2>
+
+            <h3 id="getmousewheel">GetMouseWheel</h3>
+            <p>获取鼠标滚轮值，返回 120 的整数倍。</p>
+            <pre><code><span class="ty">int</span> <span class="fn">GetMouseWheel</span>();</code></pre>
+            <h4>返回值</h4>
+            <p>滚轮向上为正，向下为负，步长为 120。</p>
+
+            <h3 id="iswheel">IsWheel</h3>
+            <p>判断本帧是否发生了滚轮事件。</p>
+            <pre><code><span class="kw">bool</span> <span class="fn">IsWheel</span>();</code></pre>
+
+            <h3 id="ismousemove">IsMouseMove</h3>
+            <p>判断本帧鼠标是否发生了移动。</p>
+            <pre><code><span class="kw">bool</span> <span class="fn">IsMouseMove</span>();</code></pre>
+        </section>
+
+        <!-- ===== 按键状态 ===== -->
+        <section id="button">
+            <h2>按键状态</h2>
+
+            <h3 id="ismousedown">IsMouseDown</h3>
+            <p>判断指定鼠标键是否处于按下状态（持续帧检测）。</p>
+            <pre><code><span class="kw">bool</span> <span class="fn">IsMouseDown</span>(<span class="tpl">VK</span>::<span class="en">VKC</span> button);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>button</code></td><td><code class="tpl">VK::VKC</code></td><td>要检测的鼠标键（如 <code class="en">MouseLeft</code>）。</td></tr>
+                </tbody>
+            </table>
+
+            <h3 id="ismousepress">IsMousePress</h3>
+            <p>判断指定鼠标键是否在本帧刚刚按下（边沿触发）。</p>
+            <pre><code><span class="kw">bool</span> <span class="fn">IsMousePress</span>(<span class="tpl">VK</span>::<span class="en">VKC</span> button);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>button</code></td><td><code class="tpl">VK::VKC</code></td><td>要检测的鼠标键。</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ===== 区域检测 ===== -->
+        <section id="zone">
+            <h2>区域检测</h2>
+
+            <h3 id="ismousein">IsMouseIn</h3>
+            <p>判断鼠标是否在窗口的指定矩形区域内。</p>
+            <pre><code><span class="kw">bool</span> <span class="fn">IsMouseIn</span>(<span class="ty">int</span> x, <span class="ty">int</span> y, <span class="ty">int</span> w, <span class="ty">int</span> h);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>x</code>, <code>y</code></td><td><code class="ty">int</code></td><td>区域左上角坐标。</td></tr>
+                    <tr><td><code>w</code>, <code>h</code></td><td><code class="ty">int</code></td><td>区域宽高。</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ===== 禁用区 ===== -->
+        <section id="ban">
+            <h2>禁用区</h2>
+
+            <h3 id="setbanzone">SetBanZone</h3>
+            <p>设置鼠标禁用区域，该区域内的鼠标消息在本帧内失效。</p>
+            <pre><code><span class="kw">void</span> <span class="fn">SetBanZone</span>(<span class="ty">int</span> x, <span class="ty">int</span> y, <span class="ty">int</span> w, <span class="ty">int</span> h);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>x</code>, <code>y</code></td><td><code class="ty">int</code></td><td>禁用区域左上角。</td></tr>
+                    <tr><td><code>w</code>, <code>h</code></td><td><code class="ty">int</code></td><td>禁用区域宽高。</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>另请参阅</h2>
+            <ul>
+                <li><a href="Msg_All.html">Msg 类总览</a></li>
+                <li><a href="VK.html">VK 虚拟键码</a></li>
+                <li><a href="Msg_Key.html">Msg_Key</a></li>
+            </ul>
+        </section>
+    </main>
+</div>
+<script src="../js/toc.js"></script>
+</body>
+</html>
