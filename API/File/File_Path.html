@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>File_Path - Xs 文档</title>
+    <link rel="stylesheet" href="../css/docs.css">
+</head>
+<body>
+<div class="layout">
+    <aside class="toc">
+        <nav class="toc-inner">
+            <div class="toc-title">File_Path</div>
+            <ul>
+                <li><a href="#displayname-w">DisplayName（宽字符）</a></li>
+                <li><a href="#displayname-a">DisplayNameA（窄字符）</a></li>
+                <li><a href="#extension-w">Extension（宽字符）</a></li>
+                <li><a href="#extension-a">ExtensionA（窄字符）</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="container">
+        <nav class="breadcrumb">
+            <a href="../index.html">Xs 文档</a> /
+            <a href="File_All.html">File 类</a> /
+            File_Path
+        </nav>
+
+        <header class="page-header">
+            <h1>File_Path</h1>
+            <p class="metadata">命名空间：<code>xs</code> | 所属类：<code>XFile</code></p>
+        </header>
+
+        <section id="displayname-w">
+            <h2>DisplayName（宽字符）</h2>
+
+            <h3 id="displayname-w-fn">DisplayName</h3>
+            <pre><code> std::<span class="ty">wstring</span> <span class="fn">DisplayName</span>(<span class="kw">const</span> <span class="tpl">Path</span>&amp; path);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>path</code></td><td><code class="kw">const</code> <code class="tpl">Path</code>&amp;</td><td>要获取文件名的路径。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回文件名（含扩展名），宽字符版本。例如 <code>L"image.png"</code>。</p>
+
+            <h4>示例</h4>
+            <pre><code><span class="tpl">Path</span> p = L<span class="nm">"C:/Data/image.png"</span>;
+std::wstring name = <span class="tpl">XFile::</span><span class="fn">DisplayName</span>(p);  <span class="cm">// L"image.png"</span></code></pre>
+        </section>
+
+        <section id="displayname-a">
+            <h2>DisplayNameA（窄字符）</h2>
+
+            <h3 id="displayname-a-fn">DisplayNameA</h3>
+            <pre><code> std::<span class="ty">string</span> <span class="fn">DisplayNameA</span>(<span class="kw">const</span> <span class="tpl">Path</span>&amp; path);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>path</code></td><td><code class="kw">const</code> <code class="tpl">Path</code>&amp;</td><td>要获取文件名的路径。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回文件名（含扩展名），窄字符版本。例如 <code>"image.png"</code>。</p>
+        </section>
+
+        <section id="extension-w">
+            <h2>Extension（宽字符）</h2>
+
+            <h3 id="extension-w-fn">Extension</h3>
+            <pre><code> std::<span class="ty">wstring</span> <span class="fn">Extension</span>(<span class="kw">const</span> <span class="tpl">Path</span>&amp; path);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>path</code></td><td><code class="kw">const</code> <code class="tpl">Path</code>&amp;</td><td>要获取扩展名的路径。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回文件扩展名（含前导点号），宽字符版本。例如 <code>L".png"</code>。</p>
+
+            <h4>示例</h4>
+            <pre><code><span class="tpl">Path</span> p = L<span class="nm">"C:/Data/image.png"</span>;
+std::wstring ext = <span class="tpl">XFile::</span><span class="fn">Extension</span>(p);  <span class="cm">// L".png"</span></code></pre>
+        </section>
+
+        <section id="extension-a">
+            <h2>ExtensionA（窄字符）</h2>
+
+            <h3 id="extension-a-fn">ExtensionA</h3>
+            <pre><code> std::<span class="ty">string</span> <span class="fn">ExtensionA</span>(<span class="kw">const</span> <span class="tpl">Path</span>&amp; path);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>path</code></td><td><code class="kw">const</code> <code class="tpl">Path</code>&amp;</td><td>要获取扩展名的路径。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回文件扩展名（含前导点号），窄字符版本。例如 <code>".png"</code>。</p>
+        </section>
+
+        <section>
+            <h2>另请参阅</h2>
+            <ul>
+                <li><a href="File_All.html">File 类总览</a></li>
+                <li><a href="File_Basic.html">File_Basic — 文件操作</a></li>
+            </ul>
+        </section>
+    </main>
+</div>
+<script src="../js/toc.js"></script>
+</body>
+</html>
