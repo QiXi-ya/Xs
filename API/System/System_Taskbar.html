@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>System_Taskbar - Xs 文档</title>
+    <link rel="stylesheet" href="../css/docs.css">
+</head>
+<body>
+<div class="layout">
+    <aside class="toc">
+        <nav class="toc-inner">
+            <div class="toc-title">System_Taskbar</div>
+            <ul>
+                <li><a href="#showbtn">显示任务栏按钮</a></li>
+                <li><a href="#progressstate">进度条状态</a></li>
+                <li><a href="#progressvalue">进度条数值</a></li>
+                <li><a href="#taskbarvisible">任务栏可见性</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="container">
+        <nav class="breadcrumb">
+            <a href="../index.html">Xs 文档</a> /
+            <a href="System_All.html">System 类</a> /
+            System_Taskbar
+        </nav>
+
+        <header class="page-header">
+            <h1>System_Taskbar</h1>
+            <p class="metadata">命名空间：<code>xs::XSystem::Taskbar</code></p>
+        </header>
+
+        <section id="showbtn">
+            <h2>显示任务栏按钮</h2>
+
+            <h3 id="showtaskbarbutton-hwnd">ShowTaskbarButton（HWND）</h3>
+            <pre><code><span class="kw">void</span> <span class="fn">ShowTaskbarButton</span>(<span class="ty">HWND</span> hwnd, <span class="kw">bool</span> show = <span class="kw">true</span>);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>hwnd</code></td><td><code class="ty">HWND</code></td><td>目标窗口句柄。</td></tr>
+                    <tr><td><code>show</code></td><td><code class="ty">bool</code></td><td>是否显示任务栏按钮，默认 <code class="kw">true</code>。</td></tr>
+                </tbody>
+            </table>
+
+            <h3 id="showtaskbarbutton-window">ShowTaskbarButton（RenWin）</h3>
+            <pre><code><span class="kw">void</span> <span class="fn">ShowTaskbarButton</span>(<span class="tpl">RenWin</span>&amp; window, <span class="kw">bool</span> show = <span class="kw">true</span>);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>window</code></td><td><code class="tpl">RenWin</code>&amp;</td><td>目标渲染窗口。</td></tr>
+                    <tr><td><code>show</code></td><td><code class="ty">bool</code></td><td>是否显示任务栏按钮，默认 <code class="kw">true</code>。</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="progressstate">
+            <h2>进度条状态</h2>
+
+            <h3 id="progressstate-enum">ProgressState 枚举</h3>
+            <table class="doc-table">
+                <thead><tr><th>值</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code class="en">NOPPROGRESS</code></td><td>无进度（清除任务栏进度条）</td></tr>
+                    <tr><td><code class="en">INDETERMINATE</code></td><td>不确定模式（持续滚动动画）</td></tr>
+                    <tr><td><code class="en">NORMAL</code></td><td>正常进度</td></tr>
+                    <tr><td><code class="en">ERROR</code></td><td>错误状态（红色）</td></tr>
+                    <tr><td><code class="en">PAUSED</code></td><td>暂停状态（黄色）</td></tr>
+                </tbody>
+            </table>
+
+            <h3 id="setprogressstate-hwnd">SetProgressState（HWND）</h3>
+            <pre><code><span class="kw">void</span> <span class="fn">SetProgressState</span>(<span class="ty">HWND</span> hwnd, <span class="tpl">ProgressState</span> state);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>hwnd</code></td><td><code class="ty">HWND</code></td><td>目标窗口句柄。</td></tr>
+                    <tr><td><code>state</code></td><td><code class="tpl">ProgressState</code></td><td>进度条状态枚举值。</td></tr>
+                </tbody>
+            </table>
+
+            <h3 id="setprogressstate-window">SetProgressState（RenWin）</h3>
+            <pre><code><span class="kw">void</span> <span class="fn">SetProgressState</span>(<span class="tpl">RenWin</span>&amp; window, <span class="tpl">ProgressState</span> state);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>window</code></td><td><code class="tpl">RenWin</code>&amp;</td><td>目标渲染窗口。</td></tr>
+                    <tr><td><code>state</code></td><td><code class="tpl">ProgressState</code></td><td>进度条状态枚举值。</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="progressvalue">
+            <h2>进度条数值</h2>
+
+            <h3 id="setprogressvalue-hwnd">SetProgressValue（HWND）</h3>
+            <pre><code><span class="kw">void</span> <span class="fn">SetProgressValue</span>(<span class="ty">HWND</span> hwnd, <span class="ty">ULONGLONG</span> current, <span class="ty">ULONGLONG</span> total);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>hwnd</code></td><td><code class="ty">HWND</code></td><td>目标窗口句柄。</td></tr>
+                    <tr><td><code>current</code></td><td><code class="ty">ULONGLONG</code></td><td>当前进度值。</td></tr>
+                    <tr><td><code>total</code></td><td><code class="ty">ULONGLONG</code></td><td>总进度值。</td></tr>
+                </tbody>
+            </table>
+
+            <h3 id="setprogressvalue-window">SetProgressValue（RenWin）</h3>
+            <pre><code><span class="kw">void</span> <span class="fn">SetProgressValue</span>(<span class="tpl">RenWin</span>&amp; window, <span class="ty">ULONGLONG</span> current, <span class="ty">ULONGLONG</span> total);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>window</code></td><td><code class="tpl">RenWin</code>&amp;</td><td>目标渲染窗口。</td></tr>
+                    <tr><td><code>current</code></td><td><code class="ty">ULONGLONG</code></td><td>当前进度值。</td></tr>
+                    <tr><td><code>total</code></td><td><code class="ty">ULONGLONG</code></td><td>总进度值。</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="taskbarvisible">
+            <h2>任务栏可见性</h2>
+
+            <h3 id="settaskbarvisible">SetTaskBarVisible</h3>
+            <pre><code><span class="kw">void</span> <span class="fn">SetTaskBarVisible</span>(<span class="kw">bool</span> IsVisible = <span class="kw">true</span>);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>IsVisible</code></td><td><code class="ty">bool</code></td><td>是否显示任务栏，默认 <code class="kw">true</code>。</td></tr>
+                </tbody>
+            </table>
+            <div class="warning">
+                此函数会影响整个系统的任务栏可见性，请谨慎调用。
+            </div>
+        </section>
+
+        <section>
+            <h2>另请参阅</h2>
+            <ul>
+                <li><a href="System_All.html">System 类总览</a></li>
+                <li><a href="System_Tray.html">System_Tray</a></li>
+            </ul>
+        </section>
+    </main>
+</div>
+<script src="../js/toc.js"></script>
+</body>
+</html>

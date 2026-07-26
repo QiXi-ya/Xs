@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>System_Tray - Xs 文档</title>
+    <link rel="stylesheet" href="../css/docs.css">
+</head>
+<body>
+<div class="layout">
+    <aside class="toc">
+        <nav class="toc-inner">
+            <div class="toc-title">System_Tray</div>
+            <ul>
+                <li><a href="#bind">绑定窗口</a></li>
+                <li><a href="#addicon">添加图标</a></li>
+                <li><a href="#seticon">更新图标</a></li>
+                <li><a href="#settooltip">更新提示</a></li>
+                <li><a href="#balloon">气泡通知</a></li>
+                <li><a href="#remove">删除图标</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="container">
+        <nav class="breadcrumb">
+            <a href="../index.html">Xs 文档</a> /
+            <a href="System_All.html">System 类</a> /
+            System_Tray
+        </nav>
+
+        <header class="page-header">
+            <h1>System_Tray</h1>
+            <p class="metadata">命名空间：<code>xs::XSystem::Tray</code></p>
+        </header>
+
+        <section id="bind">
+            <h2>绑定窗口</h2>
+
+            <h3 id="bindwindow">BindWindow</h3>
+            <pre><code><span class="kw">bool</span> <span class="fn">BindWindow</span>(<span class="ty">HWND</span> hwnd);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>hwnd</code></td><td><code class="ty">HWND</code></td><td>要绑定到托盘的目标窗口句柄。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>成功返回 <code class="kw">true</code>，失败返回 <code class="kw">false</code>。</p>
+        </section>
+
+        <section id="addicon">
+            <h2>添加图标</h2>
+
+            <h3 id="addicon-w">AddIcon（宽字符）</h3>
+            <pre><code><span class="kw">bool</span> <span class="fn">AddIcon</span>(std::<span class="ty">wstring</span> tooltip = <span class="kw">nullptr</span>, <span class="ty">UINT</span> resId = <span class="nm">0</span>);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>tooltip</code></td><td><code class="ty">std::wstring</code></td><td>托盘提示文本；为 <code>nullptr</code> 时不显示提示。</td></tr>
+                    <tr><td><code>resId</code></td><td><code class="ty">UINT</code></td><td>资源 ID；为 <code class="nm">0</code> 时加载程序图标。</td></tr>
+                </tbody>
+            </table>
+
+            <h3 id="addicon-a">AddIcon（窄字符）</h3>
+            <pre><code><span class="kw">bool</span> <span class="fn">AddIcon</span>(std::<span class="ty">string</span> tooltip = <span class="kw">nullptr</span>, <span class="ty">UINT</span> resId = <span class="nm">0</span>);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>tooltip</code></td><td><code class="ty">std::string</code></td><td>托盘提示文本（窄字符版本）。</td></tr>
+                    <tr><td><code>resId</code></td><td><code class="ty">UINT</code></td><td>资源 ID；为 <code class="nm">0</code> 时加载程序图标。</td></tr>
+                </tbody>
+            </table>
+
+            <h4>返回值</h4>
+            <p>成功返回 <code class="kw">true</code>，失败返回 <code class="kw">false</code>。</p>
+        </section>
+
+        <section id="seticon">
+            <h2>更新图标</h2>
+
+            <h3 id="seticon">SetIcon</h3>
+            <pre><code><span class="kw">bool</span> <span class="fn">SetIcon</span>(<span class="ty">UINT</span> resId = <span class="nm">0</span>);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>resId</code></td><td><code class="ty">UINT</code></td><td>资源 ID；为 <code class="nm">0</code> 时加载程序图标。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>成功返回 <code class="kw">true</code>，失败返回 <code class="kw">false</code>。</p>
+        </section>
+
+        <section id="settooltip">
+            <h2>更新提示</h2>
+
+            <h3 id="settooltip-w">SetTooltip（宽字符）</h3>
+            <pre><code><span class="kw">bool</span> <span class="fn">SetTooltip</span>(std::<span class="ty">wstring</span> tooltip);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>tooltip</code></td><td><code class="ty">std::wstring</code></td><td>新的托盘提示文本。</td></tr>
+                </tbody>
+            </table>
+
+            <h3 id="settooltip-a">SetTooltip（窄字符）</h3>
+            <pre><code><span class="kw">bool</span> <span class="fn">SetTooltip</span>(std::<span class="ty">string</span> tooltip);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>tooltip</code></td><td><code class="ty">std::string</code></td><td>新的托盘提示文本（窄字符版本）。</td></tr>
+                </tbody>
+            </table>
+
+            <h4>返回值</h4>
+            <p>成功返回 <code class="kw">true</code>，失败返回 <code class="kw">false</code>。</p>
+        </section>
+
+        <section id="balloon">
+            <h2>气泡通知</h2>
+
+            <h3 id="infotype-enum">InfoType 枚举</h3>
+            <table class="doc-table">
+                <thead><tr><th>值</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code class="en">BALLOON_NONE</code></td><td>默认样式</td></tr>
+                    <tr><td><code class="en">BALLOON_INFO</code></td><td>通知（蓝色信息图标）</td></tr>
+                    <tr><td><code class="en">BALLOON_WARNING</code></td><td>警告（黄色警告图标）</td></tr>
+                    <tr><td><code class="en">BALLOON_ERROR</code></td><td>错误（红色错误图标）</td></tr>
+                </tbody>
+            </table>
+
+            <h3 id="showballoon">ShowBalloon</h3>
+            <pre><code><span class="kw">bool</span> <span class="fn">ShowBalloon</span>(
+    <span class="ty">LPCWSTR</span> title,
+    <span class="ty">LPCWSTR</span> text,
+    <span class="tpl">InfoType</span> type = <span class="en">InfoType::BALLOON_INFO</span>,
+    <span class="ty">DWORD</span> timeoutMs = <span class="nm">5000</span>
+);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>title</code></td><td><code class="ty">LPCWSTR</code></td><td>气泡通知标题。</td></tr>
+                    <tr><td><code>text</code></td><td><code class="ty">LPCWSTR</code></td><td>气泡通知正文。</td></tr>
+                    <tr><td><code>type</code></td><td><code class="tpl">InfoType</code></td><td>通知类型，默认 <code class="en">BALLOON_INFO</code>。</td></tr>
+                    <tr><td><code>timeoutMs</code></td><td><code class="ty">DWORD</code></td><td>超时时间（毫秒），默认 <code class="nm">5000</code>。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>成功返回 <code class="kw">true</code>，失败返回 <code class="kw">false</code>。</p>
+        </section>
+
+        <section id="remove">
+            <h2>删除图标</h2>
+
+            <h3 id="removeicon">RemoveIcon</h3>
+            <pre><code><span class="kw">bool</span> <span class="fn">RemoveIcon</span>();</code></pre>
+            <h4>返回值</h4>
+            <p>成功返回 <code class="kw">true</code>，失败返回 <code class="kw">false</code>。</p>
+        </section>
+
+        <section>
+            <h2>另请参阅</h2>
+            <ul>
+                <li><a href="System_All.html">System 类总览</a></li>
+                <li><a href="../Msg/Msg_Tray.html">Msg_Tray — 托盘消息检测</a></li>
+            </ul>
+        </section>
+    </main>
+</div>
+<script src="../js/toc.js"></script>
+</body>
+</html>

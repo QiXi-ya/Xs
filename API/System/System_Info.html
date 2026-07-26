@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>System_Info - Xs 文档</title>
+    <link rel="stylesheet" href="../css/docs.css">
+</head>
+<body>
+<div class="layout">
+    <aside class="toc">
+        <nav class="toc-inner">
+            <div class="toc-title">System_Info</div>
+            <ul>
+                <li><a href="#screensize">屏幕尺寸</a></li>
+                <li><a href="#workrect">工作区尺寸</a></li>
+                <li><a href="#taskbarsize">任务栏尺寸</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="container">
+        <nav class="breadcrumb">
+            <a href="../index.html">Xs 文档</a> /
+            <a href="System_All.html">System 类</a> /
+            System_Info
+        </nav>
+
+        <header class="page-header">
+            <h1>System_Info</h1>
+            <p class="metadata">命名空间：<code>xs::XSystem::Info</code></p>
+        </header>
+
+        <section id="screensize">
+            <h2>屏幕尺寸</h2>
+
+            <h3 id="getscreensize">GetScreenSize</h3>
+            <pre><code><span class="tpl">Vector2i</span> <span class="fn">GetScreenSize</span>();</code></pre>
+            <h4>返回值</h4>
+            <p>返回主显示器分辨率，格式为 <code class="tpl">Vector2i</code>（<code>x</code> = 宽，<code>y</code> = 高）。</p>
+        </section>
+
+        <section id="workrect">
+            <h2>工作区尺寸</h2>
+
+            <h3 id="getworkrectsize">GetWorkRectSize</h3>
+            <pre><code><span class="tpl">Vector2i</span> <span class="fn">GetWorkRectSize</span>();</code></pre>
+            <h4>返回值</h4>
+            <p>返回工作区尺寸（排除任务栏等系统区域），格式为 <code class="tpl">Vector2i</code>。</p>
+        </section>
+
+        <section id="taskbarsize">
+            <h2>任务栏尺寸</h2>
+
+            <h3 id="gettaskbarsize">GetTaskbarSize</h3>
+            <pre><code><span class="tpl">Vector2i</span> <span class="fn">GetTaskbarSize</span>();</code></pre>
+            <h4>返回值</h4>
+            <p>返回任务栏尺寸，格式为 <code class="tpl">Vector2i</code>（宽度或高度取决于任务栏位置）。</p>
+        </section>
+
+        <section>
+            <h2>另请参阅</h2>
+            <ul>
+                <li><a href="System_All.html">System 类总览</a></li>
+                <li><a href="System_Taskbar.html">System_Taskbar</a></li>
+            </ul>
+        </section>
+    </main>
+</div>
+<script src="../js/toc.js"></script>
+</body>
+</html>
