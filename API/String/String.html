@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>XString - Xs 文档</title>
+    <link rel="stylesheet" href="../css/docs.css">
+</head>
+<body>
+<div class="layout">
+    <aside class="toc">
+        <nav class="toc-inner">
+            <div class="toc-title">String</div>
+            <ul>
+                <li><a href="#convert">Convert — 编码转换</a></li>
+                <li><a href="#find">Find — 查找</a></li>
+                <li><a href="#replace">Replace — 替换</a></li>
+                <li><a href="#remove">Remove — 删除</a></li>
+                <li><a href="#case">Case — 大小写</a></li>
+                <li><a href="#split">Split — 分割</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="container">
+        <nav class="breadcrumb">
+            <a href="../index.html">Xs 文档</a> / XString
+        </nav>
+
+        <header class="page-header">
+            <h1>XString</h1>
+            <p class="metadata">命名空间：<code>xs</code> | 字符串工具类</p>
+        </header>
+
+        <!-- ===== Convert ===== -->
+        <section id="convert">
+            <h2>Convert — 编码转换</h2>
+            <p>在 UTF-8、GBK 与宽字符（wstring）之间进行编码互转。</p>
+
+            <h3 id="utf8-to-wstring">utf8_to_wstring</h3>
+            <pre><code> std::<span class="ty">wstring</span> <span class="fn">utf8_to_wstring</span>(<span class="kw">const</span> std::<span class="ty">string</span>&amp; utf8);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>utf8</code></td><td><code class="kw">const</code> std::<code class="ty">string</code>&amp;</td><td>UTF-8 编码的字符串。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回转换后的 <code class="ty">std::wstring</code>。</p>
+
+            <h3 id="wstring-to-utf8">wstring_to_utf8</h3>
+            <pre><code> std::<span class="ty">string</span> <span class="fn">wstring_to_utf8</span>(<span class="kw">const</span> std::<span class="ty">wstring</span>&amp; wstr);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>wstr</code></td><td><code class="kw">const</code> std::<code class="ty">wstring</code>&amp;</td><td>宽字符串。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回转换后的 UTF-8 <code class="ty">std::string</code>。</p>
+
+            <h3 id="gbk-to-wstring">gbk_to_wstring</h3>
+            <pre><code> std::<span class="ty">wstring</span> <span class="fn">gbk_to_wstring</span>(<span class="kw">const</span> std::<span class="ty">string</span>&amp; gbk);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>gbk</code></td><td><code class="kw">const</code> std::<code class="ty">string</code>&amp;</td><td>GBK 编码的字符串。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回转换后的 <code class="ty">std::wstring</code>。</p>
+
+            <h3 id="wstring-to-gbk">wstring_to_gbk</h3>
+            <pre><code> std::<span class="ty">string</span> <span class="fn">wstring_to_gbk</span>(<span class="kw">const</span> std::<span class="ty">wstring</span>&amp; wstr);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>wstr</code></td><td><code class="kw">const</code> std::<code class="ty">wstring</code>&amp;</td><td>宽字符串。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回转换后的 GBK <code class="ty">std::string</code>。</p>
+
+            <h3 id="utf8-to-gbk">utf8_to_gbk</h3>
+            <pre><code> std::<span class="ty">string</span> <span class="fn">utf8_to_gbk</span>(<span class="kw">const</span> std::<span class="ty">string</span>&amp; utf8);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>utf8</code></td><td><code class="kw">const</code> std::<code class="ty">string</code>&amp;</td><td>UTF-8 编码的字符串。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回转换后的 GBK <code class="ty">std::string</code>。</p>
+
+            <h3 id="gbk-to-utf8">gbk_to_utf8</h3>
+            <pre><code> std::<span class="ty">string</span> <span class="fn">gbk_to_utf8</span>(<span class="kw">const</span> std::<span class="ty">string</span>&amp; gbk);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>gbk</code></td><td><code class="kw">const</code> std::<code class="ty">string</code>&amp;</td><td>GBK 编码的字符串。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回转换后的 UTF-8 <code class="ty">std::string</code>。</p>
+        </section>
+
+        <!-- ===== Find ===== -->
+        <section id="find">
+            <h2>Find — 查找</h2>
+            <p>在字符串中查找子串位置，或判断是否包含子串。</p>
+
+            <h3 id="find-string">find（string）</h3>
+            <pre><code> <span class="ty">size_t</span> <span class="fn">find</span>(<span class="kw">const</span> std::<span class="ty">string</span>&amp; str, <span class="kw">const</span> std::<span class="ty">string</span>&amp; sub, <span class="ty">size_t</span> offset = <span class="nm">0</span>);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>str</code></td><td><code class="kw">const</code> std::<code class="ty">string</code>&amp;</td><td>被搜索的原字符串。</td></tr>
+                    <tr><td><code>sub</code></td><td><code class="kw">const</code> std::<code class="ty">string</code>&amp;</td><td>要查找的子串。</td></tr>
+                    <tr><td><code>offset</code></td><td><code class="ty">size_t</code></td><td>起始搜索偏移量，默认 <code class="nm">0</code>。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回子串首次出现的索引位置；未找到时返回 <code class="en">std::string::npos</code>。</p>
+
+            <h3 id="find-wstring">find（wstring）</h3>
+            <pre><code> <span class="ty">size_t</span> <span class="fn">find</span>(<span class="kw">const</span> std::<span class="ty">wstring</span>&amp; str, <span class="kw">const</span> std::<span class="ty">wstring</span>&amp; sub, <span class="ty">size_t</span> offset = <span class="nm">0</span>);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>str</code></td><td><code class="kw">const</code> std::<code class="ty">wstring</code>&amp;</td><td>被搜索的宽字符串。</td></tr>
+                    <tr><td><code>sub</code></td><td><code class="kw">const</code> std::<code class="ty">wstring</code>&amp;</td><td>要查找的宽字符子串。</td></tr>
+                    <tr><td><code>offset</code></td><td><code class="ty">size_t</code></td><td>起始搜索偏移量，默认 <code class="nm">0</code>。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回子串首次出现的索引位置；未找到时返回 <code class="en">std::wstring::npos</code>。</p>
+
+            <h3 id="contains-string">contains（string）</h3>
+            <pre><code> <span class="kw">bool</span> <span class="fn">contains</span>(<span class="kw">const</span> std::<span class="ty">string</span>&amp; str, <span class="kw">const</span> std::<span class="ty">string</span>&amp; sub);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>str</code></td><td><code class="kw">const</code> std::<code class="ty">string</code>&amp;</td><td>被搜索的原字符串。</td></tr>
+                    <tr><td><code>sub</code></td><td><code class="kw">const</code> std::<code class="ty">string</code>&amp;</td><td>要判断是否包含的子串。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>包含返回 <code class="kw">true</code>，否则返回 <code class="kw">false</code>。</p>
+
+            <h3 id="contains-wstring">contains（wstring）</h3>
+            <pre><code> <span class="kw">bool</span> <span class="fn">contains</span>(<span class="kw">const</span> std::<span class="ty">wstring</span>&amp; str, <span class="kw">const</span> std::<span class="ty">wstring</span>&amp; sub);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>str</code></td><td><code class="kw">const</code> std::<code class="ty">wstring</code>&amp;</td><td>被搜索的宽字符串。</td></tr>
+                    <tr><td><code>sub</code></td><td><code class="kw">const</code> std::<code class="ty">wstring</code>&amp;</td><td>要判断是否包含的宽字符子串。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>包含返回 <code class="kw">true</code>，否则返回 <code class="kw">false</code>。</p>
+        </section>
+
+        <!-- ===== Replace ===== -->
+        <section id="replace">
+            <h2>Replace — 替换</h2>
+            <p>将字符串中所有匹配的子串替换为目标子串。</p>
+
+            <h3 id="replace-string">replace（string）</h3>
+            <pre><code> std::<span class="ty">string</span> <span class="fn">replace</span>(
+    <span class="kw">const</span> std::<span class="ty">string</span>&amp; str,
+    <span class="kw">const</span> std::<span class="ty">string</span>&amp; from,
+    <span class="kw">const</span> std::<span class="ty">string</span>&amp; to
+);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>str</code></td><td><code class="kw">const</code> std::<code class="ty">string</code>&amp;</td><td>原字符串。</td></tr>
+                    <tr><td><code>from</code></td><td><code class="kw">const</code> std::<code class="ty">string</code>&amp;</td><td>要被替换的子串。</td></tr>
+                    <tr><td><code>to</code></td><td><code class="kw">const</code> std::<code class="ty">string</code>&amp;</td><td>替换后的目标子串。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回替换后的新字符串（原字符串不变）。</p>
+
+            <h3 id="replace-wstring">replace（wstring）</h3>
+            <pre><code> std::<span class="ty">wstring</span> <span class="fn">replace</span>(
+    <span class="kw">const</span> std::<span class="ty">wstring</span>&amp; str,
+    <span class="kw">const</span> std::<span class="ty">wstring</span>&amp; from,
+    <span class="kw">const</span> std::<span class="ty">wstring</span>&amp; to
+);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>str</code></td><td><code class="kw">const</code> std::<code class="ty">wstring</code>&amp;</td><td>原宽字符串。</td></tr>
+                    <tr><td><code>from</code></td><td><code class="kw">const</code> std::<code class="ty">wstring</code>&amp;</td><td>要被替换的宽字符子串。</td></tr>
+                    <tr><td><code>to</code></td><td><code class="kw">const</code> std::<code class="ty">wstring</code>&amp;</td><td>替换后的目标宽字符子串。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回替换后的新宽字符串（原字符串不变）。</p>
+        </section>
+
+        <!-- ===== Remove ===== -->
+        <section id="remove">
+            <h2>Remove — 删除</h2>
+            <p>从字符串中删除所有匹配的子串。</p>
+
+            <h3 id="remove-string">remove（string）</h3>
+            <pre><code> std::<span class="ty">string</span> <span class="fn">remove</span>(<span class="kw">const</span> std::<span class="ty">string</span>&amp; str, <span class="kw">const</span> std::<span class="ty">string</span>&amp; sub);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>str</code></td><td><code class="kw">const</code> std::<code class="ty">string</code>&amp;</td><td>原字符串。</td></tr>
+                    <tr><td><code>sub</code></td><td><code class="kw">const</code> std::<code class="ty">string</code>&amp;</td><td>要删除的子串。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回删除子串后的新字符串。</p>
+
+            <h3 id="remove-wstring">remove（wstring）</h3>
+            <pre><code> std::<span class="ty">wstring</span> <span class="fn">remove</span>(<span class="kw">const</span> std::<span class="ty">wstring</span>&amp; str, <span class="kw">const</span> std::<span class="ty">wstring</span>&amp; sub);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>str</code></td><td><code class="kw">const</code> std::<code class="ty">wstring</code>&amp;</td><td>原宽字符串。</td></tr>
+                    <tr><td><code>sub</code></td><td><code class="kw">const</code> std::<code class="ty">wstring</code>&amp;</td><td>要删除的宽字符子串。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回删除子串后的新宽字符串。</p>
+        </section>
+
+        <!-- ===== Case ===== -->
+        <section id="case">
+            <h2>Case — 大小写</h2>
+            <p>将字符串转换为全大写或全小写。</p>
+
+            <h3 id="tolower-string">ToLower（string）</h3>
+            <pre><code> std::<span class="ty">string</span> <span class="fn">ToLower</span>(std::<span class="ty">string</span> str);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>str</code></td><td><code class="ty">std::string</code></td><td>要转换的字符串（按值传递，原串不变）。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回全小写版本的新字符串。</p>
+
+            <h3 id="toupper-string">ToUpper（string）</h3>
+            <pre><code> std::<span class="ty">string</span> <span class="fn">ToUpper</span>(std::<span class="ty">string</span> str);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>str</code></td><td><code class="ty">std::string</code></td><td>要转换的字符串。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回全大写版本的新字符串。</p>
+
+            <h3 id="tolower-wstring">ToLower（wstring）</h3>
+            <pre><code> std::<span class="ty">wstring</span> <span class="fn">ToLower</span>(std::<span class="ty">wstring</span> str);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>str</code></td><td><code class="ty">std::wstring</code></td><td>要转换的宽字符串。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回全小写版本的宽字符串。</p>
+
+            <h3 id="toupper-wstring">ToUpper（wstring）</h3>
+            <pre><code> std::<span class="ty">wstring</span> <span class="fn">ToUpper</span>(std::<span class="ty">wstring</span> str);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>str</code></td><td><code class="ty">std::wstring</code></td><td>要转换的宽字符串。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回全大写版本的宽字符串。</p>
+        </section>
+
+        <!-- ===== Split ===== -->
+        <section id="split">
+            <h2>Split — 分割</h2>
+            <p>按指定分隔符将字符串拆分为多个子串。</p>
+
+            <h3 id="split-string">split（string）</h3>
+            <pre><code> std::<span class="ty">vector</span>&lt;std::<span class="ty">string</span>&gt; <span class="fn">split</span>(<span class="kw">const</span> std::<span class="ty">string</span>&amp; str, <span class="ty">char</span> delimiter);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>str</code></td><td><code class="kw">const</code> std::<code class="ty">string</code>&amp;</td><td>要分割的原字符串。</td></tr>
+                    <tr><td><code>delimiter</code></td><td><code class="ty">char</code></td><td>分隔符（单字节字符）。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回分割后的子串数组 <code class="ty">std::vector&lt;std::string&gt;</code>。</p>
+
+            <h3 id="split-wstring">split（wstring）</h3>
+            <pre><code> std::<span class="ty">vector</span>&lt;std::<span class="ty">wstring</span>&gt; <span class="fn">split</span>(<span class="kw">const</span> std::<span class="ty">wstring</span>&amp; str, <span class="ty">wchar_t</span> delimiter);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>str</code></td><td><code class="kw">const</code> std::<code class="ty">wstring</code>&amp;</td><td>要分割的宽字符串。</td></tr>
+                    <tr><td><code>delimiter</code></td><td><code class="ty">wchar_t</code></td><td>分隔符（宽字符）。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回分割后的子串数组 <code class="ty">std::vector&lt;std::wstring&gt;</code>。</p>
+        </section>
+
+        <section>
+            <h2>另请参阅</h2>
+            <ul>
+                <li><a href="../index.html">返回首页</a></li>
+                <li><a href="../Msg/VK.html">VK 虚拟键码</a></li>
+            </ul>
+        </section>
+    </main>
+</div>
+<script src="../js/toc.js"></script>
+</body>
+</html>
