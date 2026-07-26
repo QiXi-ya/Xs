@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XsEngine - 基于SFML 的 C++ x64 轻量级 2D 图形引擎</title>
+    <link rel="stylesheet" href="css/docs.css">
+    <style>
+        /* ===== 主页面额外样式 ===== */
+        .hero {
+            text-align: center;
+            padding: 48px 24px 40px;
+            background: rgba(95, 95, 95, 0.233);
+            border-radius: 16px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 12px;
+            background: rgb(255, 165, 209);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero .version {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 999px;
+            background: rgba(124,58,237,0.2);
+            color: #c4b5fd;
+            font-size: 12px;
+            margin-bottom: 16px;
+        }
+        .hero p {
+            font-size: 16px;
+            color: var(--fg-secondary);
+            max-width: 640px;
+            margin: 0 auto 24px;
+            line-height: 1.7;
+        }
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .btn-primary {
+            background: rgb(255, 137, 202);
+            color: #fff;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(124,58,237,0.5);
+        }
+        .btn-secondary {
+            background: rgba(255,255,255,0.08);
+            color: var(--fg);
+            border: 1px solid rgba(255,255,255,0.12);
+        }
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.14);
+        }
+
+        /* 功能卡片网格 */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+        .feature-card {
+            padding: 20px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            transition: all 0.2s;
+        }
+        .feature-card:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(124,58,237,0.3);
+            transform: translateY(-2px);
+        }
+        .feature-card .icon {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        .feature-card h3 {
+            font-size: 15px;
+            margin-bottom: 6px;
+            color: var(--fg);
+        }
+        .feature-card p {
+            font-size: 13px;
+            color: var(--fg-secondary);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* 更新日志 */
+        .changelog {
+            margin-bottom: 40px;
+        }
+        .changelog-item {
+            padding: 16px 20px;
+            border-left: 3px solid var(--accent, #7c3aed);
+            margin-bottom: 12px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 0 8px 8px 0;
+        }
+        .changelog-item .version-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 700;
+            margin-right: 8px;
+        }
+        .changelog-item .version-tag.new {
+            background: rgba(74,222,128,0.2);
+            color: #4ade80;
+        }
+        .changelog-item .version-tag.update {
+            background: rgba(96,165,250,0.2);
+            color: #60a5fa;
+        }
+        .changelog-item .version-tag.fix {
+            background: rgba(251,146,60,0.2);
+            color: #fb923c;
+        }
+        .changelog-item h4 {
+            font-size: 14px;
+            margin: 4px 0 6px;
+        }
+        .changelog-item ul {
+            font-size: 13px;
+            color: var(--fg-secondary);
+            padding-left: 18px;
+            margin: 0;
+        }
+        .changelog-item ul li {
+            margin-bottom: 3px;
+        }
+
+        /* 导航入口 */
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+        .nav-card {
+            display: block;
+            padding: 16px 20px;
+            border-radius: 10px;
+            background: rgba(124,58,237,0.08);
+            border: 1px solid rgba(124,58,237,0.15);
+            text-decoration: none;
+            color: var(--fg);
+            transition: all 0.2s;
+        }
+        .nav-card:hover {
+            background: rgba(124,58,237,0.15);
+            border-color: rgba(124,58,237,0.35);
+            transform: translateY(-2px);
+        }
+        .nav-card .nav-title {
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+        .nav-card .nav-desc {
+            font-size: 12px;
+            color: var(--fg-secondary);
+        }
+
+        /* 代码展示 */
+        .quick-start {
+            margin-bottom: 40px;
+        }
+        .quick-start pre {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 8px;
+            padding: 16px 20px;
+            overflow-x: auto;
+        }
+        .quick-start pre code {
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        /* 平台标签 */
+        .platform-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+        .platform-tag {
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            background: rgba(255,255,255,0.06);
+            color: var(--fg-secondary);
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+    </style>
+</head>
+<body>
+<div class="layout">
+    <aside class="toc">
+        <nav class="toc-inner">
+            <div class="toc-title">XsEngine</div>
+            <ul>
+                <li><a href="#about">关于 Xs</a></li>
+                <li><a href="#quickstart">基本框架</a></li>
+                <li><a href="#changelog">更新日志</a></li>
+                <li><a href="#download">下载</a></li>
+                <li><a href="#api">API 参考文档</a></li>
+                <li><a href="#tutorial">教学指南</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="container">
+        <!-- ===== Hero ===== -->
+        <section class="hero">
+            <h1>XsEngine</h1>
+
+            <span class="version">v1.02</span>
+
+            <p>轻量级、基于SFML、纯 C++ x64 的 2D 游戏渲染与交互框架。</p>
+            <div class="hero-actions">
+                <a href="#download" class="btn btn-primary">下载 </a>
+                <a href="#quickstart" class="btn btn-secondary">快速上手</a>
+                <a href="#api" class="btn btn-secondary">API 文档</a>
+            </div>
+        </section>
+
+        <!-- ===== 关于 ===== -->
+        <section id="about">
+            <h2>关于 XsGraph</h2>
+            <p>XsGraph 是一个为独立开发者和小型团队设计的轻量级 C++ 游戏开发框架。它的目标是：</p>
+            <ul>
+                <li><strong>极简接入</strong> — 只需包含头文件即可使用，无需复杂的构建系统</li>
+                <li><strong>现代 C++</strong> — 基于 C++20 与 sfml，充分利用 RAII 与类型推导</li>
+                <li><strong>高性能</strong> — 批处理渲染、智能状态管理、最小驱动开销</li>
+                <li><strong>跨模块一致</strong> — 绘图、窗口、输入、音频共享同一命名空间与编码风格</li>
+            </ul>
+            <p>无论你是在做游戏原型、可视化工具还是创意编程，XsGraph 都能让你在 5 分钟内跑起第一个窗口。</p>
+        </section>
+
+        <!-- ===== 基本框架 ===== -->
+        <section id="quickstart" class="quick-start">
+            <h2>基本框架</h2>
+            <p>只需 30 行代码，创建一个窗口并绘制一个旋转的正方形：</p>
+            <pre><code><span class="kw">#include "</span><span class="tpl">Xs.h</span><span class="kw">"</span>
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="tpl">RenWin</span> window;
+    <span class="fn">CreateGraphWindow</span>(window, <span class="nm">100</span>, <span class="nm">100</span>, <span class="nm">800</span>, <span class="nm">600</span>, <span class="nm">"Hello XsGraph"</span>);
+
+    <span class="kw">float</span> angle = <span class="nm">0</span>;
+    <span class="kw">while</span> (!<span class="fn">IsClose</span>(window)) {
+        <span class="fn">UpdateMsg</span>(window);
+        <span class="fn">DelayFps</span>(<span class="nm">60</span>, window);
+
+        <span class="fn">BeginDraw</span>(window, <span class="tpl">Color</span>(<span class="nm">20</span>, <span class="nm">15</span>, <span class="nm">30</span>));
+        <span class="fn">SetColor</span>(<span class="tpl">Color</span>(<span class="nm">124</span>, <span class="nm">58</span>, <span class="nm">237</span>));
+        <span class="fn">DrawRectRotated</span>(<span class="nm">400</span>, <span class="nm">300</span>, <span class="nm">200</span>, <span class="nm">200</span>, angle, <span class="nm">0.5f</span>, <span class="nm">0.5f</span>);
+        <span class="fn">EndDraw</span>(window);
+
+        angle += <span class="nm">1.5f</span>;
+    }
+    <span class="kw">return</span> <span class="nm">0</span>;
+}</code></pre>
+        </section>
+
+        <!-- ===== 更新日志 ===== -->
+        <section id="changelog" class="changelog">
+            <h2>更新日志</h2>
+
+            <div class="changelog-item">
+                <span class="version-tag new">v1.02</span>
+                <h4>XsGraph 1.02 — 2025.07</h4>
+                <ul>
+                    <li>发布 <code>Xs</code> 的第一个版本</li>
+                </ul>
+            </div>
+
+        </section>
+
+        <!-- ===== 下载 ===== -->
+        <section id="download">
+            <h2>下载</h2>
+            <div class="nav-grid">
+                <a href="Download/Xs_102.zip" download class="nav-card">
+                    <div class="nav-title">Xs x64.zip</div>
+                </a>
+                <a href="Download/Xs_api.zip" download class="nav-card">
+                    <div class="nav-title">API 离线文档</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- ===== API 参考文档 ===== -->
+        <section id="api">
+            <h2>API 参考文档</h2>
+            <p>完整的 API 参考文档，按模块分类，每个函数都有参数说明、返回值与代码示例。</p>
+            <div class="nav-grid">
+                <a href="API/index.html" class="nav-card">
+                    <div class="nav-title">在线 API 文档，在浏览器中查看完整 API 参考 ></div>
+                </a>
+            </div>
+        </section>
+
+        <!-- ===== 教学指南 ===== -->
+        <section id="tutorial">
+            <h2>教学指南</h2>
+            <p>从零开始学习 XsGraph，循序渐进的教程系列。</p>
+            <div class="nav-grid">
+                <a href="Study/inedx.html" class="nav-card">
+                    <div class="nav-title">开始学习Xs的第一步 ></div>
+                </a>
+            </div>
+        </section>
+
+        <!-- ===== 底部 ===== -->
+        <footer style="text-align:center; padding: 32px 0 16px; border-top: 1px solid rgba(255,255,255,0.06); margin-top: 40px;">
+            <p style="font-size:12px; color:var(--fg-secondary);">
+                XsGraph v1.02<br>
+            </p>
+        </footer>
+    </main>
+</div>
+<script src="js/toc.js"></script>
+</body>
+</html>
