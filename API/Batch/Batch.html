@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>XBatch - Xs 文档</title>
+    <link rel="stylesheet" href="../css/docs.css">
+</head>
+<body>
+<div class="layout">
+    <aside class="toc">
+        <nav class="toc-inner">
+            <div class="toc-title">XBatch</div>
+            <ul>
+                <li><a href="#batchtype">BatchType 枚举</a></li>
+                <li><a href="#begin">begin</a></li>
+                <li><a href="#end">end</a></li>
+                <li><a href="#isbatching">isBatching</a></li>
+                <li><a href="#getbatchtype">GetBatchType</a></li>
+                <li><a href="#setbatchtype">SetBatchType</a></li>
+                <li><a href="#checkdest">CheckDest（内部）</a></li>
+                <li><a href="#addquad">addQuad（内部）</a></li>
+                <li><a href="#addtrianglefan">addTriangleFan（内部）</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="container">
+        <nav class="breadcrumb">
+            <a href="../index.html">Xs 文档</a> / XBatch
+        </nav>
+
+        <header class="page-header">
+            <h1>xs::XBatch</h1>
+            <p class="metadata">命名空间：<code>xs</code> | 所属类：<code>XBatch</code></p>
+        </header>
+
+        <!-- ===== BatchType 枚举 ===== -->
+        <section id="batchtype">
+            <h2>BatchType — 批处理类型枚举</h2>
+            <p>控制批处理是自动追加还是手动管理。</p>
+            <table class="doc-table">
+                <thead><tr><th>值</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code class="en">BATCH_AUTO</code></td><td>自动模式，由系统自动管理批处理命令。</td></tr>
+                    <tr><td><code class="en">BATCH_HANDLED</code></td><td>手动模式，由用户显式控制批处理。</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ===== begin ===== -->
+        <section id="begin">
+            <h2>begin — 开始批处理</h2>
+            <p>开启渲染批处理，后续绘制命令将被收集到批处理队列中。</p>
+            <pre><code> <span class="kw">void</span> <span class="fn">begin</span>(<span class="tpl">Rt</span>&amp; target);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>target</code></td><td><code class="tpl">Rt</code>&amp;</td><td>渲染目标，批处理后的绘制将输出到此目标。</td></tr>
+                </tbody>
+            </table>
+            <div class="note">
+                调用 <code>begin</code> 后必须配对调用 <code>end</code>，否则批处理不会提交。
+            </div>
+        </section>
+
+        <!-- ===== end ===== -->
+        <section id="end">
+            <h2>end — 结束批处理</h2>
+            <p>结束当前批处理并提交所有收集的绘制命令到渲染目标。</p>
+            <pre><code> <span class="kw">void</span> <span class="fn">end</span>();</code></pre>
+            <div class="note">
+                不需要参数，渲染目标由 <code>begin</code> 时指定。
+            </div>
+        </section>
+
+        <!-- ===== isBatching ===== -->
+        <section id="isbatching">
+            <h2>isBatching — 是否正在批处理</h2>
+            <p>查询当前是否处于批处理进行中状态。</p>
+            <pre><code> <span class="kw">bool</span> <span class="fn">isBatching</span>();</code></pre>
+            <h4>返回值</h4>
+            <p>如果当前正在批处理中返回 <code class="kw">true</code>，否则返回 <code class="kw">false</code>。</p>
+        </section>
+
+        <!-- ===== GetBatchType ===== -->
+        <section id="getbatchtype">
+            <h2>GetBatchType — 获取批处理类型</h2>
+            <p>获取当前设置的批处理模式（自动或手动）。</p>
+            <pre><code> <span class="tpl">BatchType</span> <span class="fn">GetBatchType</span>();</code></pre>
+            <h4>返回值</h4>
+            <p>返回 <code class="tpl">BatchType</code> 枚举值：<code class="en">BATCH_AUTO</code>（自动）或 <code class="en">BATCH_HANDLED</code>（手动）。</p>
+        </section>
+
+        <!-- ===== SetBatchType ===== -->
+        <section id="setbatchtype">
+            <h2>SetBatchType — 设置批处理类型</h2>
+            <p>设置批处理模式。如果有不同绘制目标（如离屏渲染），建议使用手动模式。</p>
+            <pre><code> <span class="kw">void</span> <span class="fn">SetBatchType</span>(<span class="tpl">BatchType</span> type);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>type</code></td><td><code class="tpl">BatchType</code></td><td>批处理类型。<code class="en">BATCH_AUTO</code>（自动）或 <code class="en">BATCH_HANDLED</code>（手动）。</td></tr>
+                </tbody>
+            </table>
+            <div class="warning">
+                如果有不同绘制目标（比如离屏渲染），建议手动管理。自动 Batch 并不会执行最正确的批处理命令。
+            </div>
+        </section>
+
+        <!-- ===== CheckDest（内部）===== -->
+        <section id="checkdest">
+            <h2>CheckDest — 检查并修正当前目标（内部函数）</h2>
+            <p>检查当前渲染目标是否正确，必要时进行修正。此函数为内部使用，一般无需手动调用。</p>
+            <pre><code> <span class="kw">void</span> <span class="fn">CheckDest</span>(<span class="tpl">Rt</span>&amp; Dest);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>Dest</code></td><td><code class="tpl">Rt</code>&amp;</td><td>要检查和修正的渲染目标。</td></tr>
+                </tbody>
+            </table>
+            <div class="note">
+                内部函数，由系统在批处理过程中自动调用。
+            </div>
+        </section>
+
+        <!-- ===== addQuad（内部）===== -->
+        <section id="addquad">
+            <h2>addQuad — 添加四边形（内部函数）</h2>
+            <p>向批处理队列中添加一个四边形（TriangleStrip 模式），用于绘制矩形或线段。此函数为内部使用。</p>
+            <pre><code> <span class="kw">void</span> <span class="fn">addQuad</span>(
+    <span class="kw">const</span> sf::<span class="tpl">Vector2f</span>&amp; p0,
+    <span class="kw">const</span> sf::<span class="tpl">Vector2f</span>&amp; p1,
+    <span class="kw">const</span> sf::<span class="tpl">Vector2f</span>&amp; p2,
+    <span class="kw">const</span> sf::<span class="tpl">Vector2f</span>&amp; p3,
+    <span class="kw">const</span> sf::<span class="tpl">Color</span>&amp; color
+);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>p0</code></td><td><code class="kw">const</code> sf::<code class="tpl">Vector2f</code>&amp;</td><td>四边形第一个顶点。</td></tr>
+                    <tr><td><code>p1</code></td><td><code class="kw">const</code> sf::<code class="tpl">Vector2f</code>&amp;</td><td>四边形第二个顶点。</td></tr>
+                    <tr><td><code>p2</code></td><td><code class="kw">const</code> sf::<code class="tpl">Vector2f</code>&amp;</td><td>四边形第三个顶点。</td></tr>
+                    <tr><td><code>p3</code></td><td><code class="kw">const</code> sf::<code class="tpl">Vector2f</code>&amp;</td><td>四边形第四个顶点。</td></tr>
+                    <tr><td><code>color</code></td><td><code class="kw">const</code> sf::<code class="tpl">Color</code>&amp;</td><td>四边形颜色。</td></tr>
+                </tbody>
+            </table>
+            <div class="note">
+                内部函数，使用 TriangleStrip 图元类型。通常用于矩形填充和线段绘制。
+            </div>
+        </section>
+
+        <!-- ===== addTriangleFan（内部）===== -->
+        <section id="addtrianglefan">
+            <h2>addTriangleFan — 添加三角扇形（内部函数）</h2>
+            <p>向批处理队列中添加一个三角扇形（TriangleFan 模式），用于绘制圆形、弧形或点。此函数为内部使用。</p>
+            <pre><code> <span class="kw">void</span> <span class="fn">addTriangleFan</span>(
+    <span class="kw">const</span> std::<span class="ty">vector</span>&lt;sf::<span class="tpl">Vector2f</span>&gt;&amp; fan,
+    <span class="kw">const</span> sf::<span class="tpl">Color</span>&amp; color
+);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>fan</code></td><td><code class="kw">const</code> std::<code class="ty">vector</code>&lt;sf::<code class="tpl">Vector2f</code>&gt;&amp;</td><td>三角扇形的顶点数组，第一个顶点为公共中心。</td></tr>
+                    <tr><td><code>color</code></td><td><code class="kw">const</code> sf::<code class="tpl">Color</code>&amp;</td><td>扇形颜色。</td></tr>
+                </tbody>
+            </table>
+            <div class="note">
+                内部函数，使用 TriangleFan 图元类型。通常用于圆形、弧形和点集的绘制。
+            </div>
+        </section>
+
+        <!-- ===== Entry 结构体 ===== -->
+        <section id="entry">
+            <h2>Entry — 批处理条目结构体</h2>
+            <p>批处理队列中的单个绘制条目，包含图元类型和顶点数据。</p>
+            <pre><code><span class="kw">struct</span> <span class="ty">Entry</span>
+{
+    sf::<span class="tpl">PrimitiveType</span> type;
+    std::<span class="ty">vector</span>&lt;sf::<span class="tpl">Vertex</span>&gt; vertices;
+};</code></pre>
+            <h4>成员</h4>
+            <table class="doc-table">
+                <thead><tr><th>成员</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>type</code></td><td><code class="tpl">sf::PrimitiveType</code></td><td>图元类型（如 TriangleStrip、TriangleFan 等）。</td></tr>
+                    <tr><td><code>vertices</code></td><td><code class="ty">std::vector</code>&lt;<code class="tpl">sf::Vertex</code>&gt;</td><td>该条目的顶点数据数组。</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>另请参阅</h2>
+            <ul>
+                <li><a href="../index.html">返回首页</a></li>
+                <li><a href="../Graph/Graph_All.html">Graph 类总览</a></li>
+            </ul>
+        </section>
+    </main>
+</div>
+<script src="../js/toc.js"></script>
+</body>
+</html>
