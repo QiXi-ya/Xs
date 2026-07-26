@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>XColor - Xs 文档</title>
+    <link rel="stylesheet" href="../css/docs.css">
+</head>
+<body>
+<div class="layout">
+    <aside class="toc">
+        <nav class="toc-inner">
+            <div class="toc-title">XColor</div>
+            <ul>
+                <li><a href="#gray">灰度化</a></li>
+                <li><a href="#dark">暗化</a></li>
+                <li><a href="#light">亮化</a></li>
+                <li><a href="#alpha">透明化</a></li>
+                <li><a href="#isdark">判断深色</a></li>
+                <li><a href="#issame">颜色比较</a></li>
+                <li><a href="#adjust">调整亮度</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="container">
+        <nav class="breadcrumb">
+            <a href="../index.html">Xs 文档</a> / XColor
+        </nav>
+
+        <header class="page-header">
+            <h1>xs::XColor</h1>
+            <p class="metadata">命名空间：<code>xs</code> | 所属类：<code>XColor</code></p>
+        </header>
+
+        <section id="gray">
+            <h2>GrayColor — 灰度化</h2>
+            <p>将指定颜色按灰度比例转换为灰度色。</p>
+            <pre><code><span class="tpl">Color</span> <span class="fn">GrayColor</span>(<span class="kw">const</span> <span class="tpl">Color</span>&amp; color, <span class="ty">float</span> percent);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>color</code></td><td><code class="kw">const</code> <code class="tpl">Color</code>&amp;</td><td>目标颜色。</td></tr>
+                    <tr><td><code>percent</code></td><td><code class="ty">float</code></td><td>灰度值，范围 [0 - 100]，0 为原色，100 为完全灰度。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回灰度化后的 <code class="tpl">Color</code>。</p>
+        </section>
+
+        <section id="dark">
+            <h2>DarkColor — 暗化</h2>
+            <p>将指定颜色按百分比变暗。</p>
+            <pre><code><span class="tpl">Color</span> <span class="fn">DarkColor</span>(<span class="kw">const</span> <span class="tpl">Color</span>&amp; color, <span class="ty">float</span> percent);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>color</code></td><td><code class="kw">const</code> <code class="tpl">Color</code>&amp;</td><td>目标颜色。</td></tr>
+                    <tr><td><code>percent</code></td><td><code class="ty">float</code></td><td>暗度值，范围 [0 - 100]，值越大颜色越暗。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回变暗后的 <code class="tpl">Color</code>。</p>
+        </section>
+
+        <section id="light">
+            <h2>LightColor — 亮化</h2>
+            <p>将指定颜色按百分比变亮。</p>
+            <pre><code><span class="tpl">Color</span> <span class="fn">LightColor</span>(<span class="kw">const</span> <span class="tpl">Color</span>&amp; color, <span class="ty">float</span> percent);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>color</code></td><td><code class="kw">const</code> <code class="tpl">Color</span>&amp;</td><td>目标颜色。</td></tr>
+                    <tr><td><code>percent</code></td><td><code class="ty">float</code></td><td>亮度值，范围 [0 - 100]，值越大颜色越亮。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回变亮后的 <code class="tpl">Color</code>。</p>
+        </section>
+
+        <section id="alpha">
+            <h2>AlphaColor — 透明化</h2>
+            <p>设置指定颜色的 Alpha（透明度）通道。</p>
+            <pre><code><span class="tpl">Color</span> <span class="fn">AlphaColor</span>(<span class="kw">const</span> <span class="tpl">Color</span>&amp; color, <span class="ty">uint8_t</span> alpha);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>color</code></td><td><code class="kw">const</code> <code class="tpl">Color</span>&amp;</td><td>目标颜色。</td></tr>
+                    <tr><td><code>alpha</code></td><td><code class="ty">uint8_t</code></td><td>透明值，范围 [0 - 255]，0 为完全透明，255 为完全不透明。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回设置了 Alpha 后的 <code class="tpl">Color</code>。</p>
+        </section>
+
+        <section id="isdark">
+            <h2>IsDarkColor — 判断深色</h2>
+            <p>判断指定颜色是否为深色（亮度低于阈值）。</p>
+            <pre><code><span class="kw">bool</span> <span class="fn">IsDarkColor</span>(<span class="kw">const</span> <span class="tpl">Color</span>&amp; color);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>color</code></td><td><code class="kw">const</code> <code class="tpl">Color</span>&amp;</td><td>要判断的颜色。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>如果是深色返回 <code class="kw">true</code>，否则返回 <code class="kw">false</code>。</p>
+        </section>
+
+        <section id="issame">
+            <h2>IsColorSame — 颜色比较</h2>
+            <p>判断两个颜色是否相似或相同，支持精确/相似两种模式，可选是否对比 Alpha 通道。</p>
+            <pre><code><span class="kw">bool</span> <span class="fn">IsColorSame</span>(
+    <span class="kw">const</span> <span class="tpl">Color</span>&amp; colorA,
+    <span class="kw">const</span> <span class="tpl">Color</span>&amp; colorB,
+    <span class="kw">bool</span> UseAlpha = <span class="kw">false</span>,
+    <span class="kw">bool</span> isExact = <span class="kw">false</span>,
+    <span class="ty">int</span> VagueValue = <span class="nm">10</span>);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>colorA</code></td><td><code class="kw">const</code> <code class="tpl">Color</span>&amp;</td><td>目标颜色 A。</td></tr>
+                    <tr><td><code>colorB</code></td><td><code class="kw">const</code> <code class="tpl">Color</span>&amp;</td><td>目标对比颜色 B。</td></tr>
+                    <tr><td><code>UseAlpha</code></td><td><code class="kw">bool</code></td><td>是否对比 Alpha 通道，默认 <code class="kw">false</code>（不对比）。</td></tr>
+                    <tr><td><code>isExact</code></td><td><code class="kw">bool</code></td><td>是否精确对比（每个通道完全相等），默认 <code class="kw">false</code>（相似对比）。</td></tr>
+                    <tr><td><code>VagueValue</code></td><td><code class="ty">int</code></td><td>相似对比时的允许差度，默认 <code class="nm">10</code>，值越小越严格。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>如果相似或相同返回 <code class="kw">true</code>，否则返回 <code class="kw">false</code>。</p>
+            <div class="note">
+                当 <code>isExact = true</code> 时，每个颜色通道必须完全相等才会返回 <code class="kw">true</code>。
+                当 <code>isExact = false</code> 时，各通道差值在 <code>VagueValue</code> 范围内即视为相同。
+            </div>
+        </section>
+
+        <section id="adjust">
+            <h2>AdjustColorBright — 调整亮度</h2>
+            <p>按亮度阈值调整颜色的整体亮度。</p>
+            <pre><code><span class="tpl">Color</span> <span class="fn">AdjustColorBright</span>(<span class="kw">const</span> <span class="tpl">Color</span>&amp; color, <span class="ty">int</span> brightness);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>color</code></td><td><code class="kw">const</code> <code class="tpl">Color</span>&amp;</td><td>目标颜色。</td></tr>
+                    <tr><td><code>brightness</code></td><td><code class="ty">int</code></td><td>亮度阈值，正值变亮，负值变暗。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回调整后的 <code class="tpl">Color</code>。</p>
+        </section>
+
+        <section>
+            <h2>另请参阅</h2>
+            <ul>
+                <li><a href="Color_All.html">Color 类总览</a></li>
+                <li><a href="../index.html">返回首页</a></li>
+            </ul>
+        </section>
+    </main>
+</div>
+<script src="../js/toc.js"></script>
+</body>
+</html>
