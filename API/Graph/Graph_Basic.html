@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>xs::XGraph 类 - Xs 文档</title>
+<link rel="stylesheet" href="../css/docs.css">
+</head>
+<body>
+<div class="layout">
+
+<aside class="toc">
+<nav class="toc-inner">
+<div class="toc-title">本文内容</div>
+<ul>
+<li><a href="#overview">概述</a></li>
+<li><a href="#linetype">LineType</a></li>
+<li><a href="#linecaptype">LineCapType</a></li>
+<li><a href="#setcolor">SetColor</a></li>
+<li><a href="#setfillcolor">SetFillColor</a></li>
+<li><a href="#line">Line</a></li>
+<li><a href="#lineex">LineEx</a></li>
+<li><a href="#setlinewidth">SetLineWidth</a></li>
+<li><a href="#setlinetype">SetLineType</a></li>
+<li><a href="#setlinecap">SetLineCap</a></li>
+<li><a href="#circle">Circle</a></li>
+<li><a href="#fillcircle">FillCircle</a></li>
+<li><a href="#fillcircle_withoutborder">FillCircle_WithoutBorder</a></li>
+<li><a href="#ellipse">Ellipse</a></li>
+<li><a href="#fillellipse">FillEllipse</a></li>
+<li><a href="#fillellipse_withoutborder">FillEllipse_WithoutBorder</a></li>
+<li><a href="#arc">Arc</a></li>
+<li><a href="#fillarc">FillArc</a></li>
+<li><a href="#fillarc_withoutborder">FillArc_WithoutBorder</a></li>
+<li><a href="#rect">Rect</a></li>
+<li><a href="#fillrect">FillRect</a></li>
+<li><a href="#fillrect_withoutborder">FillRect_WithoutBorder</a></li>
+<li><a href="#roundrect">RoundRect</a></li>
+<li><a href="#fillroundrect">FillRoundRect</a></li>
+<li><a href="#fillroundrect_withoutborder">FillRoundRect_WithoutBorder</a></li>
+<li><a href="#remarks">备注</a></li>
+</ul>
+</nav>
+</aside>
+
+<main class="container">
+
+<nav class="breadcrumb">
+<a href="../index.html">Xs 文档</a> / <a href="Graph_All.html">Graph 类</a> / XGraph 类
+</nav>
+
+<header class="page-header">
+<h1>xs::XGraph 类</h1>
+<p class="metadata">命名空间：<code>xs</code> | 所属类：<code>XGraph</code></p>
+</header>
+
+<section id="overview">
+<h2>概述</h2>
+<p><code>xs::XGraph</code> 提供基础几何图形绘制能力与全局绘图状态管理。所有成员均为静态，无需实例化即可调用。</p>
+<div class="note">全局绘图状态（颜色、线宽、线型等）在所有子类中共享，会持续影响后续绘制操作，直到再次修改。</div>
+</section>
+
+<section id="linetype">
+<h2>LineType 枚举</h2>
+<p>定义线条的绘制样式。</p>
+<table class="doc-table">
+<thead><tr><th>值</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code class="en">LINE_SOLID</code></td><td>实线</td></tr>
+<tr><td><code class="en">LINE_CENTER</code></td><td>虚线</td></tr>
+<tr><td><code class="en">LINE_DOTTED</code></td><td>点线</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="linecaptype">
+<h2>LineCapType 枚举</h2>
+<p>定义线条端点的样式。</p>
+<table class="doc-table">
+<thead><tr><th>值</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code class="en">LINECAP_FLAT</code></td><td>平头（无延伸）</td></tr>
+<tr><td><code class="en">LINECAP_ROUND</code></td><td>圆头（默认）</td></tr>
+<tr><td><code class="en">LINECAP_SQUART</code></td><td>方头</td></tr>
+</tbody>
+</table>
+</section>
+
+<!-- ==================== 全局状态 ==================== -->
+
+<section id="setcolor">
+<h2>SetColor</h2>
+<p>设置全局线条颜色（影响后续所有描边绘制）。</p>
+<pre><code><span class="kw">void</span> <span class="fn">SetColor</span>(<span class="ty">Color</span> color);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>color</code></td><td><code class="ty">Color</code></td><td>要设置的颜色。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="setfillcolor">
+<h2>SetFillColor</h2>
+<p>设置全局填充颜色（影响后续所有填充绘制）。</p>
+<pre><code><span class="kw">void</span> <span class="fn">SetFillColor</span>(<span class="ty">Color</span> color);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>color</code></td><td><code class="ty">Color</code></td><td>要设置的颜色。</td></tr>
+</tbody>
+</table>
+</section>
+
+<!-- ==================== LineShape ==================== -->
+
+<section id="line">
+<h2>Line</h2>
+<p>绘制直线。</p>
+<pre><code><span class="kw">void</span> <span class="fn">Line</span>(<span class="ty">float</span> x1, <span class="ty">float</span> y1, <span class="ty">float</span> x2, <span class="ty">float</span> y2, <span class="tpl"><span class="ty">Rt</span>&</span> Dest);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>x1</code></td><td><code class="ty">float</code></td><td>起始坐标 x。</td></tr>
+<tr><td><code>y1</code></td><td><code class="ty">float</code></td><td>起始坐标 y。</td></tr>
+<tr><td><code>x2</code></td><td><code class="ty">float</code></td><td>终点坐标 x。</td></tr>
+<tr><td><code>y2</code></td><td><code class="ty">float</code></td><td>终点坐标 y。</td></tr>
+<tr><td><code>Dest</code></td><td><code class="tpl">Rt&</code></td><td>目标窗口。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="lineex">
+<h2>LineEx</h2>
+<p>绘制直线（可指定粗细与线型）。</p>
+<pre><code><span class="kw">void</span> <span class="fn">LineEx</span>(<span class="ty">float</span> x, <span class="ty">float</span> y, <span class="ty">float</span> x2, <span class="ty">float</span> y2, <span class="ty">int</span> thickness, <span class="ty">LineType</span> type, <span class="tpl"><span class="ty">Rt</span>&</span> Dest);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>x</code></td><td><code class="ty">float</code></td><td>起始坐标 x。</td></tr>
+<tr><td><code>y</code></td><td><code class="ty">float</code></td><td>起始坐标 y。</td></tr>
+<tr><td><code>x2</code></td><td><code class="ty">float</code></td><td>终点坐标 x。</td></tr>
+<tr><td><code>y2</code></td><td><code class="ty">float</code></td><td>终点坐标 y。</td></tr>
+<tr><td><code>thickness</code></td><td><code class="ty">int</code></td><td>线粗细（像素）。</td></tr>
+<tr><td><code>type</code></td><td><code class="ty">LineType</code></td><td>线形状：<code class="en">LINE_SOLID</code> 实线 / <code class="en">LINE_CENTER</code> 虚线 / <code class="en">LINE_DOTTED</code> 点线。</td></tr>
+<tr><td><code>Dest</code></td><td><code class="tpl">Rt&</code></td><td>目标窗口。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="setlinewidth">
+<h2>SetLineWidth</h2>
+<p>设置全局线条粗细，此函数也会影响其他绘制函数的线条粗细。</p>
+<pre><code><span class="kw">void</span> <span class="fn">SetLineWidth</span>(<span class="ty">int</span> thickness = <span class="nm">1</span>);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>thickness</code></td><td><code class="ty">int</code></td><td>粗细（像素），默认 <code>1</code>。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="setlinetype">
+<h2>SetLineType</h2>
+<p>设置线条类型。</p>
+<pre><code><span class="kw">void</span> <span class="fn">SetLineType</span>(<span class="ty">LineType</span> type = <span class="en">LINE_SOLID</span>);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>type</code></td><td><code class="ty">LineType</code></td><td>类型：<code class="en">LINE_SOLID</code> 实线 / <code class="en">LINE_CENTER</code> 虚线 / <code class="en">LINE_DOTTED</code> 点线。默认 <code class="en">LINE_SOLID</code>。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="setlinecap">
+<h2>SetLineCap</h2>
+<p>设置线头（端点）类型。</p>
+<pre><code><span class="kw">void</span> <span class="fn">SetLineCap</span>(<span class="ty">LineCapType</span> type = <span class="en">LINECAP_ROUND</span>);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>type</code></td><td><code class="ty">LineCapType</code></td><td>类型：<code class="en">LINECAP_FLAT</code> 平头 / <code class="en">LINECAP_ROUND</code> 圆头 / <code class="en">LINECAP_SQUART</code> 方头。默认 <code class="en">LINECAP_ROUND</code>。</td></tr>
+</tbody>
+</table>
+</section>
+
+<!-- ==================== CircleShape ==================== -->
+
+<section id="circle">
+<h2>Circle</h2>
+<p>绘制圆形（仅边框）。</p>
+<pre><code><span class="kw">void</span> <span class="fn">Circle</span>(<span class="ty">float</span> x, <span class="ty">float</span> y, <span class="ty">float</span> radius, <span class="tpl"><span class="ty">Rt</span>&</span> Dest);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>x</code></td><td><code class="ty">float</code></td><td>中心 x。</td></tr>
+<tr><td><code>y</code></td><td><code class="ty">float</code></td><td>中心 y。</td></tr>
+<tr><td><code>radius</code></td><td><code class="ty">float</code></td><td>半径（像素）。</td></tr>
+<tr><td><code>Dest</code></td><td><code class="tpl">Rt&</code></td><td>目标窗口。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="fillcircle">
+<h2>FillCircle</h2>
+<p>绘制填充的圆形，带边框（描边使用 SetColor，填充使用 SetFillColor）。</p>
+<pre><code><span class="kw">void</span> <span class="fn">FillCircle</span>(<span class="ty">float</span> x, <span class="ty">float</span> y, <span class="ty">float</span> radius, <span class="tpl"><span class="ty">Rt</span>&</span> Dest);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>x</code></td><td><code class="ty">float</code></td><td>中心 x。</td></tr>
+<tr><td><code>y</code></td><td><code class="ty">float</code></td><td>中心 y。</td></tr>
+<tr><td><code>radius</code></td><td><code class="ty">float</code></td><td>半径（像素）。</td></tr>
+<tr><td><code>Dest</code></td><td><code class="tpl">Rt&</code></td><td>目标窗口。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="fillcircle_withoutborder">
+<h2>FillCircle_WithoutBorder</h2>
+<p>绘制填充无边框圆（仅填充，无描边）。</p>
+<pre><code><span class="kw">void</span> <span class="fn">FillCircle_WithoutBorder</span>(<span class="ty">float</span> x, <span class="ty">float</span> y, <span class="ty">float</span> radius, <span class="tpl"><span class="ty">Rt</span>&</span> Dest);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>x</code></td><td><code class="ty">float</code></td><td>中心 x。</td></tr>
+<tr><td><code>y</code></td><td><code class="ty">float</code></td><td>中心 y。</td></tr>
+<tr><td><code>radius</code></td><td><code class="ty">float</code></td><td>半径（像素）。</td></tr>
+<tr><td><code>Dest</code></td><td><code class="tpl">Rt&</code></td><td>目标窗口。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="ellipse">
+<h2>Ellipse</h2>
+<p>绘制椭圆，带边框。</p>
+<pre><code><span class="kw">void</span> <span class="fn">Ellipse</span>(<span class="ty">float</span> x, <span class="ty">float</span> y, <span class="ty">float</span> radiusX, <span class="ty">float</span> radiusY, <span class="tpl"><span class="ty">Rt</span>&</span> Dest);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>x</code></td><td><code class="ty">float</code></td><td>中心 x。</td></tr>
+<tr><td><code>y</code></td><td><code class="ty">float</code></td><td>中心 y。</td></tr>
+<tr><td><code>radiusX</code></td><td><code class="ty">float</code></td><td>横向半径。</td></tr>
+<tr><td><code>radiusY</code></td><td><code class="ty">float</code></td><td>纵向半径。</td></tr>
+<tr><td><code>Dest</code></td><td><code class="tpl">Rt&</code></td><td>目标窗口。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="fillellipse">
+<h2>FillEllipse</h2>
+<p>绘制填充的椭圆，带边框。</p>
+<pre><code><span class="kw">void</span> <span class="fn">FillEllipse</span>(<span class="ty">float</span> x, <span class="ty">float</span> y, <span class="ty">float</span> radiusX, <span class="ty">float</span> radiusY, <span class="tpl"><span class="ty">Rt</span>&</span> Dest);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>x</code></td><td><code class="ty">float</code></td><td>中心 x。</td></tr>
+<tr><td><code>y</code></td><td><code class="ty">float</code></td><td>中心 y。</td></tr>
+<tr><td><code>radiusX</code></td><td><code class="ty">float</code></td><td>横向半径。</td></tr>
+<tr><td><code>radiusY</code></td><td><code class="ty">float</code></td><td>纵向半径。</td></tr>
+<tr><td><code>Dest</code></td><td><code class="tpl">Rt&</code></td><td>目标窗口。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="fillellipse_withoutborder">
+<h2>FillEllipse_WithoutBorder</h2>
+<p>绘制填充无边框椭圆。</p>
+<pre><code><span class="kw">void</span> <span class="fn">FillEllipse_WithoutBorder</span>(<span class="ty">float</span> x, <span class="ty">float</span> y, <span class="ty">float</span> radiusX, <span class="ty">float</span> radiusY, <span class="tpl"><span class="ty">Rt</span>&</span> Dest);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>x</code></td><td><code class="ty">float</code></td><td>中心 x。</td></tr>
+<tr><td><code>y</code></td><td><code class="ty">float</code></td><td>中心 y。</td></tr>
+<tr><td><code>radiusX</code></td><td><code class="ty">float</code></td><td>横向半径。</td></tr>
+<tr><td><code>radiusY</code></td><td><code class="ty">float</code></td><td>纵向半径。</td></tr>
+<tr><td><code>Dest</code></td><td><code class="tpl">Rt&</code></td><td>目标窗口。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="arc">
+<h2>Arc</h2>
+<p>绘制圆弧（仅边框）。</p>
+<pre><code><span class="kw">void</span> <span class="fn">Arc</span>(<span class="ty">float</span> x, <span class="ty">float</span> y, <span class="ty">float</span> radius, <span class="ty">float</span> startAngle, <span class="ty">float</span> endAngle, <span class="tpl"><span class="ty">Rt</span>&</span> Dest);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>x</code></td><td><code class="ty">float</code></td><td>中心 x。</td></tr>
+<tr><td><code>y</code></td><td><code class="ty">float</code></td><td>中心 y。</td></tr>
+<tr><td><code>radius</code></td><td><code class="ty">float</code></td><td>半径（像素）。</td></tr>
+<tr><td><code>startAngle</code></td><td><code class="ty">float</code></td><td>起始角度（度）。</td></tr>
+<tr><td><code>endAngle</code></td><td><code class="ty">float</code></td><td>绘制角度（度）。</td></tr>
+<tr><td><code>Dest</code></td><td><code class="tpl">Rt&</code></td><td>目标窗口。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="fillarc">
+<h2>FillArc</h2>
+<p>绘制填充圆弧，带边框。</p>
+<pre><code><span class="kw">void</span> <span class="fn">FillArc</span>(<span class="ty">float</span> x, <span class="ty">float</span> y, <span class="ty">float</span> radius, <span class="ty">float</span> startAngle, <span class="ty">float</span> endAngle, <span class="tpl"><span class="ty">Rt</span>&</span> Dest);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>x</code></td><td><code class="ty">float</code></td><td>中心 x。</td></tr>
+<tr><td><code>y</code></td><td><code class="ty">float</code></td><td>中心 y。</td></tr>
+<tr><td><code>radius</code></td><td><code class="ty">float</code></td><td>半径（像素）。</td></tr>
+<tr><td><code>startAngle</code></td><td><code class="ty">float</code></td><td>起始角度（度）。</td></tr>
+<tr><td><code>endAngle</code></td><td><code class="ty">float</code></td><td>绘制角度（度）。</td></tr>
+<tr><td><code>Dest</code></td><td><code class="tpl">Rt&</code></td><td>目标窗口。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="fillarc_withoutborder">
+<h2>FillArc_WithoutBorder</h2>
+<p>绘制无边框填充圆弧。</p>
+<pre><code><span class="kw">void</span> <span class="fn">FillArc_WithoutBorder</span>(<span class="ty">float</span> x, <span class="ty">float</span> y, <span class="ty">float</span> radius, <span class="ty">float</span> startAngle, <span class="ty">float</span> endAngle, <span class="tpl"><span class="ty">Rt</span>&</span> Dest);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>x</code></td><td><code class="ty">float</code></td><td>中心 x。</td></tr>
+<tr><td><code>y</code></td><td><code class="ty">float</code></td><td>中心 y。</td></tr>
+<tr><td><code>radius</code></td><td><code class="ty">float</code></td><td>半径（像素）。</td></tr>
+<tr><td><code>startAngle</code></td><td><code class="ty">float</code></td><td>起始角度（度）。</td></tr>
+<tr><td><code>endAngle</code></td><td><code class="ty">float</code></td><td>绘制角度（度）。</td></tr>
+<tr><td><code>Dest</code></td><td><code class="tpl">Rt&</code></td><td>目标窗口。</td></tr>
+</tbody>
+</table>
+</section>
+
+<!-- ==================== RectangleShape ==================== -->
+
+<section id="rect">
+<h2>Rect</h2>
+<p>绘制矩形边框。</p>
+<pre><code><span class="kw">void</span> <span class="fn">Rect</span>(<span class="ty">float</span> x, <span class="ty">float</span> y, <span class="ty">float</span> w, <span class="ty">float</span> h, <span class="tpl"><span class="ty">Rt</span>&</span> Dest);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>x</code></td><td><code class="ty">float</code></td><td>左上角 x。</td></tr>
+<tr><td><code>y</code></td><td><code class="ty">float</code></td><td>左上角 y。</td></tr>
+<tr><td><code>w</code></td><td><code class="ty">float</code></td><td>宽。</td></tr>
+<tr><td><code>h</code></td><td><code class="ty">float</code></td><td>高。</td></tr>
+<tr><td><code>Dest</code></td><td><code class="tpl">Rt&</code></td><td>目标窗口。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="fillrect">
+<h2>FillRect</h2>
+<p>绘制填充矩形，带边框。</p>
+<pre><code><span class="kw">void</span> <span class="fn">FillRect</span>(<span class="ty">float</span> x, <span class="ty">float</span> y, <span class="ty">float</span> w, <span class="ty">float</span> h, <span class="tpl"><span class="ty">Rt</span>&</span> Dest);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>x</code></td><td><code class="ty">float</code></td><td>左上角 x。</td></tr>
+<tr><td><code>y</code></td><td><code class="ty">float</code></td><td>左上角 y。</td></tr>
+<tr><td><code>w</code></td><td><code class="ty">float</code></td><td>宽。</td></tr>
+<tr><td><code>h</code></td><td><code class="ty">float</code></td><td>高。</td></tr>
+<tr><td><code>Dest</code></td><td><code class="tpl">Rt&</code></td><td>目标窗口。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="fillrect_withoutborder">
+<h2>FillRect_WithoutBorder</h2>
+<p>绘制填充无边框矩形。</p>
+<pre><code><span class="kw">void</span> <span class="fn">FillRect_WithoutBorder</span>(<span class="ty">float</span> x, <span class="ty">float</span> y, <span class="ty">float</span> w, <span class="ty">float</span> h, <span class="tpl"><span class="ty">Rt</span>&</span> Dest);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>x</code></td><td><code class="ty">float</code></td><td>左上角 x。</td></tr>
+<tr><td><code>y</code></td><td><code class="ty">float</code></td><td>左上角 y。</td></tr>
+<tr><td><code>w</code></td><td><code class="ty">float</code></td><td>宽。</td></tr>
+<tr><td><code>h</code></td><td><code class="ty">float</code></td><td>高。</td></tr>
+<tr><td><code>Dest</code></td><td><code class="tpl">Rt&</code></td><td>目标窗口。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="roundrect">
+<h2>RoundRect</h2>
+<p>绘制圆角矩形边框。</p>
+<pre><code><span class="kw">void</span> <span class="fn">RoundRect</span>(<span class="ty">float</span> x, <span class="ty">float</span> y, <span class="ty">float</span> w, <span class="ty">float</span> h, <span class="ty">float</span> radius, <span class="tpl"><span class="ty">Rt</span>&</span> Dest);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>x</code></td><td><code class="ty">float</code></td><td>左上角 x。</td></tr>
+<tr><td><code>y</code></td><td><code class="ty">float</code></td><td>左上角 y。</td></tr>
+<tr><td><code>w</code></td><td><code class="ty">float</code></td><td>宽。</td></tr>
+<tr><td><code>h</code></td><td><code class="ty">float</code></td><td>高。</td></tr>
+<tr><td><code>radius</code></td><td><code class="ty">float</code></td><td>圆角半径（像素）。</td></tr>
+<tr><td><code>Dest</code></td><td><code class="tpl">Rt&</code></td><td>目标窗口。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="fillroundrect">
+<h2>FillRoundRect</h2>
+<p>绘制填充圆角矩形，带边框。</p>
+<pre><code><span class="kw">void</span> <span class="fn">FillRoundRect</span>(<span class="ty">float</span> x, <span class="ty">float</span> y, <span class="ty">float</span> w, <span class="ty">float</span> h, <span class="ty">float</span> radius, <span class="tpl"><span class="ty">Rt</span>&</span> Dest);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>x</code></td><td><code class="ty">float</code></td><td>左上角 x。</td></tr>
+<tr><td><code>y</code></td><td><code class="ty">float</code></td><td>左上角 y。</td></tr>
+<tr><td><code>w</code></td><td><code class="ty">float</code></td><td>宽。</td></tr>
+<tr><td><code>h</code></td><td><code class="ty">float</code></td><td>高。</td></tr>
+<tr><td><code>radius</code></td><td><code class="ty">float</code></td><td>圆角半径（像素）。</td></tr>
+<tr><td><code>Dest</code></td><td><code class="tpl">Rt&</code></td><td>目标窗口。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="fillroundrect_withoutborder">
+<h2>FillRoundRect_WithoutBorder</h2>
+<p>绘制填充无边框圆角矩形。</p>
+<pre><code><span class="kw">void</span> <span class="fn">FillRoundRect_WithoutBorder</span>(<span class="ty">float</span> x, <span class="ty">float</span> y, <span class="ty">float</span> w, <span class="ty">float</span> h, <span class="ty">float</span> radius, <span class="tpl"><span class="ty">Rt</span>&</span> Dest);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>x</code></td><td><code class="ty">float</code></td><td>左上角 x。</td></tr>
+<tr><td><code>y</code></td><td><code class="ty">float</code></td><td>左上角 y。</td></tr>
+<tr><td><code>w</code></td><td><code class="ty">float</code></td><td>宽。</td></tr>
+<tr><td><code>h</code></td><td><code class="ty">float</code></td><td>高。</td></tr>
+<tr><td><code>radius</code></td><td><code class="ty">float</code></td><td>圆角半径（像素）。</td></tr>
+<tr><td><code>Dest</code></td><td><code class="tpl">Rt&</code></td><td>目标窗口。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="remarks">
+<h2>备注</h2>
+<ul>
+<li>所有绘制方法立即生效，不自动刷新窗口，需配合窗口的显示逻辑使用。</li>
+<li>全局状态（颜色、线宽等）是跨子类共享的，例如 <code>SetLineWidth</code> 会影响 <code>Rect</code>、<code>Circle</code> 等所有描边操作。</li>
+<li>角度参数统一使用度（°），顺时针为正方向。</li>
+</ul>
+</section>
+
+<section>
+<h2>另请参阅</h2>
+<ul>
+<li><a href="Graph_Image.html">xs::XImage</a></li>
+<li><a href="Graph_ImageEx.html">xs::XImageEx</a></li>
+<li><a href="Graph_Text.html">xs::XText</a></li>
+</ul>
+</section>
+
+</main>
+</div>
+<script src="../js/toc.js"></script>
+</body>
+</html>

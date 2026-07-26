@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>xs::XText 类 - Xs 文档</title>
+<link rel="stylesheet" href="../css/docs.css">
+</head>
+<body>
+<div class="layout">
+
+<aside class="toc">
+<nav class="toc-inner">
+<div class="toc-title">本文内容</div>
+<ul>
+<li><a href="#overview">概述</a></li>
+<li><a href="#fontadjusttype">FontAdjustType 枚举</a></li>
+<li><a href="#xyprintf1">Xyprintf（基础·窄字符）</a></li>
+<li><a href="#xyprintf2">Xyprintf（颜色·窄字符）</a></li>
+<li><a href="#xyprintf3">Xyprintf（完整·窄字符）</a></li>
+<li><a href="#xyprintf4">Xyprintf（基础·宽字符）</a></li>
+<li><a href="#xyprintf5">Xyprintf（颜色·宽字符）</a></li>
+<li><a href="#xyprintf6">Xyprintf（完整·宽字符）</a></li>
+<li><a href="#setfontcolor">SetFontColor</a></li>
+<li><a href="#setfontsize">SetFontSize</a></li>
+<li><a href="#setfontconfig">SetFontConfig</a></li>
+<li><a href="#setfont_obj">SetFont（Font 对象）</a></li>
+<li><a href="#setfont_obj2">SetFont（Font + 配置）</a></li>
+<li><a href="#setfont_file">SetFont（文件·窄字符）</a></li>
+<li><a href="#setfont_file2">SetFont（文件 + 配置）</a></li>
+<li><a href="#setfont_file_w">SetFont（文件·宽字符）</a></li>
+<li><a href="#setfont_file_w2">SetFont（文件 + 配置·宽字符）</a></li>
+<li><a href="#findfont_w">FindFont（宽字符）</a></li>
+<li><a href="#findfont">FindFont（窄字符）</a></li>
+<li><a href="#setfontadjust">SetFontAdjust</a></li>
+<li><a href="#getfontwidth">GetFontWidth</a></li>
+<li><a href="#getfontheight">GetFontHeight</a></li>
+</ul>
+</nav>
+</aside>
+
+<main class="container">
+
+<nav class="breadcrumb">
+<a href="../index.html">Xs 文档</a> / <a href="Graph_All.html">Graph 类</a> / XText 类
+</nav>
+
+<header class="page-header">
+<h1>xs::XText 类</h1>
+<p class="metadata">命名空间：<code>xs</code>  | 所属类：<code>XText</code></p>
+</header>
+
+<section id="overview">
+<h2>概述</h2>
+<p><code>xs::XText</code> 提供文字绘制、字体管理与文本测量功能。所有方法均为静态。</p>
+</section>
+
+<section id="fontadjusttype">
+<h2>FontAdjustType 枚举</h2>
+<p>定义文本对齐方式。</p>
+<table class="doc-table">
+<thead><tr><th>值</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code class="en">ADJUST_LEFT</code></td><td>左对齐</td></tr>
+<tr><td><code class="en">ADJUST_RIGHT</code></td><td>右对齐</td></tr>
+<tr><td><code class="en">ADJUST_CENTER</code></td><td>中心（居中）对齐</td></tr>
+<tr><td><code class="en">ADJUST_TOP</code></td><td>上对齐</td></tr>
+<tr><td><code class="en">ADJUST_BOTTOM</code></td><td>下对齐</td></tr>
+</tbody>
+</table>
+</section>
+
+<!-- ==================== Xyprintf ==================== -->
+
+<section id="xyprintf1">
+<h2>Xyprintf（基础·窄字符）</h2>
+<p>在指定位置绘制文本（使用当前字体配置）。</p>
+<pre><code><span class="kw">void</span> <span class="fn">Xyprintf</span>(<span class="ty">float</span> x, <span class="ty">float</span> y, <span class="ty">std::string</span> str, <span class="tpl"><span class="ty">Rt</span>&</span> Dest);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>x</code></td><td><code class="ty">float</code></td><td>坐标 x。</td></tr>
+<tr><td><code>y</code></td><td><code class="ty">float</code></td><td>坐标 y。</td></tr>
+<tr><td><code>str</code></td><td><code class="ty">std::string</code></td><td>需要绘制的文本。</td></tr>
+<tr><td><code>Dest</code></td><td><code class="tpl">Rt&</code></td><td>目标窗口。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="xyprintf2">
+<h2>Xyprintf（颜色·窄字符）</h2>
+<p>在指定位置绘制指定颜色的文本。</p>
+<pre><code><span class="kw">void</span> <span class="fn">Xyprintf</span>(<span class="ty">float</span> x, <span class="ty">float</span> y, <span class="ty">std::string</span> str, <span class="ty">Color</span> color, <span class="tpl"><span class="ty">Rt</span>&</span> Dest);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>x</code></td><td><code class="ty">float</code></td><td>坐标 x。</td></tr>
+<tr><td><code>y</code></td><td><code class="ty">float</code></td><td>坐标 y。</td></tr>
+<tr><td><code>str</code></td><td><code class="ty">std::string</code></td><td>需要绘制的文本。</td></tr>
+<tr><td><code>color</code></td><td><code class="ty">Color</code></td><td>绘制文本的颜色。</td></tr>
+<tr><td><code>Dest</code></td><td><code class="tpl">Rt&</code></td><td>目标窗口。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="xyprintf3">
+<h2>Xyprintf（完整·窄字符）</h2>
+<p>在指定位置绘制指定颜色和大小的文本。</p>
+<pre><code><span class="kw">void</span> <span class="fn">Xyprintf</span>(<span class="ty">float</span> x, <span class="ty">float</span> y, <span class="ty">std::string</span> str, <span class="ty">Color</span> color, <span class="ty">int</span> size, <span class="tpl"><span class="ty">Rt</span>&</span> Dest);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>x</code></td><td><code class="ty">float</code></td><td>坐标 x。</td></tr>
+<tr><td><code>y</code></td><td><code class="ty">float</code></td><td>坐标 y。</td></tr>
+<tr><td><code>str</code></td><td><code class="ty">std::string</code></td><td>需要绘制的文本。</td></tr>
+<tr><td><code>color</code></td><td><code class="ty">Color</code></td><td>绘制文本的颜色。</td></tr>
+<tr><td><code>size</code></td><td><code class="ty">int</code></td><td>绘制文本的大小（像素）。</td></tr>
+<tr><td><code>Dest</code></td><td><code class="tpl">Rt&</code></td><td>目标窗口。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="xyprintf4">
+<h2>Xyprintf（基础·宽字符）</h2>
+<p>在指定位置绘制宽字符文本（使用当前字体配置）。</p>
+<pre><code><span class="kw">void</span> <span class="fn">Xyprintf</span>(<span class="ty">float</span> x, <span class="ty">float</span> y, <span class="ty">std::wstring</span> str, <span class="tpl"><span class="ty">Rt</span>&</span> Dest);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>x</code></td><td><code class="ty">float</code></td><td>坐标 x。</td></tr>
+<tr><td><code>y</code></td><td><code class="ty">float</code></td><td>坐标 y。</td></tr>
+<tr><td><code>str</code></td><td><code class="ty">std::wstring</code></td><td>需要绘制的文本。</td></tr>
+<tr><td><code>Dest</code></td><td><code class="tpl">Rt&</code></td><td>目标窗口。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="xyprintf5">
+<h2>Xyprintf（颜色·宽字符）</h2>
+<p>在指定位置绘制指定颜色的宽字符文本。</p>
+<pre><code><span class="kw">void</span> <span class="fn">Xyprintf</span>(<span class="ty">float</span> x, <span class="ty">float</span> y, <span class="ty">std::wstring</span> str, <span class="ty">Color</span> color, <span class="tpl"><span class="ty">Rt</span>&</span> Dest);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>x</code></td><td><code class="ty">float</code></td><td>坐标 x。</td></tr>
+<tr><td><code>y</code></td><td><code class="ty">float</code></td><td>坐标 y。</td></tr>
+<tr><td><code>str</code></td><td><code class="ty">std::wstring</code></td><td>需要绘制的文本。</td></tr>
+<tr><td><code>color</code></td><td><code class="ty">Color</code></td><td>绘制文本的颜色。</td></tr>
+<tr><td><code>Dest</code></td><td><code class="tpl">Rt&</code></td><td>目标窗口。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="xyprintf6">
+<h2>Xyprintf（完整·宽字符）</h2>
+<p>在指定位置绘制指定颜色和大小的宽字符文本。</p>
+<pre><code><span class="kw">void</span> <span class="fn">Xyprintf</span>(<span class="ty">float</span> x, <span class="ty">float</span> y, <span class="ty">std::wstring</span> str, <span class="ty">Color</span> color, <span class="ty">int</span> size, <span class="tpl"><span class="ty">Rt</span>&</span> Dest);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>x</code></td><td><code class="ty">float</code></td><td>坐标 x。</td></tr>
+<tr><td><code>y</code></td><td><code class="ty">float</code></td><td>坐标 y。</td></tr>
+<tr><td><code>str</code></td><td><code class="ty">std::wstring</code></td><td>需要绘制的文本。</td></tr>
+<tr><td><code>color</code></td><td><code class="ty">Color</code></td><td>绘制文本的颜色。</td></tr>
+<tr><td><code>size</code></td><td><code class="ty">int</code></td><td>绘制文本的大小（像素）。</td></tr>
+<tr><td><code>Dest</code></td><td><code class="tpl">Rt&</code></td><td>目标窗口。</td></tr>
+</tbody>
+</table>
+</section>
+
+<!-- ==================== 字体配置 ==================== -->
+
+<section id="setfontcolor">
+<h2>SetFontColor</h2>
+<p>设置绘制文本的颜色。</p>
+<pre><code><span class="kw">void</span> <span class="fn">SetFontColor</span>(<span class="ty">Color</span> color);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>color</code></td><td><code class="ty">Color</code></td><td>要设置的颜色。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="setfontsize">
+<h2>SetFontSize</h2>
+<p>设置绘制文本的大小。</p>
+<pre><code><span class="kw">void</span> <span class="fn">SetFontSize</span>(<span class="ty">int</span> size);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>size</code></td><td><code class="ty">int</code></td><td>要设置的大小（像素）。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="setfontconfig">
+<h2>SetFontConfig</h2>
+<p>同时设置绘制文本的颜色和大小。</p>
+<pre><code><span class="kw">void</span> <span class="fn">SetFontConfig</span>(<span class="ty">Color</span> color, <span class="ty">int</span> size);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>color</code></td><td><code class="ty">Color</code></td><td>要设置的颜色。</td></tr>
+<tr><td><code>size</code></td><td><code class="ty">int</code></td><td>要设置的大小（像素）。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="setfont_obj">
+<h2>SetFont（Font 对象）</h2>
+<p>设置字体（使用已加载的 Font 对象）。</p>
+<pre><code><span class="kw">void</span> <span class="fn">SetFont</span>(<span class="ty">sf::Font</span> font);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>font</code></td><td><code class="ty">sf::Font</code></td><td>要设置的字体。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="setfont_obj2">
+<h2>SetFont（Font + 配置）</h2>
+<p>从 Font 对象设置字体，并同时设置颜色和大小。</p>
+<pre><code><span class="kw">void</span> <span class="fn">SetFont</span>(<span class="ty">sf::Font</span> font, <span class="ty">Color</span> color, <span class="ty">int</span> size);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>font</code></td><td><code class="ty">sf::Font</code></td><td>要设置的字体。</td></tr>
+<tr><td><code>color</code></td><td><code class="ty">Color</code></td><td>要设置的颜色。</td></tr>
+<tr><td><code>size</code></td><td><code class="ty">int</code></td><td>要设置的大小（像素）。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="setfont_file">
+<h2>SetFont（文件·窄字符）</h2>
+<p>从文件中设置字体。</p>
+<pre><code><span class="kw">void</span> <span class="fn">SetFont</span>(<span class="ty">std::string</span> filename);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>filename</code></td><td><code class="ty">std::string</code></td><td>字体文件名。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="setfont_file2">
+<h2>SetFont（文件 + 配置）</h2>
+<p>从文件中设置字体，并同时设置颜色和大小。</p>
+<pre><code><span class="kw">void</span> <span class="fn">SetFont</span>(<span class="ty">std::string</span> filename, <span class="ty">Color</span> color, <span class="ty">int</span> size);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>filename</code></td><td><code class="ty">std::string</code></td><td>字体文件名。</td></tr>
+<tr><td><code>color</code></td><td><code class="ty">Color</code></td><td>要设置的颜色。</td></tr>
+<tr><td><code>size</code></td><td><code class="ty">int</code></td><td>要设置的大小（像素）。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="setfont_file_w">
+<h2>SetFont（文件·宽字符）</h2>
+<p>从文件中设置字体（宽字符路径）。</p>
+<pre><code><span class="kw">void</span> <span class="fn">SetFont</span>(<span class="ty">std::wstring</span> filename);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>filename</code></td><td><code class="ty">std::wstring</code></td><td>字体文件名（宽字符）。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="setfont_file_w2">
+<h2>SetFont（文件 + 配置·宽字符）</h2>
+<p>从文件中设置字体（宽字符路径），并同时设置颜色和大小。</p>
+<pre><code><span class="kw">void</span> <span class="fn">SetFont</span>(<span class="ty">std::wstring</span> filename, <span class="ty">Color</span> color, <span class="ty">int</span> size);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>filename</code></td><td><code class="ty">std::wstring</code></td><td>字体文件名（宽字符）。</td></tr>
+<tr><td><code>color</code></td><td><code class="ty">Color</code></td><td>要设置的颜色。</td></tr>
+<tr><td><code>size</code></td><td><code class="ty">int</code></td><td>要设置的大小（像素）。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="findfont_w">
+<h2>FindFont（宽字符）</h2>
+<p>查找并设置本地已安装的字体（宽字符名称）。</p>
+<pre><code><span class="kw">void</span> <span class="fn">FindFont</span>(<span class="ty">std::wstring</span> fontname);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>fontname</code></td><td><code class="ty">std::wstring</code></td><td>字体名称。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="findfont">
+<h2>FindFont（窄字符）</h2>
+<p>查找并设置本地已安装的字体（窄字符名称）。</p>
+<pre><code><span class="kw">void</span> <span class="fn">FindFont</span>(<span class="ty">std::string</span> fontname);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>fontname</code></td><td><code class="ty">std::string</code></td><td>字体名称。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="setfontadjust">
+<h2>SetFontAdjust</h2>
+<p>设置文本对齐方式。</p>
+<pre><code><span class="kw">void</span> <span class="fn">SetFontAdjust</span>(<span class="ty">FontAdjustType</span> horizontal, <span class="ty">FontAdjustType</span> vertical);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>horizontal</code></td><td><code class="ty">FontAdjustType</code></td><td>水平对齐：<code class="en">ADJUST_LEFT</code> 左对齐 / <code class="en">ADJUST_RIGHT</code> 右对齐 / <code class="en">ADJUST_CENTER</code> 中心对齐。</td></tr>
+<tr><td><code>vertical</code></td><td><code class="ty">FontAdjustType</code></td><td>垂直对齐：<code class="en">ADJUST_TOP</code> 上对齐 / <code class="en">ADJUST_BOTTOM</code> 下对齐 / <code class="en">ADJUST_CENTER</code> 中心对齐。</td></tr>
+</tbody>
+</table>
+</section>
+
+<!-- ==================== 测量 ==================== -->
+
+<section id="getfontwidth">
+<h2>GetFontWidth</h2>
+<p>测量指定文本总宽度。</p>
+<pre><code><span class="kw">int</span> <span class="fn">GetFontWidth</span>(<span class="kw">const</span> <span class="ty">std::string</span>& str, <span class="kw">unsigned</span> <span class="ty">int</span> fontsize = <span class="nm">0</span>);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>str</code></td><td><code>const std::string&</code></td><td>文本。</td></tr>
+<tr><td><code>fontsize</code></td><td><code>unsigned int</code></td><td>字体大小，<code>0</code> 表示使用当前配置。</td></tr>
+</tbody>
+</table>
+<h4>返回值</h4>
+<p>文本总宽度（像素）。</p>
+</section>
+
+<section id="getfontheight">
+<h2>GetFontHeight</h2>
+<p>测量指定文本总高度。</p>
+<pre><code><span class="kw">int</span> <span class="fn">GetFontHeight</span>(<span class="kw">const</span> <span class="ty">std::string</span>& str, <span class="kw">unsigned</span> <span class="ty">int</span> fontsize = <span class="nm">0</span>);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>str</code></td><td><code>const std::string&</code></td><td>文本。</td></tr>
+<tr><td><code>fontsize</code></td><td><code>unsigned int</code></td><td>字体大小，<code>0</code> 表示使用当前配置。</td></tr>
+</tbody>
+</table>
+<h4>返回值</h4>
+<p>文本总高度（像素）。</p>
+</section>
+
+<section>
+<h2>另请参阅</h2>
+<ul>
+<li><a href="Graph_Basic.html">xs::XGraph</a></li>
+<li><a href="Graph_Image.html">xs::XImage</a></li>
+<li><a href="Graph_ImageEx.html">xs::XImageEx</a></li>
+</ul>
+</section>
+
+</main>
+</div>
+<script src="../js/toc.js"></script>
+</body>
+</html>

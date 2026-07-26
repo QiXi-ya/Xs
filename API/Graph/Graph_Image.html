@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>xs::XImage 类 - Xs 文档</title>
+<link rel="stylesheet" href="../css/docs.css">
+</head>
+<body>
+<div class="layout">
+
+<aside class="toc">
+<nav class="toc-inner">
+<div class="toc-title">本文内容</div>
+<ul>
+<li><a href="#overview">概述</a></li>
+<li><a href="#newimage_file">NewImage（文件）</a></li>
+<li><a href="#newimage_file_w">NewImage（文件·宽字符）</a></li>
+<li><a href="#newimage_window">NewImage（窗口）</a></li>
+<li><a href="#newimage_image">NewImage（图片）</a></li>
+<li><a href="#cutimage">CutImage</a></li>
+<li><a href="#setimagesmooth">SetImageSmooth</a></li>
+<li><a href="#setimagerepeated">SetImageRepeated</a></li>
+<li><a href="#setimagecolor">SetImageColor</a></li>
+<li><a href="#updateimage">UpdateImage</a></li>
+<li><a href="#alphaimage">AlphaImage</a></li>
+<li><a href="#putimage_win">PutImage（窗口）</a></li>
+<li><a href="#putimage_img">PutImage（图片）</a></li>
+<li><a href="#putroteimage_win">PutRoteImage（窗口）</a></li>
+<li><a href="#putroteimage_img">PutRoteImage（图片）</a></li>
+<li><a href="#putscaleimage_win">PutScaleImage（窗口）</a></li>
+<li><a href="#putscaleimage_img">PutScaleImage（图片）</a></li>
+<li><a href="#putrotescaleimage_win">PutRoteScaleImage（窗口）</a></li>
+<li><a href="#putrotescaleimage_img">PutRoteScaleImage（图片）</a></li>
+<li><a href="#getwidth">GetWidth</a></li>
+<li><a href="#getheight">GetHeight</a></li>
+<li><a href="#setimagesize">SetImageSize</a></li>
+<li><a href="#clearimage">ClearImage</a></li>
+</ul>
+</nav>
+</aside>
+
+<main class="container">
+
+<nav class="breadcrumb">
+<a href="../index.html">Xs 文档</a> / <a href="Graph_All.html">Graph 类</a> / XImage 类
+</nav>
+
+<header class="page-header">
+<h1>xs::XImage 类</h1>
+<p class="metadata">命名空间：<code>xs</code>  | 所属类：<code>XImage</code></p>
+</header>
+
+<section id="overview">
+<h2>概述</h2>
+<p><code>xs::XImage</code> 提供图片对象的创建、属性控制与绘制功能。所有成员均为静态。</p>
+</section>
+
+<!-- ==================== 创建 ==================== -->
+
+<section id="newimage_file">
+<h2>NewImage（文件·窄字符）</h2>
+<p>从文件创建图像（窄字符路径）。</p>
+<pre><code><span class="kw">bool</span> <span class="fn">NewImage</span>(<span class="tpl"><span class="ty">IMAGE</span>&</span> img, <span class="kw">const</span> <span class="ty">std::string</span>& filename, <span class="ty">int</span> x = <span class="nm">0</span>, <span class="ty">int</span> y = <span class="nm">0</span>, <span class="ty">int</span> w = <span class="nm">0</span>, <span class="ty">int</span> h = <span class="nm">0</span>);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>img</code></td><td><code class="tpl">IMAGE&</code></td><td>输出图像对象。</td></tr>
+<tr><td><code>filename</code></td><td><code>const std::string&</code></td><td>文件路径。</td></tr>
+<tr><td><code>x</code></td><td><code class="ty">int</code></td><td>索取图像的 x 坐标，默认 <code>0</code>。</td></tr>
+<tr><td><code>y</code></td><td><code class="ty">int</code></td><td>索取图像的 y 坐标，默认 <code>0</code>。</td></tr>
+<tr><td><code>w</code></td><td><code class="ty">int</code></td><td>索取图像的宽，默认 <code>0</code>（取全部）。</td></tr>
+<tr><td><code>h</code></td><td><code class="ty">int</code></td><td>索取图像的高，默认 <code>0</code>（取全部）。</td></tr>
+</tbody>
+</table>
+<h4>返回值</h4>
+<p>成功返回 <code class="kw">true</code>，失败返回 <code class="kw">false</code>。</p>
+</section>
+
+<section id="newimage_file_w">
+<h2>NewImage（文件·宽字符）</h2>
+<p>从文件创建图像（宽字符路径）。</p>
+<pre><code><span class="kw">bool</span> <span class="fn">NewImage</span>(<span class="tpl"><span class="ty">IMAGE</span>&</span> img, <span class="kw">const</span> <span class="ty">std::wstring</span>& filename, <span class="ty">int</span> x = <span class="nm">0</span>, <span class="ty">int</span> y = <span class="nm">0</span>, <span class="ty">int</span> w = <span class="nm">0</span>, <span class="ty">int</span> h = <span class="nm">0</span>);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>img</code></td><td><code class="tpl">IMAGE&</code></td><td>输出图像对象。</td></tr>
+<tr><td><code>filename</code></td><td><code>const std::wstring&</code></td><td>文件路径（宽字符）。</td></tr>
+<tr><td><code>x</code>, <code>y</code></td><td><code class="ty">int</code></td><td>索取图像的起始坐标，默认 <code>0</code>。</td></tr>
+<tr><td><code>w</code>, <code>h</code></td><td><code class="ty">int</code></td><td>索取图像的宽高，默认 <code>0</code>（取全部）。</td></tr>
+</tbody>
+</table>
+<h4>返回值</h4>
+<p>成功返回 <code class="kw">true</code>，失败返回 <code class="kw">false</code>。</p>
+</section>
+
+<section id="newimage_window">
+<h2>NewImage（窗口）</h2>
+<p>从窗口上获取图像（截图）。</p>
+<pre><code><span class="kw">bool</span> <span class="fn">NewImage</span>(<span class="tpl"><span class="ty">RenWin</span>&</span> window, <span class="tpl"><span class="ty">IMAGE</span>&</span> img, <span class="ty">int</span> x = <span class="nm">0</span>, <span class="ty">int</span> y = <span class="nm">0</span>, <span class="ty">int</span> w = <span class="nm">0</span>, <span class="ty">int</span> h = <span class="nm">0</span>);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>window</code></td><td><code class="tpl">RenWin&</code></td><td>源窗口。</td></tr>
+<tr><td><code>img</code></td><td><code class="tpl">IMAGE&</code></td><td>输出图像对象。</td></tr>
+<tr><td><code>x</code></td><td><code class="ty">int</code></td><td>x 坐标，默认 <code>0</code>。</td></tr>
+<tr><td><code>y</code></td><td><code class="ty">int</code></td><td>y 坐标，默认 <code>0</code>。</td></tr>
+<tr><td><code>w</code></td><td><code class="ty">int</code></td><td>宽，默认 <code>0</code>。</td></tr>
+<tr><td><code>h</code></td><td><code class="ty">int</code></td><td>高，默认 <code>0</code>。</td></tr>
+</tbody>
+</table>
+<h4>返回值</h4>
+<p>成功返回 <code class="kw">true</code>，失败返回 <code class="kw">false</code>。</p>
+</section>
+
+<section id="newimage_image">
+<h2>NewImage（图片）</h2>
+<p>从另一图像上获取图像。目标图像不保留原有的颜色滤镜，但 src 会以颜色滤镜的形式覆盖 dest。</p>
+<pre><code><span class="kw">bool</span> <span class="fn">NewImage</span>(<span class="tpl"><span class="ty">IMAGE</span>&</span> dest, <span class="tpl"><span class="ty">IMAGE</span>&</span> src, <span class="ty">int</span> x = -<span class="nm">1</span>, <span class="ty">int</span> y = -<span class="nm">1</span>, <span class="ty">int</span> w = -<span class="nm">1</span>, <span class="ty">int</span> h = -<span class="nm">1</span>);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>dest</code></td><td><code class="tpl">IMAGE&</code></td><td>目标图像。</td></tr>
+<tr><td><code>src</code></td><td><code class="tpl">IMAGE&</code></td><td>原图像。</td></tr>
+<tr><td><code>x</code></td><td><code class="ty">int</code></td><td>获取的 x 坐标，默认 <code>-1</code>（自动）。</td></tr>
+<tr><td><code>y</code></td><td><code class="ty">int</code></td><td>获取的 y 坐标，默认 <code>-1</code>（自动）。</td></tr>
+<tr><td><code>w</code></td><td><code class="ty">int</code></td><td>获取的宽，默认 <code>-1</code>（自动）。</td></tr>
+<tr><td><code>h</code></td><td><code class="ty">int</code></td><td>获取的高，默认 <code>-1</code>（自动）。</td></tr>
+</tbody>
+</table>
+<h4>返回值</h4>
+<p>成功返回 <code class="kw">true</code>，失败返回 <code class="kw">false</code>。</p>
+</section>
+
+<!-- ==================== 属性 ==================== -->
+
+<section id="cutimage">
+<h2>CutImage</h2>
+<p>裁剪图片。</p>
+<pre><code><span class="kw">bool</span> <span class="fn">CutImage</span>(<span class="tpl"><span class="ty">IMAGE</span>&</span> img, <span class="ty">int</span> x, <span class="ty">int</span> y, <span class="ty">int</span> w, <span class="ty">int</span> h);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>img</code></td><td><code class="tpl">IMAGE&</code></td><td>需要裁剪的图片。</td></tr>
+<tr><td><code>x</code></td><td><code class="ty">int</code></td><td>x 坐标。</td></tr>
+<tr><td><code>y</code></td><td><code class="ty">int</code></td><td>y 坐标。</td></tr>
+<tr><td><code>w</code></td><td><code class="ty">int</code></td><td>裁剪宽度。</td></tr>
+<tr><td><code>h</code></td><td><code class="ty">int</code></td><td>裁剪高度。</td></tr>
+</tbody>
+</table>
+<h4>返回值</h4>
+<p>成功返回 <code class="kw">true</code>，失败返回 <code class="kw">false</code>。</p>
+</section>
+
+<section id="setimagesmooth">
+<h2>SetImageSmooth</h2>
+<p>启用或禁用图片平滑（抗锯齿）。默认启用。</p>
+<pre><code><span class="kw">void</span> <span class="fn">SetImageSmooth</span>(<span class="tpl"><span class="ty">IMAGE</span>&</span> img, <span class="ty">bool</span> smooth);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>img</code></td><td><code class="tpl">IMAGE&</code></td><td>目标图像。</td></tr>
+<tr><td><code>smooth</code></td><td><code class="ty">bool</code></td><td>是否平滑（<code class="kw">true</code> 启用 / <code class="kw">false</code> 禁用）。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="setimagerepeated">
+<h2>SetImageRepeated</h2>
+<p>启用或禁用图片平铺。默认禁用。</p>
+<pre><code><span class="kw">void</span> <span class="fn">SetImageRepeated</span>(<span class="tpl"><span class="ty">IMAGE</span>&</span> img, <span class="ty">bool</span> repeated);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>img</code></td><td><code class="tpl">IMAGE&</code></td><td>目标图像。</td></tr>
+<tr><td><code>repeated</code></td><td><code class="ty">bool</code></td><td>是否平铺（<code class="kw">true</code> 启用 / <code class="kw">false</code> 禁用）。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="setimagecolor">
+<h2>SetImageColor</h2>
+<p>应用图像颜色滤镜。</p>
+<pre><code><span class="kw">void</span> <span class="fn">SetImageColor</span>(<span class="tpl"><span class="ty">IMAGE</span>&</span> img, <span class="ty">Color</span> color);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>img</code></td><td><code class="tpl">IMAGE&</code></td><td>目标图像。</td></tr>
+<tr><td><code>color</code></td><td><code class="ty">Color</code></td><td>颜色滤镜。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="updateimage">
+<h2>UpdateImage</h2>
+<p>更新图像，目标不保留原有的颜色滤镜。</p>
+<pre><code><span class="kw">void</span> <span class="fn">UpdateImage</span>(<span class="tpl"><span class="ty">IMAGE</span>&</span> img, <span class="tpl"><span class="ty">IMAGE</span>&</span> dest);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>img</code></td><td><code class="tpl">IMAGE&</code></td><td>源图像。</td></tr>
+<tr><td><code>dest</code></td><td><code class="tpl">IMAGE&</code></td><td>目标图像（不保留原有颜色滤镜）。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="alphaimage">
+<h2>AlphaImage</h2>
+<p>半透明化图像。alpha 为 0 时完全透明，alpha 为 255 时完全不透明。</p>
+<pre><code><span class="kw">void</span> <span class="fn">AlphaImage</span>(<span class="tpl"><span class="ty">IMAGE</span>&</span> img, <span class="ty">int</span> alpha);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>img</code></td><td><code class="tpl">IMAGE&</code></td><td>目标图像。</td></tr>
+<tr><td><code>alpha</code></td><td><code class="ty">int</code></td><td>不透明值（<code>0</code>–<code>255</code>）。</td></tr>
+</tbody>
+</table>
+</section>
+
+<!-- ==================== 绘制 ==================== -->
+
+<section id="putimage_win">
+<h2>PutImage（绘制到窗口）</h2>
+<p>绘制图像到窗口。</p>
+<pre><code><span class="kw">void</span> <span class="fn">PutImage</span>(<span class="tpl"><span class="ty">IMAGE</span>&</span> img, <span class="ty">float</span> x, <span class="ty">float</span> y, <span class="tpl"><span class="ty">Rt</span>&</span> Dest, <span class="ty">float</span> CenterX = <span class="nm">0.0</span>, <span class="ty">float</span> CenterY = <span class="nm">0.0</span>);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>img</code></td><td><code class="tpl">IMAGE&</code></td><td>源图像。</td></tr>
+<tr><td><code>x</code></td><td><code class="ty">float</code></td><td>x 坐标。</td></tr>
+<tr><td><code>y</code></td><td><code class="ty">float</code></td><td>y 坐标。</td></tr>
+<tr><td><code>Dest</code></td><td><code class="tpl">Rt&</code></td><td>目标窗口。</td></tr>
+<tr><td><code>CenterX</code></td><td><code class="ty">float</code></td><td>旋转中心 X（归一化 0~1），默认 <code>0.0</code>。</td></tr>
+<tr><td><code>CenterY</code></td><td><code class="ty">float</code></td><td>旋转中心 Y（归一化 0~1），默认 <code>0.0</code>。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="putimage_img">
+<h2>PutImage（绘制到图片）</h2>
+<p>绘制图像到另一图像。</p>
+<pre><code><span class="kw">void</span> <span class="fn">PutImage</span>(<span class="tpl"><span class="ty">IMAGE</span>&</span> dest, <span class="tpl"><span class="ty">IMAGE</span>&</span> src, <span class="ty">float</span> x, <span class="ty">float</span> y, <span class="ty">float</span> CenterX = <span class="nm">0.0</span>, <span class="ty">float</span> CenterY = <span class="nm">0.0</span>);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>dest</code></td><td><code class="tpl">IMAGE&</code></td><td>目标图像。</td></tr>
+<tr><td><code>src</code></td><td><code class="tpl">IMAGE&</code></td><td>原图像。</td></tr>
+<tr><td><code>x</code></td><td><code class="ty">float</code></td><td>x 坐标。</td></tr>
+<tr><td><code>y</code></td><td><code class="ty">float</code></td><td>y 坐标。</td></tr>
+<tr><td><code>CenterX</code></td><td><code class="ty">float</code></td><td>旋转中心 X（归一化 0~1），默认 <code>0.0</code>。</td></tr>
+<tr><td><code>CenterY</code></td><td><code class="ty">float</code></td><td>旋转中心 Y（归一化 0~1），默认 <code>0.0</code>。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="putroteimage_win">
+<h2>PutRoteImage（窗口）</h2>
+<p>绘制旋转图像到窗口。</p>
+<pre><code><span class="kw">void</span> <span class="fn">PutRoteImage</span>(<span class="tpl"><span class="ty">IMAGE</span>&</span> img, <span class="ty">float</span> x, <span class="ty">float</span> y, <span class="ty">float</span> angle, <span class="tpl"><span class="ty">Rt</span>&</span> Dest, <span class="ty">float</span> CenterX = <span class="nm">0.0</span>, <span class="ty">float</span> CenterY = <span class="nm">0.0</span>);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>img</code></td><td><code class="tpl">IMAGE&</code></td><td>源图像。</td></tr>
+<tr><td><code>x</code></td><td><code class="ty">float</code></td><td>x 坐标。</td></tr>
+<tr><td><code>y</code></td><td><code class="ty">float</code></td><td>y 坐标。</td></tr>
+<tr><td><code>angle</code></td><td><code class="ty">float</code></td><td>角度（度）。</td></tr>
+<tr><td><code>Dest</code></td><td><code class="tpl">Rt&</code></td><td>目标窗口。</td></tr>
+<tr><td><code>CenterX</code></td><td><code class="ty">float</code></td><td>旋转中心 X（归一化 0~1），默认 <code>0.0</code>。</td></tr>
+<tr><td><code>CenterY</code></td><td><code class="ty">float</code></td><td>旋转中心 Y（归一化 0~1），默认 <code>0.0</code>。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="putroteimage_img">
+<h2>PutRoteImage（图片）</h2>
+<p>绘制旋转图像到另一图像。目标图像不保留原有的颜色滤镜，但 img 会以颜色滤镜的形式覆盖 dest。</p>
+<pre><code><span class="kw">void</span> <span class="fn">PutRoteImage</span>(<span class="tpl"><span class="ty">IMAGE</span>&</span> dest, <span class="tpl"><span class="ty">IMAGE</span>&</span> img, <span class="ty">float</span> x, <span class="ty">float</span> y, <span class="ty">float</span> angle, <span class="ty">float</span> CenterX = <span class="nm">0.0</span>, <span class="ty">float</span> CenterY = <span class="nm">0.0</span>);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>dest</code></td><td><code class="tpl">IMAGE&</code></td><td>目标图像。</td></tr>
+<tr><td><code>img</code></td><td><code class="tpl">IMAGE&</code></td><td>原图像。</td></tr>
+<tr><td><code>x</code></td><td><code class="ty">float</code></td><td>x 坐标。</td></tr>
+<tr><td><code>y</code></td><td><code class="ty">float</code></td><td>y 坐标。</td></tr>
+<tr><td><code>angle</code></td><td><code class="ty">float</code></td><td>角度（度）。</td></tr>
+<tr><td><code>CenterX</code></td><td><code class="ty">float</code></td><td>旋转中心 X（归一化 0~1），默认 <code>0.0</code>。</td></tr>
+<tr><td><code>CenterY</code></td><td><code class="ty">float</code></td><td>旋转中心 Y（归一化 0~1），默认 <code>0.0</code>。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="putscaleimage_win">
+<h2>PutScaleImage（窗口）</h2>
+<p>绘制缩放图像到窗口。</p>
+<pre><code><span class="kw">void</span> <span class="fn">PutScaleImage</span>(<span class="tpl"><span class="ty">IMAGE</span>&</span> img, <span class="ty">float</span> x, <span class="ty">float</span> y, <span class="ty">float</span> scaleX, <span class="ty">float</span> scaleY, <span class="tpl"><span class="ty">Rt</span>&</span> Dest, <span class="ty">float</span> CenterX = <span class="nm">0.0</span>, <span class="ty">float</span> CenterY = <span class="nm">0.0</span>);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>img</code></td><td><code class="tpl">IMAGE&</code></td><td>源图像。</td></tr>
+<tr><td><code>x</code></td><td><code class="ty">float</code></td><td>x 坐标。</td></tr>
+<tr><td><code>y</code></td><td><code class="ty">float</code></td><td>y 坐标。</td></tr>
+<tr><td><code>scaleX</code></td><td><code class="ty">float</code></td><td>缩放宽倍数。</td></tr>
+<tr><td><code>scaleY</code></td><td><code class="ty">float</code></td><td>缩放高倍数。</td></tr>
+<tr><td><code>Dest</code></td><td><code class="tpl">Rt&</code></td><td>目标窗口。</td></tr>
+<tr><td><code>CenterX</code></td><td><code class="ty">float</code></td><td>旋转中心 X（归一化 0~1），默认 <code>0.0</code>。</td></tr>
+<tr><td><code>CenterY</code></td><td><code class="ty">float</code></td><td>旋转中心 Y（归一化 0~1），默认 <code>0.0</code>。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="putscaleimage_img">
+<h2>PutScaleImage（图片）</h2>
+<p>绘制缩放图像到另一图像。目标图像不保留原有的颜色滤镜，但 img 会以颜色滤镜的形式覆盖 dest。</p>
+<pre><code><span class="kw">void</span> <span class="fn">PutScaleImage</span>(<span class="tpl"><span class="ty">IMAGE</span>&</span> dest, <span class="tpl"><span class="ty">IMAGE</span>&</span> img, <span class="ty">float</span> x, <span class="ty">float</span> y, <span class="ty">float</span> scaleX, <span class="ty">float</span> scaleY, <span class="ty">float</span> CenterX = <span class="nm">0.0</span>, <span class="ty">float</span> CenterY = <span class="nm">0.0</span>);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>dest</code></td><td><code class="tpl">IMAGE&</code></td><td>目标图像。</td></tr>
+<tr><td><code>img</code></td><td><code class="tpl">IMAGE&</code></td><td>原图像。</td></tr>
+<tr><td><code>x</code></td><td><code class="ty">float</code></td><td>x 坐标。</td></tr>
+<tr><td><code>y</code></td><td><code class="ty">float</code></td><td>y 坐标。</td></tr>
+<tr><td><code>scaleX</code></td><td><code class="ty">float</code></td><td>缩放宽倍数。</td></tr>
+<tr><td><code>scaleY</code></td><td><code class="ty">float</code></td><td>缩放高倍数。</td></tr>
+<tr><td><code>CenterX</code></td><td><code class="ty">float</code></td><td>旋转中心 X（归一化 0~1），默认 <code>0.0</code>。</td></tr>
+<tr><td><code>CenterY</code></td><td><code class="ty">float</code></td><td>旋转中心 Y（归一化 0~1），默认 <code>0.0</code>。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="putrotescaleimage_win">
+<h2>PutRoteScaleImage（窗口）</h2>
+<p>绘制旋转缩放图像到窗口。</p>
+<pre><code><span class="kw">void</span> <span class="fn">PutRoteScaleImage</span>(<span class="tpl"><span class="ty">IMAGE</span>&</span> img, <span class="ty">float</span> x, <span class="ty">float</span> y, <span class="ty">float</span> angle, <span class="ty">float</span> scaleX, <span class="ty">float</span> scaleY, <span class="tpl"><span class="ty">Rt</span>&</span> Dest, <span class="ty">float</span> CenterX = <span class="nm">0.0</span>, <span class="ty">float</span> CenterY = <span class="nm">0.0</span>);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>img</code></td><td><code class="tpl">IMAGE&</code></td><td>源图像。</td></tr>
+<tr><td><code>x</code></td><td><code class="ty">float</code></td><td>x 坐标。</td></tr>
+<tr><td><code>y</code></td><td><code class="ty">float</code></td><td>y 坐标。</td></tr>
+<tr><td><code>angle</code></td><td><code class="ty">float</code></td><td>角度（度）。</td></tr>
+<tr><td><code>scaleX</code></td><td><code class="ty">float</code></td><td>缩放宽倍数。</td></tr>
+<tr><td><code>scaleY</code></td><td><code class="ty">float</code></td><td>缩放高倍数。</td></tr>
+<tr><td><code>Dest</code></td><td><code class="tpl">Rt&</code></td><td>目标窗口。</td></tr>
+<tr><td><code>CenterX</code></td><td><code class="ty">float</code></td><td>旋转中心 X（归一化 0~1），默认 <code>0.0</code>。</td></tr>
+<tr><td><code>CenterY</code></td><td><code class="ty">float</code></td><td>旋转中心 Y（归一化 0~1），默认 <code>0.0</code>。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="putrotescaleimage_img">
+<h2>PutRoteScaleImage（图片）</h2>
+<p>绘制旋转缩放图像到另一图像。目标图像不保留原有的颜色滤镜，但 img 会以颜色滤镜的形式覆盖 dest。</p>
+<pre><code><span class="kw">void</span> <span class="fn">PutRoteScaleImage</span>(<span class="tpl"><span class="ty">IMAGE</span>&</span> dest, <span class="tpl"><span class="ty">IMAGE</span>&</span> img, <span class="ty">float</span> x, <span class="ty">float</span> y, <span class="ty">float</span> angle, <span class="ty">float</span> scaleX, <span class="ty">float</span> scaleY, <span class="ty">float</span> CenterX = <span class="nm">0.0</span>, <span class="ty">float</span> CenterY = <span class="nm">0.0</span>);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>dest</code></td><td><code class="tpl">IMAGE&</code></td><td>目标图像。</td></tr>
+<tr><td><code>img</code></td><td><code class="tpl">IMAGE&</code></td><td>原图像。</td></tr>
+<tr><td><code>x</code></td><td><code class="ty">float</code></td><td>x 坐标。</td></tr>
+<tr><td><code>y</code></td><td><code class="ty">float</code></td><td>y 坐标。</td></tr>
+<tr><td><code>angle</code></td><td><code class="ty">float</code></td><td>角度（度）。</td></tr>
+<tr><td><code>scaleX</code></td><td><code class="ty">float</code></td><td>缩放宽倍数。</td></tr>
+<tr><td><code>scaleY</code></td><td><code class="ty">float</code></td><td>缩放高倍数。</td></tr>
+<tr><td><code>CenterX</code></td><td><code class="ty">float</code></td><td>旋转中心 X（归一化 0~1），默认 <code>0.0</code>。</td></tr>
+<tr><td><code>CenterY</code></td><td><code class="ty">float</code></td><td>旋转中心 Y（归一化 0~1），默认 <code>0.0</code>。</td></tr>
+</tbody>
+</table>
+</section>
+
+<!-- ==================== 信息 ==================== -->
+
+<section id="getwidth">
+<h2>GetWidth</h2>
+<p>获取图像的宽。</p>
+<pre><code><span class="kw">int</span> <span class="fn">GetWidth</span>(<span class="tpl"><span class="ty">IMAGE</span>&</span> img);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>img</code></td><td><code class="tpl">IMAGE&</code></td><td>目标图像。</td></tr>
+</tbody>
+</table>
+<h4>返回值</h4>
+<p>图像宽度（像素）。</p>
+</section>
+
+<section id="getheight">
+<h2>GetHeight</h2>
+<p>获取图像的高。</p>
+<pre><code><span class="kw">int</span> <span class="fn">GetHeight</span>(<span class="tpl"><span class="ty">IMAGE</span>&</span> img);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>img</code></td><td><code class="tpl">IMAGE&</code></td><td>目标图像。</td></tr>
+</tbody>
+</table>
+<h4>返回值</h4>
+<p>图像高度（像素）。</p>
+</section>
+
+<section id="setimagesize">
+<h2>SetImageSize</h2>
+<p>设置图像大小，当其中值小于 0 时忽略。</p>
+<pre><code><span class="kw">void</span> <span class="fn">SetImageSize</span>(<span class="tpl"><span class="ty">IMAGE</span>&</span> img, <span class="ty">int</span> x = -<span class="nm">1</span>, <span class="ty">int</span> y = -<span class="nm">1</span>);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>img</code></td><td><code class="tpl">IMAGE&</code></td><td>目标图像。</td></tr>
+<tr><td><code>x</code></td><td><code class="ty">int</code></td><td>宽，小于 <code>0</code> 时忽略。</td></tr>
+<tr><td><code>y</code></td><td><code class="ty">int</code></td><td>高，小于 <code>0</code> 时忽略。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="clearimage">
+<h2>ClearImage</h2>
+<p>清理图像为纯色背景。</p>
+<pre><code><span class="kw">void</span> <span class="fn">ClearImage</span>(<span class="tpl"><span class="ty">IMAGE</span>&</span> image, <span class="ty">Color</span> backcolor);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>image</code></td><td><code class="tpl">IMAGE&</code></td><td>目标图像。</td></tr>
+<tr><td><code>backcolor</code></td><td><code class="ty">Color</code></td><td>目标颜色（纯色背景）。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section>
+<h2>另请参阅</h2>
+<ul>
+<li><a href="Graph_Basic.html">xs::XGraph</a></li>
+<li><a href="Graph_ImageEx.html">xs::XImageEx</a></li>
+<li><a href="Graph_Text.html">xs::XText</a></li>
+</ul>
+</section>
+
+</main>
+</div>
+<script src="../js/toc.js"></script>
+</body>
+</html>

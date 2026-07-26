@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>xs::XImageEx 类 - Xs 文档</title>
+<link rel="stylesheet" href="../css/docs.css">
+</head>
+<body>
+<div class="layout">
+
+<aside class="toc">
+<nav class="toc-inner">
+<div class="toc-title">本文内容</div>
+<ul>
+<li><a href="#overview">概述</a></li>
+<li><a href="#blur_gaussian">Gaussian（高斯模糊）</a></li>
+<li><a href="#blur_box">Box（盒式模糊）</a></li>
+<li><a href="#blur_motion">Motion（运动模糊）</a></li>
+<li><a href="#blur_radial">Radial（径向模糊）</a></li>
+<li><a href="#blur_spin">Spin（旋转模糊）</a></li>
+<li><a href="#blur_hazy">Hazy（朦胧）</a></li>
+<li><a href="#dist_fisheye">Fisheye（鱼眼）</a></li>
+<li><a href="#dist_heat">Heat（热浪）</a></li>
+<li><a href="#dist_blackhole">BlackHole（黑洞）</a></li>
+<li><a href="#dist_waterring">WaterRing（水面波动）</a></li>
+<li><a href="#feather_circle">Feather::Circle</a></li>
+<li><a href="#feather_rect">Feather::Rect</a></li>
+<li><a href="#effect_chromatic">Chromatic（色差）</a></li>
+<li><a href="#effect_mosaic">Mosaic（马赛克）</a></li>
+<li><a href="#effect_glitch">Glitch（故障）</a></li>
+<li><a href="#ct_gray">Gray（黑白）</a></li>
+<li><a href="#ct_invert">Invert（反色）</a></li>
+<li><a href="#ct_contrast">Contrast（对比度）</a></li>
+<li><a href="#ct_brightness">Brightness（亮度）</a></li>
+<li><a href="#ct_saturation">Saturation（饱和度）</a></li>
+<li><a href="#ct_gamma">Gamma（校正）</a></li>
+<li><a href="#replace_rgb">ReplaceColorRGB</a></li>
+<li><a href="#scale">Scale（缩放）</a></li>
+</ul>
+</nav>
+</aside>
+
+<main class="container">
+
+<nav class="breadcrumb">
+<a href="../index.html">Xs 文档</a> / <a href="Graph_All.html">Graph 类</a> / XImageEx 类
+</nav>
+
+<header class="page-header">
+<h1>xs::XImageEx 类</h1>
+<p class="metadata">命名空间：<code>xs</code>  | 所属类：<code>XImageEx</code></p>
+</header>
+
+<section id="overview">
+<h2>概述</h2>
+<p><code>xs::XImageEx</code> 提供高级图像处理能力，包含模糊、扭曲、羽化、特效、颜色变换、颜色替换与缩放七大类。</p>
+<div class="note">所有方法均直接修改传入的 <code class="ty">IMAGE</code> 对象，操作不可逆，建议先备份原图。</div>
+</section>
+
+<!-- ==================== 模糊 ==================== -->
+
+<section id="blur_gaussian">
+<h2>ImageBlur::Gaussian</h2>
+<p>高斯模糊。</p>
+<pre><code><span class="kw">void</span> <span class="fn">Gaussian</span>(<span class="tpl"><span class="ty">IMAGE</span>&</span> img, <span class="ty">double</span> sigma);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>img</code></td><td><code class="tpl">IMAGE&</code></td><td>目标图像。</td></tr>
+<tr><td><code>sigma</code></td><td><code class="ty">double</code></td><td>模糊强度，推荐 <code>2.0</code>~<code>4.0</code>。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="blur_box">
+<h2>ImageBlur::Box</h2>
+<p>盒式模糊。</p>
+<pre><code><span class="kw">void</span> <span class="fn">Box</span>(<span class="tpl"><span class="ty">IMAGE</span>&</span> img, std::<span class="ty">size_t</span> radius);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>img</code></td><td><code class="tpl">IMAGE&</code></td><td>目标图像。</td></tr>
+<tr><td><code>radius</code></td><td><code>std::size_t</code></td><td>模糊半径，推荐 <code>2</code>~<code>6</code>。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="blur_motion">
+<h2>ImageBlur::Motion</h2>
+<p>运动模糊。</p>
+<pre><code><span class="kw">void</span> <span class="fn">Motion</span>(<span class="tpl"><span class="ty">IMAGE</span>&</span> img, <span class="ty">float</span> angleDeg, <span class="ty">float</span> intensity = <span class="nm">0.25</span>f, std::<span class="ty">size_t</span> samples = <span class="nm">12</span>);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>img</code></td><td><code class="tpl">IMAGE&</code></td><td>目标图像。</td></tr>
+<tr><td><code>angleDeg</code></td><td><code class="ty">float</code></td><td>方向角度（<code>0°</code> 右，<code>90°</code> 下）。</td></tr>
+<tr><td><code>intensity</code></td><td><code class="ty">float</code></td><td>强度，推荐 <code>0.15</code>~<code>0.35</code>，默认 <code>0.25</code>。</td></tr>
+<tr><td><code>samples</code></td><td><code>std::size_t</code></td><td>采样数，推荐 <code>8</code>~<code>16</code>，默认 <code>12</code>。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="blur_radial">
+<h2>ImageBlur::Radial</h2>
+<p>径向模糊（从中心向外发散）。</p>
+<pre><code><span class="kw">void</span> <span class="fn">Radial</span>(<span class="tpl"><span class="ty">IMAGE</span>&</span> img, <span class="ty">float</span> intensity = <span class="nm">0.35</span>f, std::<span class="ty">size_t</span> samples = <span class="nm">12</span>, <span class="ty">float</span> centerX = <span class="nm">0.5</span>f, <span class="ty">float</span> centerY = <span class="nm">0.5</span>f);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>img</code></td><td><code class="tpl">IMAGE&</code></td><td>目标图像。</td></tr>
+<tr><td><code>intensity</code></td><td><code class="ty">float</code></td><td>强度，推荐 <code>0.25</code>~<code>0.5</code>，默认 <code>0.35</code>。</td></tr>
+<tr><td><code>samples</code></td><td><code>std::size_t</code></td><td>采样数，推荐 <code>10</code>~<code>16</code>，默认 <code>12</code>。</td></tr>
+<tr><td><code>centerX</code></td><td><code class="ty">float</code></td><td>中心 X（归一化 0~1），默认 <code>0.5</code>。</td></tr>
+<tr><td><code>centerY</code></td><td><code class="ty">float</code></td><td>中心 Y（归一化 0~1），默认 <code>0.5</code>。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="blur_spin">
+<h2>ImageBlur::Spin</h2>
+<p>旋转模糊（绕中心旋转）。</p>
+<pre><code><span class="kw">void</span> <span class="fn">Spin</span>(<span class="tpl"><span class="ty">IMAGE</span>&</span> img, <span class="ty">float</span> angleDeg = <span class="nm">45.0</span>f, std::<span class="ty">size_t</span> samples = <span class="nm">12</span>, <span class="ty">float</span> centerX = <span class="nm">0.5</span>f, <span class="ty">float</span> centerY = <span class="nm">0.5</span>f);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>img</code></td><td><code class="tpl">IMAGE&</code></td><td>目标图像。</td></tr>
+<tr><td><code>angleDeg</code></td><td><code class="ty">float</code></td><td>旋转角度，推荐 <code>15</code>~<code>90</code>，默认 <code>45.0</code>。</td></tr>
+<tr><td><code>samples</code></td><td><code>std::size_t</code></td><td>采样数，推荐 <code>10</code>~<code>20</code>，默认 <code>12</code>。</td></tr>
+<tr><td><code>centerX</code></td><td><code class="ty">float</code></td><td>中心 X（归一化 0~1），默认 <code>0.5</code>。</td></tr>
+<tr><td><code>centerY</code></td><td><code class="ty">float</code></td><td>中心 Y（归一化 0~1），默认 <code>0.5</code>。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="blur_hazy">
+<h2>ImageBlur::Hazy</h2>
+<p>朦胧图像（多层模糊 + 透明度遮罩）。</p>
+<pre><code><span class="kw">void</span> <span class="fn">Hazy</span>(<span class="tpl"><span class="ty">IMAGE</span>&</span> img, <span class="ty">float</span> intensity, <span class="ty">int</span> maxAlphaMask = <span class="nm">200</span>, <span class="ty">double</span> sigma = <span class="nm">7.0</span>f, <span class="ty">float</span> layerStep = <span class="nm">0.1</span>f);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>img</code></td><td><code class="tpl">IMAGE&</code></td><td>目标图像。</td></tr>
+<tr><td><code>intensity</code></td><td><code class="ty">float</code></td><td>强度，推荐 <code>0.2</code>~<code>0.5</code>。</td></tr>
+<tr><td><code>maxAlphaMask</code></td><td><code class="ty">int</code></td><td>遮罩最大透明度，推荐 <code>180</code>~<code>220</code>，默认 <code>200</code>。</td></tr>
+<tr><td><code>sigma</code></td><td><code class="ty">double</code></td><td>模糊强度，推荐 <code>5.0</code>~<code>10.0</code>，默认 <code>7.0</code>。</td></tr>
+<tr><td><code>layerStep</code></td><td><code class="ty">float</code></td><td>层次衰减，推荐 <code>0.05</code>~<code>0.15</code>，默认 <code>0.1</code>。</td></tr>
+</tbody>
+</table>
+</section>
+
+<!-- ==================== 扭曲 ==================== -->
+
+<section id="dist_fisheye">
+<h2>ImageDistort::Fisheye</h2>
+<p>鱼眼扭曲。</p>
+<pre><code><span class="kw">void</span> <span class="fn">Fisheye</span>(<span class="tpl"><span class="ty">IMAGE</span>&</span> img, <span class="ty">float</span> intensity = <span class="nm">0.35</span>f, <span class="ty">float</span> centerX = <span class="nm">0.5</span>f, <span class="ty">float</span> centerY = <span class="nm">0.5</span>f);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>img</code></td><td><code class="tpl">IMAGE&</code></td><td>目标图像。</td></tr>
+<tr><td><code>intensity</code></td><td><code class="ty">float</code></td><td>强度，推荐 <code>0.25</code>~<code>0.5</code>，默认 <code>0.35</code>。</td></tr>
+<tr><td><code>centerX</code></td><td><code class="ty">float</code></td><td>中心 X（归一化 0~1），默认 <code>0.5</code>。</td></tr>
+<tr><td><code>centerY</code></td><td><code class="ty">float</code></td><td>中心 Y（归一化 0~1），默认 <code>0.5</code>。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="dist_heat">
+<h2>ImageDistort::Heat</h2>
+<p>热浪扭曲（模拟热气上升）。</p>
+<pre><code><span class="kw">void</span> <span class="fn">Heat</span>(<span class="tpl"><span class="ty">IMAGE</span>&</span> img, <span class="ty">float</span> amplitude = <span class="nm">0.15</span>f, <span class="ty">float</span> frequency = <span class="nm">25.0</span>f, <span class="ty">float</span> phase = <span class="nm">0.0</span>f, <span class="ty">float</span> noiseStrength = <span class="nm">0.4</span>f);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>img</code></td><td><code class="tpl">IMAGE&</code></td><td>目标图像。</td></tr>
+<tr><td><code>amplitude</code></td><td><code class="ty">float</code></td><td>振幅，推荐 <code>0.1</code>~<code>0.2</code>，默认 <code>0.15</code>。</td></tr>
+<tr><td><code>frequency</code></td><td><code class="ty">float</code></td><td>频率，推荐 <code>20</code>~<code>30</code>，默认 <code>25.0</code>。</td></tr>
+<tr><td><code>phase</code></td><td><code class="ty">float</code></td><td>相位（随时间递增产生动画），默认 <code>0.0</code>。</td></tr>
+<tr><td><code>noiseStrength</code></td><td><code class="ty">float</code></td><td>噪声强度，推荐 <code>0.3</code>~<code>0.5</code>，默认 <code>0.4</code>。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="dist_blackhole">
+<h2>ImageDistort::BlackHole</h2>
+<p>黑洞扭曲（中心吸入效果）。</p>
+<pre><code><span class="kw">void</span> <span class="fn">BlackHole</span>(<span class="tpl"><span class="ty">IMAGE</span>&</span> img, <span class="ty">float</span> intensity = <span class="nm">0.45</span>f, <span class="ty">float</span> centerX = <span class="nm">0.5</span>f, <span class="ty">float</span> centerY = <span class="nm">0.5</span>f, <span class="ty">float</span> power = <span class="nm">2.0</span>f);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>img</code></td><td><code class="tpl">IMAGE&</code></td><td>目标图像。</td></tr>
+<tr><td><code>intensity</code></td><td><code class="ty">float</code></td><td>强度，推荐 <code>0.3</code>~<code>0.6</code>，默认 <code>0.45</code>。</td></tr>
+<tr><td><code>centerX</code></td><td><code class="ty">float</code></td><td>中心 X（归一化 0~1），默认 <code>0.5</code>。</td></tr>
+<tr><td><code>centerY</code></td><td><code class="ty">float</code></td><td>中心 Y（归一化 0~1），默认 <code>0.5</code>。</td></tr>
+<tr><td><code>power</code></td><td><code class="ty">float</code></td><td>衰减指数，推荐 <code>1.5</code>~<code>2.5</code>，默认 <code>2.0</code>。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="dist_waterring">
+<h2>ImageDistort::WaterRing</h2>
+<p>水面波动（环形波纹）。</p>
+<pre><code><span class="kw">void</span> <span class="fn">WaterRing</span>(<span class="tpl"><span class="ty">IMAGE</span>&</span> img, <span class="ty">float</span> centerX, <span class="ty">float</span> centerY, <span class="ty">float</span> radiusX, <span class="ty">float</span> radiusY, <span class="ty">float</span> width, <span class="ty">float</span> amplitude);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>img</code></td><td><code class="tpl">IMAGE&</code></td><td>目标图像。</td></tr>
+<tr><td><code>centerX</code></td><td><code class="ty">float</code></td><td>中心 X（归一化 0~1）。</td></tr>
+<tr><td><code>centerY</code></td><td><code class="ty">float</code></td><td>中心 Y（归一化 0~1）。</td></tr>
+<tr><td><code>radiusX</code></td><td><code class="ty">float</code></td><td>环半径 X。</td></tr>
+<tr><td><code>radiusY</code></td><td><code class="ty">float</code></td><td>环半径 Y。</td></tr>
+<tr><td><code>width</code></td><td><code class="ty">float</code></td><td>环宽度。</td></tr>
+<tr><td><code>amplitude</code></td><td><code class="ty">float</code></td><td>扭曲强度。</td></tr>
+</tbody>
+</table>
+</section>
+
+<!-- ==================== 羽化 ==================== -->
+
+<section id="feather_circle">
+<h2>ImageFeather::Circle</h2>
+<p>圆形羽化（边缘渐隐为透明）。</p>
+<pre><code><span class="kw">void</span> <span class="fn">Circle</span>(<span class="tpl"><span class="ty">IMAGE</span>&</span> img, <span class="ty">float</span> intensity = <span class="nm">0.3</span>f);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>img</code></td><td><code class="tpl">IMAGE&</code></td><td>目标图像。</td></tr>
+<tr><td><code>intensity</code></td><td><code class="ty">float</code></td><td>强度，推荐 <code>0.2</code>~<code>0.4</code>，默认 <code>0.3</code>。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="feather_rect">
+<h2>ImageFeather::Rect</h2>
+<p>方形羽化（边缘渐隐为透明）。</p>
+<pre><code><span class="kw">void</span> <span class="fn">Rect</span>(<span class="tpl"><span class="ty">IMAGE</span>&</span> img, <span class="ty">float</span> intensity = <span class="nm">0.3</span>f);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>img</code></td><td><code class="tpl">IMAGE&</code></td><td>目标图像。</td></tr>
+<tr><td><code>intensity</code></td><td><code class="ty">float</code></td><td>强度，推荐 <code>0.2</code>~<code>0.4</code>，默认 <code>0.3</code>。</td></tr>
+</tbody>
+</table>
+</section>
+
+<!-- ==================== 特效 ==================== -->
+
+<section id="effect_chromatic">
+<h2>ImageEffect::Chromatic</h2>
+<p>色差特效（RGB 通道分离）。</p>
+<pre><code><span class="kw">void</span> <span class="fn">Chromatic</span>(<span class="tpl"><span class="ty">IMAGE</span>&</span> img, <span class="ty">float</span> intensity = <span class="nm">0.2</span>f, <span class="ty">float</span> centerX = <span class="nm">0.5</span>f, <span class="ty">float</span> centerY = <span class="nm">0.5</span>f);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>img</code></td><td><code class="tpl">IMAGE&</code></td><td>目标图像。</td></tr>
+<tr><td><code>intensity</code></td><td><code class="ty">float</code></td><td>强度，推荐 <code>0.1</code>~<code>0.25</code>，默认 <code>0.2</code>。</td></tr>
+<tr><td><code>centerX</code></td><td><code class="ty">float</code></td><td>中心 X（归一化 0~1），默认 <code>0.5</code>。</td></tr>
+<tr><td><code>centerY</code></td><td><code class="ty">float</code></td><td>中心 Y（归一化 0~1），默认 <code>0.5</code>。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="effect_mosaic">
+<h2>ImageEffect::Mosaic</h2>
+<p>马赛克特效。</p>
+<pre><code><span class="kw">void</span> <span class="fn">Mosaic</span>(<span class="tpl"><span class="ty">IMAGE</span>&</span> img, <span class="ty">float</span> blockSize);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>img</code></td><td><code class="tpl">IMAGE&</code></td><td>目标图像。</td></tr>
+<tr><td><code>blockSize</code></td><td><code class="ty">float</code></td><td>方块大小（像素），推荐 <code>4</code>~<code>16</code>。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="effect_glitch">
+<h2>ImageEffect::Glitch</h2>
+<p>故障特效（画面撕裂 + 色偏）。</p>
+<pre><code><span class="kw">void</span> <span class="fn">Glitch</span>(<span class="tpl"><span class="ty">IMAGE</span>&</span> img, <span class="ty">float</span> intensity = <span class="nm">0.25</span>f, <span class="ty">float</span> maxLineWidth = <span class="nm">0.1</span>, <span class="ty">float</span> lineDensity = <span class="nm">0.4</span>);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>img</code></td><td><code class="tpl">IMAGE&</code></td><td>目标图像。</td></tr>
+<tr><td><code>intensity</code></td><td><code class="ty">float</code></td><td>强度，推荐 <code>0.15</code>~<code>0.4</code>，默认 <code>0.25</code>。</td></tr>
+<tr><td><code>maxLineWidth</code></td><td><code class="ty">float</code></td><td>最大线宽度，默认 <code>0.1</code>。</td></tr>
+<tr><td><code>lineDensity</code></td><td><code class="ty">float</code></td><td>线密度，默认 <code>0.4</code>。</td></tr>
+</tbody>
+</table>
+</section>
+
+<!-- ==================== 颜色变换 ==================== -->
+
+<section id="ct_gray">
+<h2>ImageColorTransforms::Gray</h2>
+<p>黑白化（去色）。</p>
+<pre><code><span class="kw">void</span> <span class="fn">Gray</span>(<span class="tpl"><span class="ty">IMAGE</span>&</span> img);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>img</code></td><td><code class="tpl">IMAGE&</code></td><td>目标图像。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="ct_invert">
+<h2>ImageColorTransforms::Invert</h2>
+<p>反色（颜色取反）。</p>
+<pre><code><span class="kw">void</span> <span class="fn">Invert</span>(<span class="tpl"><span class="ty">IMAGE</span>&</span> img);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>img</code></td><td><code class="tpl">IMAGE&</code></td><td>目标图像。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="ct_contrast">
+<h2>ImageColorTransforms::Contrast</h2>
+<p>对比度调整。</p>
+<pre><code><span class="kw">void</span> <span class="fn">Contrast</span>(<span class="tpl"><span class="ty">IMAGE</span>&</span> img, <span class="ty">float</span> contrast);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>img</code></td><td><code class="tpl">IMAGE&</code></td><td>目标图像。</td></tr>
+<tr><td><code>contrast</code></td><td><code class="ty">float</code></td><td>对比度，推荐 <code>0.8</code>~<code>1.4</code>。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="ct_brightness">
+<h2>ImageColorTransforms::Brightness</h2>
+<p>亮度调整。</p>
+<pre><code><span class="kw">void</span> <span class="fn">Brightness</span>(<span class="tpl"><span class="ty">IMAGE</span>&</span> img, <span class="ty">float</span> brightness);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>img</code></td><td><code class="tpl">IMAGE&</code></td><td>目标图像。</td></tr>
+<tr><td><code>brightness</code></td><td><code class="ty">float</code></td><td>亮度偏移，推荐 <code>-0.2</code>~<code>0.3</code>。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="ct_saturation">
+<h2>ImageColorTransforms::Saturation</h2>
+<p>饱和度调整。</p>
+<pre><code><span class="kw">void</span> <span class="fn">Saturation</span>(<span class="tpl"><span class="ty">IMAGE</span>&</span> img, <span class="ty">float</span> saturation);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>img</code></td><td><code class="tpl">IMAGE&</code></td><td>目标图像。</td></tr>
+<tr><td><code>saturation</code></td><td><code class="ty">float</code></td><td>饱和度，推荐 <code>0.0</code>~<code>1.5</code>。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="ct_gamma">
+<h2>ImageColorTransforms::Gamma</h2>
+<p>Gamma 校正。</p>
+<pre><code><span class="kw">void</span> <span class="fn">Gamma</span>(<span class="tpl"><span class="ty">IMAGE</span>&</span> img, <span class="ty">float</span> gamma);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>img</code></td><td><code class="tpl">IMAGE&</code></td><td>目标图像。</td></tr>
+<tr><td><code>gamma</code></td><td><code class="ty">float</code></td><td>Gamma 值，标准 <code>2.2</code>，推荐 <code>0.8</code>~<code>2.2</code>。</td></tr>
+</tbody>
+</table>
+</section>
+
+<!-- ==================== 颜色替换 ==================== -->
+
+<section id="replace_rgb">
+<h2>ImageReplaceColor::ReplaceColorRGB</h2>
+<p>RGB 颜色替换（性能高，适合精确换色）。</p>
+<pre><code><span class="kw">void</span> <span class="fn">ReplaceColorRGB</span>(<span class="tpl"><span class="ty">IMAGE</span>&</span> img,
+    <span class="kw">const</span> <span class="ty">sf::Color</span>& targetColor,
+    <span class="kw">const</span> <span class="ty">sf::Color</span>& newColor,
+    std::<span class="ty">uint8_t</span> tolerance = <span class="nm">12</span>);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>img</code></td><td><code class="tpl">IMAGE&</code></td><td>目标图像。</td></tr>
+<tr><td><code>targetColor</code></td><td><code>const sf::Color&</code></td><td>要替换的目标颜色。</td></tr>
+<tr><td><code>newColor</code></td><td><code>const sf::Color&</code></td><td>新颜色。</td></tr>
+<tr><td><code>tolerance</code></td><td><code>std::uint8_t</code></td><td>容差，推荐 <code>8</code>~<code>20</code>（<code>0</code>~<code>255</code>），默认 <code>12</code>。</td></tr>
+</tbody>
+</table>
+</section>
+
+<!-- ==================== 缩放 ==================== -->
+
+<section id="scale">
+<h2>ImageScale::Scale</h2>
+<p>缩放图像（特效前常用 0.5 提升性能）。</p>
+<pre><code><span class="kw">void</span> <span class="fn">Scale</span>(<span class="tpl"><span class="ty">IMAGE</span>&</span> img, <span class="ty">float</span> scaleX, <span class="ty">float</span> scaleY);</code></pre>
+<h4>参数</h4>
+<table class="doc-table">
+<thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>img</code></td><td><code class="tpl">IMAGE&</code></td><td>目标图像。</td></tr>
+<tr><td><code>scaleX</code></td><td><code class="ty">float</code></td><td>横向缩放，<code>0.5</code> = 一半，<code>2.0</code> = 两倍。</td></tr>
+<tr><td><code>scaleY</code></td><td><code class="ty">float</code></td><td>纵向缩放，<code>0.5</code> = 一半，<code>2.0</code> = 两倍。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section>
+<h2>另请参阅</h2>
+<ul>
+<li><a href="Graph_Image.html">xs::XImage</a></li>
+<li><a href="Graph_Basic.html">xs::XGraph</a></li>
+<li><a href="Graph_Text.html">xs::XText</a></li>
+</ul>
+</section>
+
+</main>
+</div>
+<script src="../js/toc.js"></script>
+</body>
+</html>
