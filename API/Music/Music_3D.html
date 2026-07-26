@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>XMusic::Audio3D - Xs 文档</title>
+    <link rel="stylesheet" href="../css/docs.css">
+</head>
+<body>
+<div class="layout">
+    <aside class="toc">
+        <nav class="toc-inner">
+            <div class="toc-title">Audio3D</div>
+            <ul>
+                <li><a href="#position">3D 位置</a></li>
+                <li><a href="#getposition">获取位置</a></li>
+                <li><a href="#mindistance">最小距离</a></li>
+                <li><a href="#enable">启用/禁用</a></li>
+                <li><a href="#attenuation">衰减</a></li>
+                <li><a href="#truevolume">实际音量</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="container">
+        <nav class="breadcrumb">
+            <a href="../index.html">Xs 文档</a> /
+            <a href="Music_All.html">Music 类</a> /
+            Audio3D
+        </nav>
+
+        <header class="page-header">
+            <h1>XMusic::Audio3D</h1>
+            <p class="metadata">命名空间：<code>xs</code> | 所属类：<code>XMusic::3D</code></p>
+        </header>
+
+        <!-- ===== 3D 位置 ===== -->
+        <section id="position">
+            <h2>3D 位置</h2>
+            <p>设置音频在 3D 空间中的位置，支持相对监听器或世界坐标。</p>
+
+            <h3 id="set3dposition-music">Set3DPosition（MUSIC）</h3>
+            <pre><code><span class="kw">void</span> <span class="fn">Set3DPosition</span>(<span class="tpl">MUSIC</span>&amp; music, <span class="ty">float</span> x, <span class="ty">float</span> y, <span class="ty">float</span> z, <span class="kw">bool</span> relative);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>music</code></td><td><code class="tpl">MUSIC</code>&amp;</td><td>要设置 3D 位置的音频。</td></tr>
+                    <tr><td><code>x</code>, <code>y</code>, <code>z</code></td><td><code class="ty">float</code></td><td>3D 空间坐标。</td></tr>
+                    <tr><td><code>relative</code></td><td><code class="ty">bool</code></td><td><code class="kw">true</code> = 相对于监听器位置；<code class="kw">false</code> = 世界坐标。</td></tr>
+                </tbody>
+            </table>
+
+            <h3 id="set3dposition-sound">Set3DPosition（SOUND）</h3>
+            <pre><code><span class="kw">void</span> <span class="fn">Set3DPosition</span>(<span class="tpl">SOUND</span>&amp; sound, <span class="ty">float</span> x, <span class="ty">float</span> y, <span class="ty">float</span> z, <span class="kw">bool</span> relative);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>sound</code></td><td><code class="tpl">SOUND</code>&amp;</td><td>要设置 3D 位置的音频。</td></tr>
+                    <tr><td><code>x</code>, <code>y</code>, <code>z</code></td><td><code class="ty">float</code></td><td>3D 空间坐标。</td></tr>
+                    <tr><td><code>relative</code></td><td><code class="ty">bool</code></td><td><code class="kw">true</code> = 相对于监听器位置；<code class="kw">false</code> = 世界坐标。</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ===== 获取位置 ===== -->
+        <section id="getposition">
+            <h2>获取位置</h2>
+
+            <h3 id="get3dposition-music">Get3DPosition（MUSIC）</h3>
+            <pre><code><span class="tpl">Vector2f</span> <span class="fn">Get3DPosition</span>(<span class="tpl">MUSIC</span>&amp; music);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>music</code></td><td><code class="tpl">MUSIC</code>&amp;</td><td>要获取 3D 位置的音频。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回 <code class="tpl">Vector2f</code>，包含音频的 X/Y 位置。</p>
+
+            <h3 id="get3dposition-sound">Get3DPosition（SOUND）</h3>
+            <pre><code><span class="tpl">Vector2f</span> <span class="fn">Get3DPosition</span>(<span class="tpl">SOUND</span>&amp; sound);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>sound</code></td><td><code class="tpl">SOUND</code>&amp;</td><td>要获取 3D 位置的音频。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回 <code class="tpl">Vector2f</code>，包含音频的 X/Y 位置。</p>
+        </section>
+
+        <!-- ===== 最小距离 ===== -->
+        <section id="mindistance">
+            <h2>最小距离</h2>
+            <p>设置音频音量保持最大值的起始距离。距离小于此值时音量为 100%，超过后开始衰减。</p>
+
+            <h3 id="setmindistance-music">SetMinDistance（MUSIC）</h3>
+            <pre><code><span class="kw">void</span> <span class="fn">SetMinDistance</span>(<span class="tpl">MUSIC</span>&amp; music, <span class="ty">float</span> minDistance);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>music</code></td><td><code class="tpl">MUSIC</code>&amp;</td><td>要设置最小距离的音频。</td></tr>
+                    <tr><td><code>minDistance</code></td><td><code class="ty">float</code></td><td>音量保持最大的最小距离。</td></tr>
+                </tbody>
+            </table>
+
+            <h3 id="setmindistance-sound">SetMinDistance（SOUND）</h3>
+            <pre><code><span class="kw">void</span> <span class="fn">SetMinDistance</span>(<span class="tpl">SOUND</span>&amp; sound, <span class="ty">float</span> minDistance);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>sound</code></td><td><code class="tpl">SOUND</code>&amp;</td><td>要设置最小距离的音频。</td></tr>
+                    <tr><td><code>minDistance</code></td><td><code class="ty">float</code></td><td>音量保持最大的最小距离。</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ===== 启用/禁用 3D ===== -->
+        <section id="enable">
+            <h2>启用 / 禁用 3D 音效</h2>
+
+            <h3 id="enable3d-music">Enable3D（MUSIC）</h3>
+            <pre><code><span class="kw">void</span> <span class="fn">Enable3D</span>(<span class="tpl">MUSIC</span>&amp; music, <span class="kw">bool</span> enable);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>music</code></td><td><code class="tpl">MUSIC</code>&amp;</td><td>要启用/禁用 3D 的音频。</td></tr>
+                    <tr><td><code>enable</code></td><td><code class="ty">bool</code></td><td><code class="kw">true</code> = 启用 3D 音效；<code class="kw">false</code> = 禁用。</td></tr>
+                </tbody>
+            </table>
+
+            <h3 id="enable3d-sound">Enable3D（SOUND）</h3>
+            <pre><code><span class="kw">void</span> <span class="fn">Enable3D</span>(<span class="tpl">SOUND</span>&amp; sound, <span class="kw">bool</span> enable);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>sound</code></td><td><code class="tpl">SOUND</code>&amp;</td><td>要启用/禁用 3D 的音频。</td></tr>
+                    <tr><td><code>enable</code></td><td><code class="ty">bool</code></td><td><code class="kw">true</code> = 启用 3D 音效；<code class="kw">false</code> = 禁用。</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ===== 衰减 ===== -->
+        <section id="attenuation">
+            <h2>音量衰减</h2>
+            <p>设置音频随距离衰减的速率。值越大，音量随距离下降越快。</p>
+
+            <h3 id="setattenuation-music">SetAttenuation（MUSIC）</h3>
+            <pre><code><span class="kw">void</span> <span class="fn">SetAttenuation</span>(<span class="tpl">MUSIC</span>&amp; music, <span class="ty">float</span> attenuation);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>music</code></td><td><code class="tpl">MUSIC</code>&amp;</td><td>要设置衰减的音频。</td></tr>
+                    <tr><td><code>attenuation</code></td><td><code class="ty">float</code></td><td>衰减值，越大衰减越快。</td></tr>
+                </tbody>
+            </table>
+
+            <h3 id="setattenuation-sound">SetAttenuation（SOUND）</h3>
+            <pre><code><span class="kw">void</span> <span class="fn">SetAttenuation</span>(<span class="tpl">SOUND</span>&amp; sound, <span class="ty">float</span> attenuation);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>sound</code></td><td><code class="tpl">SOUND</code>&amp;</td><td>要设置衰减的音频。</td></tr>
+                    <tr><td><code>attenuation</code></td><td><code class="ty">float</code></td><td>衰减值，越大衰减越快。</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ===== 实际音量 ===== -->
+        <section id="truevolume">
+            <h2>实际音量</h2>
+            <p>获取经过 3D 衰减后的实际播放音量。</p>
+
+            <h3 id="gettruevolume-music">GetTrueVolume（MUSIC）</h3>
+            <pre><code><span class="ty">float</span> <span class="fn">GetTrueVolume</span>(<span class="tpl">MUSIC</span>&amp; music);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>music</code></td><td><code class="tpl">MUSIC</code>&amp;</td><td>要获取实际音量的音频。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回衰减后的实际音量值（0.0 ~ 100.0）。</p>
+            <div class="note">
+                此值与 <code>GetVolume</code> 不同：<code>GetVolume</code> 返回设置值，<code>GetTrueVolume</code> 返回经过 3D 距离衰减后的实际值。
+            </div>
+
+            <h3 id="gettruevolume-sound">GetTrueVolume（SOUND）</h3>
+            <pre><code><span class="ty">float</span> <span class="fn">GetTrueVolume</span>(<span class="tpl">SOUND</span>&amp; sound);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>sound</code></td><td><code class="tpl">SOUND</code>&amp;</td><td>要获取实际音量的音频。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回衰减后的实际音量值（0.0 ~ 100.0）。</p>
+        </section>
+
+        <section>
+            <h2>另请参阅</h2>
+            <ul>
+                <li><a href="Music_All.html">Music 类总览</a></li>
+                <li><a href="Music.html">XMusic — 音频主类</a></li>
+            </ul>
+        </section>
+    </main>
+</div>
+<script src="../js/toc.js"></script>
+</body>
+</html>

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>XMusic - Xs 文档</title>
+    <link rel="stylesheet" href="../css/docs.css">
+</head>
+<body>
+<div class="layout">
+    <aside class="toc">
+        <nav class="toc-inner">
+            <div class="toc-title">XMusic</div>
+            <ul>
+                <li><a href="#load">加载音频</a></li>
+                <li><a href="#play">播放</a></li>
+                <li><a href="#pause">暂停</a></li>
+                <li><a href="#stop">停止</a></li>
+                <li><a href="#volume">音量控制</a></li>
+                <li><a href="#fade">淡入淡出</a></li>
+                <li><a href="#offset">跳转位置</a></li>
+                <li><a href="#status">播放状态</a></li>
+                <li><a href="#pitch">音调</a></li>
+                <li><a href="#loop">循环</a></li>
+                <li><a href="#looptime">循环时间段</a></li>
+                <li><a href="#getvolume">获取音量</a></li>
+                <li><a href="#audio3d">Audio3D</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="container">
+        <nav class="breadcrumb">
+            <a href="../index.html">Xs 文档</a> /
+            <a href="Music_All.html">Music 类</a> /
+            XMusic
+        </nav>
+
+        <header class="page-header">
+            <h1>XMusic</h1>
+            <p class="metadata">命名空间：<code>xs</code> | 所属类：<code>XMusic</code></p>
+        </header>
+
+        <!-- ===== 加载音频 ===== -->
+        <section id="load">
+            <h2>加载音频</h2>
+
+            <h3 id="load-music-w">Load（MUSIC，宽字符）</h3>
+            <pre><code><span class="kw">bool</span> <span class="fn">Load</span>(<span class="tpl">MUSIC</span>&amp; music, std::<span class="ty">wstring</span> path);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>music</code></td><td><code class="tpl">MUSIC</code>&amp;</td><td>要加载的目标 MUSIC 对象。</td></tr>
+                    <tr><td><code>path</code></td><td><code class="ty">std::wstring</code></td><td>音频文件路径（宽字符）。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>加载成功返回 <code class="kw">true</code>，失败返回 <code class="kw">false</code>。</p>
+
+            <h3 id="load-music-a">Load（MUSIC，窄字符）</h3>
+            <pre><code><span class="kw">bool</span> <span class="fn">Load</span>(<span class="tpl">MUSIC</span>&amp; music, std::<span class="ty">string</span> path);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>music</code></td><td><code class="tpl">MUSIC</code>&amp;</td><td>要加载的目标 MUSIC 对象。</td></tr>
+                    <tr><td><code>path</code></td><td><code class="ty">std::string</code></td><td>音频文件路径（窄字符）。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>加载成功返回 <code class="kw">true</code>，失败返回 <code class="kw">false</code>。</p>
+
+            <h3 id="load-sound-w">Load（SOUND，宽字符）</h3>
+            <pre><code><span class="kw">bool</span> <span class="fn">Load</span>(<span class="tpl">SOUND</span>&amp; sound, std::<span class="ty">wstring</span> path);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>sound</code></td><td><code class="tpl">SOUND</code>&amp;</td><td>要加载的目标 SOUND 对象。</td></tr>
+                    <tr><td><code>path</code></td><td><code class="ty">std::wstring</code></td><td>音频文件路径（宽字符）。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>加载成功返回 <code class="kw">true</code>，失败返回 <code class="kw">false</code>。</p>
+
+            <h3 id="load-sound-a">Load（SOUND，窄字符）</h3>
+            <pre><code><span class="kw">bool</span> <span class="fn">Load</span>(<span class="tpl">SOUND</span>&amp; sound, std::<span class="ty">string</span> path);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>sound</code></td><td><code class="tpl">SOUND</code>&amp;</td><td>要加载的目标 SOUND 对象。</td></tr>
+                    <tr><td><code>path</code></td><td><code class="ty">std::string</code></td><td>音频文件路径（窄字符）。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>加载成功返回 <code class="kw">true</code>，失败返回 <code class="kw">false</code>。</p>
+        </section>
+
+        <!-- ===== 播放 ===== -->
+        <section id="play">
+            <h2>播放</h2>
+
+            <h3 id="play-music">Play（MUSIC）</h3>
+            <pre><code><span class="kw">void</span> <span class="fn">Play</span>(<span class="tpl">MUSIC</span>&amp; music, <span class="kw">bool</span> loop = <span class="kw">false</span>);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>music</code></td><td><code class="tpl">MUSIC</code>&amp;</td><td>要播放的音频。</td></tr>
+                    <tr><td><code>loop</code></td><td><code class="ty">bool</code></td><td>是否循环播放，默认 <code class="kw">false</code>。</td></tr>
+                </tbody>
+            </table>
+
+            <h3 id="play-sound">Play（SOUND）</h3>
+            <pre><code><span class="kw">void</span> <span class="fn">Play</span>(<span class="tpl">SOUND</span>&amp; sound, <span class="kw">bool</span> loop = <span class="kw">false</span>);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>sound</code></td><td><code class="tpl">SOUND</code>&amp;</td><td>要播放的音频。</td></tr>
+                    <tr><td><code>loop</code></td><td><code class="ty">bool</code></td><td>是否循环播放，默认 <code class="kw">false</code>。</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ===== 暂停 ===== -->
+        <section id="pause">
+            <h2>暂停</h2>
+
+            <h3 id="pause-music">Pause（MUSIC）</h3>
+            <pre><code><span class="kw">void</span> <span class="fn">Pause</span>(<span class="tpl">MUSIC</span>&amp; music);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>music</code></td><td><code class="tpl">MUSIC</code>&amp;</td><td>要暂停的音频。</td></tr>
+                </tbody>
+            </table>
+
+            <h3 id="pause-sound">Pause（SOUND）</h3>
+            <pre><code><span class="kw">void</span> <span class="fn">Pause</span>(<span class="tpl">SOUND</span>&amp; sound);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>sound</code></td><td><code class="tpl">SOUND</code>&amp;</td><td>要暂停的音频。</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ===== 停止 ===== -->
+        <section id="stop">
+            <h2>停止</h2>
+
+            <h3 id="stop-music">Stop（MUSIC）</h3>
+            <pre><code><span class="kw">void</span> <span class="fn">Stop</span>(<span class="tpl">MUSIC</span>&amp; music);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>music</code></td><td><code class="tpl">MUSIC</code>&amp;</td><td>要停止的音频。</td></tr>
+                </tbody>
+            </table>
+
+            <h3 id="stop-sound">Stop（SOUND）</h3>
+            <pre><code><span class="kw">void</span> <span class="fn">Stop</span>(<span class="tpl">SOUND</span>&amp; sound);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>sound</code></td><td><code class="tpl">SOUND</code>&amp;</td><td>要停止的音频。</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ===== 音量控制 ===== -->
+        <section id="volume">
+            <h2>音量控制</h2>
+
+            <h3 id="setvolume-music">SetVolume（MUSIC）</h3>
+            <pre><code><span class="kw">void</span> <span class="fn">SetVolume</span>(<span class="tpl">MUSIC</span>&amp; music, <span class="ty">float</span> volume);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>music</code></td><td><code class="tpl">MUSIC</code>&amp;</td><td>要设置音量的音频。</td></tr>
+                    <tr><td><code>volume</code></td><td><code class="ty">float</code></td><td>音量值（0.0 ~ 100.0）。</td></tr>
+                </tbody>
+            </table>
+
+            <h3 id="setvolume-sound">SetVolume（SOUND）</h3>
+            <pre><code><span class="kw">void</span> <span class="fn">SetVolume</span>(<span class="tpl">SOUND</span>&amp; sound, <span class="ty">float</span> volume);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>sound</code></td><td><code class="tpl">SOUND</code>&amp;</td><td>要设置音量的音频。</td></tr>
+                    <tr><td><code>volume</code></td><td><code class="ty">float</code></td><td>音量值（0.0 ~ 100.0）。</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ===== 淡入淡出 ===== -->
+        <section id="fade">
+            <h2>淡入淡出</h2>
+
+            <h3 id="setfade-music">SetFade（MUSIC）</h3>
+            <pre><code><span class="kw">void</span> <span class="fn">SetFade</span>(<span class="tpl">MUSIC</span>&amp; music, <span class="ty">float</span> fadeStart, <span class="ty">float</span> fadeEnd);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>music</code></td><td><code class="tpl">MUSIC</code>&amp;</td><td>要设置淡入淡出的音频。</td></tr>
+                    <tr><td><code>fadeStart</code></td><td><code class="ty">float</code></td><td>淡入时长（秒）。</td></tr>
+                    <tr><td><code>fadeEnd</code></td><td><code class="ty">float</code></td><td>淡出时长（秒）。</td></tr>
+                </tbody>
+            </table>
+            <div class="note">
+                淡入淡出由 <code>Update()</code> 驱动，必须每帧调用。
+            </div>
+
+            <h3 id="setfade-sound">SetFade（SOUND）</h3>
+            <pre><code><span class="kw">void</span> <span class="fn">SetFade</span>(<span class="tpl">SOUND</span>&amp; sound, <span class="ty">float</span> fadeStart, <span class="ty">float</span> fadeEnd);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>sound</code></td><td><code class="tpl">SOUND</code>&amp;</td><td>要设置淡入淡出的音频。</td></tr>
+                    <tr><td><code>fadeStart</code></td><td><code class="ty">float</code></td><td>淡入时长（秒）。</td></tr>
+                    <tr><td><code>fadeEnd</code></td><td><code class="ty">float</code></td><td>淡出时长（秒）。</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ===== 跳转位置 ===== -->
+        <section id="offset">
+            <h2>跳转位置</h2>
+
+            <h3 id="setoffset-music">SetOffset（MUSIC）</h3>
+            <pre><code><span class="kw">void</span> <span class="fn">SetOffset</span>(<span class="tpl">MUSIC</span>&amp; music, <span class="ty">float</span> offset);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>music</code></td><td><code class="tpl">MUSIC</code>&amp;</td><td>要跳转的音频。</td></tr>
+                    <tr><td><code>offset</code></td><td><code class="ty">float</code></td><td>播放位置偏移量（秒）。</td></tr>
+                </tbody>
+            </table>
+
+            <h3 id="setoffset-sound">SetOffset（SOUND）</h3>
+            <pre><code><span class="kw">void</span> <span class="fn">SetOffset</span>(<span class="tpl">SOUND</span>&amp; sound, <span class="ty">float</span> offset);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>sound</code></td><td><code class="tpl">SOUND</code>&amp;</td><td>要跳转的音频。</td></tr>
+                    <tr><td><code>offset</code></td><td><code class="ty">float</code></td><td>播放位置偏移量（秒）。</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ===== 播放状态 ===== -->
+        <section id="status">
+            <h2>播放状态</h2>
+
+            <h3 id="getplaystatue-music">GetPlayStatue（MUSIC）</h3>
+            <pre><code><span class="tpl">PlayStatus</span> <span class="fn">GetPlayStatue</span>(<span class="tpl">MUSIC</span>&amp; music);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>music</code></td><td><code class="tpl">MUSIC</code>&amp;</td><td>要查询的音频。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回 <code class="tpl">PlayStatus</code> 枚举：<code class="en">STOP</code> / <code class="en">PLAY</code> / <code class="en">PAUSE</code>。</p>
+
+            <h3 id="getplaystatue-sound">GetPlayStatue（SOUND）</h3>
+            <pre><code><span class="tpl">PlayStatus</span> <span class="fn">GetPlayStatue</span>(<span class="tpl">SOUND</span>&amp; sound);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>sound</code></td><td><code class="tpl">SOUND</code>&amp;</td><td>要查询的音频。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回 <code class="tpl">PlayStatus</code> 枚举：<code class="en">STOP</code> / <code class="en">PLAY</code> / <code class="en">PAUSE</code>。</p>
+        </section>
+
+        <!-- ===== 音调 ===== -->
+        <section id="pitch">
+            <h2>音调</h2>
+
+            <h3 id="setpitch-music">SetPitch（MUSIC）</h3>
+            <pre><code><span class="kw">void</span> <span class="fn">SetPitch</span>(<span class="tpl">MUSIC</span>&amp; music, <span class="ty">float</span> pitch);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>music</code></td><td><code class="tpl">MUSIC</code>&amp;</td><td>要设置音调的音频。</td></tr>
+                    <tr><td><code>pitch</code></td><td><code class="ty">float</code></td><td>音调值，注意会受到硬件限制。</td></tr>
+                </tbody>
+            </table>
+
+            <h3 id="setpitch-sound">SetPitch（SOUND）</h3>
+            <pre><code><span class="kw">void</span> <span class="fn">SetPitch</span>(<span class="tpl">SOUND</span>&amp; sound, <span class="ty">float</span> pitch);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>sound</code></td><td><code class="tpl">SOUND</code>&amp;</td><td>要设置音调的音频。</td></tr>
+                    <tr><td><code>pitch</code></td><td><code class="ty">float</code></td><td>音调值，注意会受到硬件限制。</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ===== 循环 ===== -->
+        <section id="loop">
+            <h2>循环</h2>
+
+            <h3 id="setloop-music">SetLoop（MUSIC）</h3>
+            <pre><code><span class="kw">void</span> <span class="fn">SetLoop</span>(<span class="tpl">MUSIC</span>&amp; music, <span class="kw">bool</span> loop);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>music</code></td><td><code class="tpl">MUSIC</code>&amp;</td><td>要设置循环的音频。</td></tr>
+                    <tr><td><code>loop</code></td><td><code class="ty">bool</code></td><td>是否循环播放。</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ===== 循环时间段 ===== -->
+        <section id="looptime">
+            <h2>循环时间段</h2>
+
+            <h3 id="setlooptime-music">SetLoopTime</h3>
+            <pre><code><span class="kw">void</span> <span class="fn">SetLoopTime</span>(<span class="tpl">MUSIC</span>&amp; music, <span class="ty">float</span> Start, <span class="ty">float</span> End);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>music</code></td><td><code class="tpl">MUSIC</code>&amp;</td><td>要设置循环时间的音频。</td></tr>
+                    <tr><td><code>Start</code></td><td><code class="ty">float</code></td><td>循环开始时间（秒）。</td></tr>
+                    <tr><td><code>End</code></td><td><code class="ty">float</code></td><td>循环结束时间（秒）。</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ===== 获取音量 ===== -->
+        <section id="getvolume">
+            <h2>获取音量</h2>
+
+            <h3 id="getvolume-music">GetVolume（MUSIC）</h3>
+            <pre><code><span class="ty">float</span> <span class="fn">GetVolume</span>(<span class="tpl">MUSIC</span>&amp; music);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>music</code></td><td><code class="tpl">MUSIC</code>&amp;</td><td>要获取音量的音频。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回当前音量值（0.0 ~ 100.0）。</p>
+
+            <h3 id="getvolume-sound">GetVolume（SOUND）</h3>
+            <pre><code><span class="ty">float</span> <span class="fn">GetVolume</span>(<span class="tpl">SOUND</span>&amp; sound);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>sound</code></td><td><code class="tpl">SOUND</code>&amp;</td><td>要获取音量的音频。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回当前音量值（0.0 ~ 100.0）。</p>
+        </section>
+
+        <!-- ===== Audio3D ===== -->
+        <section id="audio3d">
+            <h2>Audio3D — 3D 音效</h2>
+            <p><a href="Music_3D.html">查看 3D 音效文档 ></a></p>
+        </section>
+
+        <section>
+            <h2>另请参阅</h2>
+            <ul>
+                <li><a href="Music_All.html">Music 类总览</a></li>
+                <li><a href="Music_3D.html">Music_3D — 3D 音效</a></li>
+            </ul>
+        </section>
+    </main>
+</div>
+<script src="../js/toc.js"></script>
+</body>
+</html>
