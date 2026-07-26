@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>XsEngine API 参考文档 1.02</title>
+    <link rel="stylesheet" href="css/docs.css">
+</head>
+<body>
+<div class="layout">
+    
+    <aside class="toc">
+        <nav class="toc-inner">
+            <div class="toc-title">XsGraph API 参考文档 1.02</div>
+            <ul>
+                <!-- 第一组：渲染管线（从底向上） -->
+                <li><a href="#graph">Graph 类(图形绘制)</a></li>
+                <li><a href="#batch">Batch 类(批处理)</a></li>
+                <li><a href="#shader">Shader 类(着色器)</a></li>
+                <li><a href="#color">Color 类(颜色)</a></li>
+
+                <!-- 第二组：窗口与系统 -->
+                <li><a href="#window">Window 类(窗口)</a></li>
+                <li><a href="#system">System 类(系统)</a></li>
+
+                <!-- 第三组：输入处理 -->
+                <li><a href="#msg">Msg 类(消息)</a></li>
+
+                <!-- 第四组：音频 -->
+                <li><a href="#music">Music 类(音乐)</a></li>
+
+                <!-- 第五组：工具集 -->
+                <li><a href="#string">String 类(字符串)</a></li>
+                <li><a href="#file">File 类(文件)</a></li>
+                <li><a href="#ease">Ease 类(动画)</a></li>
+                <li><a href="#debug">Debug 类(调试)</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="container">
+        <header class="page-header">
+            <h1>XsGraph API 参考文档 1.02</h1>
+            <p class="metadata">命名空间：<code>xs</code></p>
+        </header>
+
+        <nav class="breadcrumb">
+        <a href="../index.html">Xs 主页</a> / Xs API 参考文档
+        </nav>
+
+        <!-- ====================================================== -->
+        <!-- 第一组：渲染管线                                        -->
+
+        <!-- ===== Graph 类 ===== -->
+        <section id="graph">
+            <h2>Graph 类</h2>
+            <p>xs::Graph 是 xs 的核心图形子系统，由四个类组成。在下方选择具体类跳转。</p>
+
+            <table class="doc-table">
+                <thead>
+                    <tr><th>类</th><th>职责</th><th>文档</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>xs::XGraph</code></td>
+                        <td>图形绘制（矢量图元、变换、状态管理）</td>
+                        <td><a href="Graph/Graph_Basic.html">  查看详情 ></a></td>
+                    </tr>
+                    <tr>
+                        <td><code>xs::XImage</code></td>
+                        <td>图像绘制（加载、缩放、旋转、裁剪、混合）</td>
+                        <td><a href="Graph/Graph_Image.html">  查看详情 ></a></td>
+                    </tr>
+                    <tr>
+                        <td><code>xs::XImageEx</code></td>
+                        <td>图像特效（模糊、色彩调整、遮罩、滤镜）</td>
+                        <td><a href="Graph/Graph_ImageEx.html">  查看详情 ></a></td>
+                    </tr>
+                    <tr>
+                        <td><code>xs::XText</code></td>
+                        <td>文字绘制（字体、排版、对齐、换行）</td>
+                        <td><a href="Graph/Graph_Text.html">  查看详情 ></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ===== Batch 类 ===== -->
+        <section id="batch">
+            <h2>Batch 类</h2>
+            <p>xs::XBatch 提供渲染批处理管理，支持自动/手动两种模式，用于高效收集并提交绘制命令到 GPU。</p>
+
+            <table class="doc-table">
+                <thead>
+                    <tr><th>类</th><th>职责</th><th>文档</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>xs::XBatch</code></td>
+                        <td>GPU 提交批处理（自动/手动模式、图元收集）</td>
+                        <td><a href="Batch/Batch.html">  查看详情 ></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ===== Shader 类 ===== -->
+        <section id="shader">
+            <h2>Shader 类</h2>
+            <p>xs::XShader 提供 GLSL 着色器管理，支持从文件或源码加载，应用于渲染目标。</p>
+
+            <table class="doc-table">
+                <thead>
+                    <tr><th>类</th><th>职责</th><th>文档</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>xs::XShader</code></td>
+                        <td>着色器加载、应用、查询与生命周期管理</td>
+                        <td><a href="Shader/Shader.html">  查看详情 ></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ===== Color 类 ===== -->
+        <section id="color">
+            <h2>Color 类</h2>
+            <p>xs::XColor 提供颜色处理工具，包括灰度化、明暗调整、透明度、颜色比较等。被 Graph/Image/Text 等所有绘制模块共用。</p>
+
+            <table class="doc-table">
+                <thead>
+                    <tr><th>类</th><th>职责</th><th>文档</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>xs::XColor</code></td>
+                        <td>颜色管理（灰度/明暗/透明/比较/调整）</td>
+                        <td><a href="Color/Color.html">  查看详情 ></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ====================================================== -->
+        <!-- 第二组：窗口与系统                                      -->
+
+        <!-- ===== Window 类 ===== -->
+        <section id="window">
+            <h2>Window 类</h2>
+            <p>xs::Window 提供窗口创建、属性控制、DWM 特效与 OpenGL 高级设置。是渲染管线的承载容器。</p>
+
+            <table class="doc-table">
+                <thead>
+                    <tr><th>类</th><th>职责</th><th>文档</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>xs::Window_Basic</code></td>
+                        <td>窗口管理（创建/DPI/标题/图标/大小/位置/状态/鼠标同步）</td>
+                        <td><a href="Window/Window_Basic.html">  查看详情 ></a></td>
+                    </tr>
+                    <tr>
+                        <td><code>xs::Window_Advanced</code></td>
+                        <td>OpenGL 高级设置（抗锯齿/深度/模板/版本/sRGB）</td>
+                        <td><a href="Window/Window_Advanced.html">  查看详情 ></a></td>
+                    </tr>
+                    <tr>
+                        <td><code>xs::Window_DWM</code></td>
+                        <td>DWM 特效（圆角/云母/深色模式/阴影/标题栏/动画）</td>
+                        <td><a href="Window/Window_DWM.html">  查看详情 ></a></td>
+                    </tr>
+                    <tr>
+                        <td><code>xs::Window_Style</code></td>
+                        <td>Win32 窗口样式操作（Style/ExStyle 双重载 + 参考表）</td>
+                        <td><a href="Window/Window_Style.html">  查看详情 ></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ===== System 类 ===== -->
+        <section id="system">
+            <h2>System 类</h2>
+            <p>xs::XSystem 提供与操作系统交互的能力：任务栏控制、系统托盘、屏幕信息检索。</p>
+
+            <table class="doc-table">
+                <thead>
+                    <tr><th>类</th><th>职责</th><th>文档</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>xs::XSystem::Taskbar</code></td>
+                        <td>任务栏按钮显示、进度条状态与数值</td>
+                        <td><a href="System/System_Taskbar.html">  查看详情 ></a></td>
+                    </tr>
+                    <tr>
+                        <td><code>xs::XSystem::Tray</code></td>
+                        <td>托盘图标管理、气泡通知</td>
+                        <td><a href="System/System_Tray.html">  查看详情 ></a></td>
+                    </tr>
+                    <tr>
+                        <td><code>xs::XSystem::Info</code></td>
+                        <td>屏幕、工作区、任务栏尺寸查询</td>
+                        <td><a href="System/System_Info.html">  查看详情 ></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ====================================================== -->
+        <!-- 第三组：输入处理                                        -->
+
+        <!-- ===== Msg 类 ===== -->
+        <section id="msg">
+            <h2>Msg 类</h2>
+            <p>xs::Msg 提供虚拟键码、窗口消息、鼠标、键盘、触控与热键等输入处理能力。</p>
+
+            <table class="doc-table">
+                <thead>
+                    <tr><th>类</th><th>职责</th><th>文档</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>xs::VK</code></td>
+                        <td>虚拟键码枚举（键盘/鼠标按键常量）</td>
+                        <td><a href="Msg/VK.html">  查看详情 ></a></td>
+                    </tr>
+                    <tr>
+                        <td><code>xs::Msg</code></td>
+                        <td>底层消息处理（UpdateMsg/IsClose/ResetCloseMsg）</td>
+                        <td><a href="Msg/Msg_Basic.html">  查看详情 ></a></td>
+                    </tr>
+                    <tr>
+                        <td><code>xs::Msg::WindowMsg</code></td>
+                        <td>窗口消息（移动/缩放/最小化/最大化/关闭）</td>
+                        <td><a href="Msg/Msg_Window.html">  查看详情 ></a></td>
+                    </tr>
+                    <tr>
+                        <td><code>xs::Msg::MouseMsg</code></td>
+                        <td>鼠标消息（位置/滚轮/按键/区域检测/禁用区）</td>
+                        <td><a href="Msg/Msg_Mouse.html">  查看详情 ></a></td>
+                    </tr>
+                    <tr>
+                        <td><code>xs::Msg::KeyMsg</code></td>
+                        <td>按键消息（状态/按下/释放/输入/IME）</td>
+                        <td><a href="Msg/Msg_Key.html">  查看详情 ></a></td>
+                    </tr>
+                    <tr>
+                        <td><code>xs::Msg::KeyMsg::HotKey</code></td>
+                        <td>全局热键（快捷键注册/查询/注销）</td>
+                        <td><a href="Msg/Msg_HotKey.html">  查看详情 ></a></td>
+                    </tr>
+                    <tr>
+                        <td><code>xs::Msg::TouchMsg</code></td>
+                        <td>触控消息（触控点/大小/滚轮/支持检测）</td>
+                        <td><a href="Msg/Msg_Touch.html">  查看详情 ></a></td>
+                    </tr>
+                    <tr>
+                        <td><code>xs::Msg::TrayMsg</code></td>
+                        <td>托盘消息（鼠标事件/气泡通知状态）</td>
+                        <td><a href="Msg/Msg_Tray.html">  查看详情 ></a></td>
+                    </tr>
+                    <tr>
+                        <td><code>xs::Msg_Global</code></td>
+                        <td>全局消息（睡眠/清空/窗口状态查询）</td>
+                        <td><a href="Msg/Msg_Global.html">  查看详情 ></a></td>
+                    </tr>
+                    <tr>
+                        <td><code>xs::Msg_Composite</code></td>
+                        <td>复合函数（区域检测 + 消息组合）</td>
+                        <td><a href="Msg/Msg_Composite.html">  查看详情 ></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ====================================================== -->
+        <!-- 第四组：音频                                            -->
+
+        <!-- ===== Music 类 ===== -->
+        <section id="music">
+            <h2>Music 类</h2>
+            <p>xs::XMusic 提供音频加载、播放控制、音量管理、淡入淡出与 3D 空间音效。</p>
+
+            <table class="doc-table">
+                <thead>
+                    <tr><th>类</th><th>职责</th><th>文档</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>xs::XMusic</code></td>
+                        <td>音频加载/播放/暂停/停止/音量/淡入淡出/跳转/音调/循环</td>
+                        <td><a href="Music/Music.html">  查看详情 ></a></td>
+                    </tr>
+                    <tr>
+                        <td><code>xs::XMusic::Audio3D</code></td>
+                        <td>3D 空间音效（位置/距离衰减/最小距离/启用）</td>
+                        <td><a href="Music/Music_3D.html">  查看详情 ></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ====================================================== -->
+        <!-- 第五组：工具集（按使用频率排序）                         -->
+
+        <!-- ===== String 类 ===== -->
+        <section id="string">
+            <h2>String 类</h2>
+            <p>xs::XString 提供字符串编码转换、查找、替换、删除、大小写转换与分割。被几乎所有其他模块依赖。</p>
+            <table class="doc-table">
+                <thead>
+                    <tr><th>类</th><th>职责</th><th>文档</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>xs::XString</code></td>
+                        <td>字符串操作（编码转换/查找/替换/删除/大小写/分割）</td>
+                        <td><a href="String/String.html">  查看详情 ></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ===== File 类 ===== -->
+        <section id="file">
+            <h2>File 类</h2>
+            <p>xs::XFile 提供文件选择对话框、文件操作、路径查询、系统目录获取与目录缓存管理。</p>
+
+            <table class="doc-table">
+                <thead>
+                    <tr><th>类</th><th>职责</th><th>文档</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>xs::XFile::Pick</code></td>
+                        <td>系统文件/文件夹选择对话框</td>
+                        <td><a href="File/File_Pick.html">  查看详情 ></a></td>
+                    </tr>
+                    <tr>
+                        <td><code>xs::XFile</code></td>
+                        <td>文件判断、创建、删除、移动、复制、遍历、大小</td>
+                        <td><a href="File/File_Basic.html">  查看详情 ></a></td>
+                    </tr>
+                    <tr>
+                        <td><code>xs::XFile</code></td>
+                        <td>文件名与扩展名查询</td>
+                        <td><a href="File/File_Path.html">  查看详情 ></a></td>
+                    </tr>
+                    <tr>
+                        <td><code>xs::XFile::GetDir</code></td>
+                        <td>系统标准目录路径（桌面/文档/下载/AppData 等）</td>
+                        <td><a href="File/File_GetDir.html">  查看详情 ></a></td>
+                    </tr>
+                    <tr>
+                        <td><code>xs::XFile::DirCache</code></td>
+                        <td>目录路径缓存的保存、查找、删除与清除</td>
+                        <td><a href="File/File_DirCache.html">  查看详情 ></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ===== Ease 类 ===== -->
+        <section id="ease">
+            <h2>Ease 类</h2>
+            <p>xs::XEase 提供动画缓动函数与数值结构体，支持 15 种缓动曲线（In / Out / InOut 三种模式），每种函数都配有 x=时间 / y=值的精确可视化曲线图。</p>
+
+            <table class="doc-table">
+                <thead>
+                    <tr><th>类</th><th>职责</th><th>文档</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>xs::EaseValue</code></td>
+                        <td>单值缓动动画结构体（start/end/value/frame）</td>
+                        <td><a href="Ease/Ease.html#easevalue">  查看详情 ></a></td>
+                    </tr>
+                    <tr>
+                        <td><code>xs::XEase::easeBasic</code></td>
+                        <td>15 种缓动函数（幂次/弹性/回弹/弹跳/正弦/指数/圆形）</td>
+                        <td><a href="Ease/Ease.html#easebasic">  查看详情 ></a></td>
+                    </tr>
+                    <tr>
+                        <td><code>xs::XEase</code></td>
+                        <td>EaseAnimationTranslate 便捷封装</td>
+                        <td><a href="Ease/Ease.html#translate">  查看详情 ></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ===== Debug 类 ===== -->
+        <section id="debug">
+            <h2>Debug 类</h2>
+            <p>xs::XDebug 提供基本调试工具函数，包括日志输出、调试弹窗与调试信息获取。</p>
+
+            <table class="doc-table">
+                <thead>
+                    <tr><th>类</th><th>职责</th><th>文档</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>xs::XDebug</code></td>
+                        <td>调试工具函数（日志/弹窗/信息获取）</td>
+                        <td><a href="Debug/Debug.html">  查看详情 ></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+    </main>
+
+</div>
+<script src="js/toc.js"></script>
+</body>
+</html>
