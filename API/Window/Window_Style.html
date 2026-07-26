@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Window_Style - Xs 文档</title>
+    <link rel="stylesheet" href="../css/docs.css">
+</head>
+<body>
+<div class="layout">
+    <aside class="toc">
+        <nav class="toc-inner">
+            <div class="toc-title">WindowStyle</div>
+            <ul>
+                <li><a href="#addstyle">添加样式</a></li>
+                <li><a href="#removestyle">移除样式</a></li>
+                <li><a href="#addexstyle">添加扩展样式</a></li>
+                <li><a href="#removeexstyle">移除扩展样式</a></li>
+                <li><a href="#ws-reference">Win32 窗口样式参考</a></li>
+                <li><a href="#ws-ex-reference">Win32 扩展样式参考</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="container">
+        <nav class="breadcrumb">
+            <a href="../index.html">Xs 文档</a> / <a href="Window_All.html">Window 类</a> / Window_Style
+        </nav>
+
+        <header class="page-header">
+            <h1>Window_Style</h1>
+            <p class="metadata">命名空间：<code>xs</code> | 所属类：<code>XWindow</code></p>
+        </header>
+
+        <!-- ===== 添加样式 ===== -->
+        <section id="addstyle">
+            <h2>添加样式</h2>
+
+            <h3 id="addwindowstyle">AddWindowStyle</h3>
+            <pre><code><span class="kw">bool</span> AddWindowStyle(<span class="ty">HWND</span> hwnd, <span class="ty">LONG</span> style);
+<span class="kw">bool</span> AddWindowStyle(<span class="tpl">RenWin</span>&amp; window, <span class="ty">LONG</span> style);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>hwnd</code></td><td><code class="ty">HWND</code></td><td>目标窗口句柄。</td></tr>
+                    <tr><td><code>window</code></td><td><code class="tpl">RenWin</code>&amp;</td><td>目标渲染窗口。</td></tr>
+                    <tr><td><code>style</code></td><td><code class="ty">LONG</code></td><td>要添加的 Win32 窗口样式（见下方样式参考）。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>成功返回 <code class="kw">true</code>，失败返回 <code class="kw">false</code>。</p>
+            <div class="note">
+                常用值：<code class="en">WS_POPUP</code>、<code class="en">WS_BORDER</code>、<code class="en">WS_THICKFRAME</code>。
+                完整列表见下方 <a href="#ws-reference">Win32 窗口样式参考</a>。
+            </div>
+        </section>
+
+        <!-- ===== 移除样式 ===== -->
+        <section id="removestyle">
+            <h2>移除样式</h2>
+
+            <h3 id="removewindowstyle">RemoveWindowStyle</h3>
+            <pre><code><span class="kw">bool</span> RemoveWindowStyle(<span class="ty">HWND</span> hwnd, <span class="ty">LONG</span> style);
+<span class="kw">bool</span> RemoveWindowStyle(<span class="tpl">RenWin</span>&amp; window, <span class="ty">LONG</span> style);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>hwnd</code></td><td><code class="ty">HWND</code></td><td>目标窗口句柄。</td></tr>
+                    <tr><td><code>window</code></td><td><code class="tpl">RenWin</code>&amp;</td><td>目标渲染窗口。</td></tr>
+                    <tr><td><code>style</code></td><td><code class="ty">LONG</code></td><td>要移除的 Win32 窗口样式。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>成功返回 <code class="kw">true</code>，失败返回 <code class="kw">false</code>。</p>
+        </section>
+
+        <!-- ===== 添加扩展样式 ===== -->
+        <section id="addexstyle">
+            <h2>添加扩展样式</h2>
+
+            <h3 id="addwindowexstyle">AddWindowExStyle</h3>
+            <pre><code><span class="kw">bool</span> AddWindowExStyle(<span class="ty">HWND</span> hwnd, <span class="ty">LONG</span> style);
+<span class="kw">bool</span> AddWindowExStyle(<span class="tpl">RenWin</span>&amp; window, <span class="ty">LONG</span> style);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>hwnd</code></td><td><code class="ty">HWND</code></td><td>目标窗口句柄。</td></tr>
+                    <tr><td><code>window</code></td><td><code class="tpl">RenWin</code>&amp;</td><td>目标渲染窗口。</td></tr>
+                    <tr><td><code>style</code></td><td><code class="ty">LONG</code></td><td>要添加的扩展样式（见下方扩展样式参考）。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>成功返回 <code class="kw">true</code>，失败返回 <code class="kw">false</code>。</p>
+            <div class="note">
+                常用值：<code class="en">WS_EX_LAYERED</code>（透明窗口）、<code class="en">WS_EX_TOOLWINDOW</code>（工具窗口）。
+                完整列表见下方 <a href="#ws-ex-reference">Win32 扩展样式参考</a>。
+            </div>
+        </section>
+
+        <!-- ===== 移除扩展样式 ===== -->
+        <section id="removeexstyle">
+            <h2>移除扩展样式</h2>
+
+            <h3 id="removewindowexstyle">RemoveWindowExStyle</h3>
+            <pre><code><span class="kw">bool</span> RemoveWindowExStyle(<span class="ty">HWND</span> hwnd, <span class="ty">LONG</span> style);
+<span class="kw">bool</span> RemoveWindowExStyle(<span class="tpl">RenWin</span>&amp; window, <span class="ty">LONG</span> style);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>hwnd</code></td><td><code class="ty">HWND</code></td><td>目标窗口句柄。</td></tr>
+                    <tr><td><code>window</code></td><td><code class="tpl">RenWin</code>&amp;</td><td>目标渲染窗口。</td></tr>
+                    <tr><td><code>style</code></td><td><code class="ty">LONG</code></td><td>要移除的扩展样式。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>成功返回 <code class="kw">true</code>，失败返回 <code class="kw">false</code>。</p>
+        </section>
+
+        <!-- ===== Win32 窗口样式参考 ===== -->
+        <section id="ws-reference">
+            <h2>Win32 窗口样式参考（WS_*）</h2>
+            <p>以下为可直接传给 <code>AddWindowStyle</code> / <code>RemoveWindowStyle</code> 的 <code>style</code> 参数值。</p>
+
+            <h3>基础样式</h3>
+            <table class="doc-table">
+                <thead><tr><th>常量</th><th>值</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code class="en">WS_POPUP</code></td><td><code class="nm">0x80000000</code></td><td>弹出式窗口（无边框、无标题栏）</td></tr>
+                    <tr><td><code class="en">WS_CHILD</code></td><td><code class="nm">0x40000000</code></td><td>子窗口</td></tr>
+                    <tr><td><code class="en">WS_MINIMIZE</code></td><td><code class="nm">0x20000000</code></td><td>窗口初始为最小化</td></tr>
+                    <tr><td><code class="en">WS_VISIBLE</code></td><td><code class="nm">0x10000000</code></td><td>窗口初始可见</td></tr>
+                    <tr><td><code class="en">WS_DISABLED</code></td><td><code class="nm">0x08000000</code></td><td>窗口不可交互</td></tr>
+                    <tr><td><code class="en">WS_CLIPSIBLINGS</code></td><td><code class="nm">0x04000000</code></td><td>裁剪兄弟窗口重叠区域</td></tr>
+                    <tr><td><code class="en">WS_CLIPCHILDREN</code></td><td><code class="nm">0x02000000</code></td><td>绘制时不绘制子窗口区域</td></tr>
+                    <tr><td><code class="en">WS_MAXIMIZE</code></td><td><code class="nm">0x01000000</code></td><td>窗口初始为最大化</td></tr>
+                </tbody>
+            </table>
+
+            <h3>边框与标题栏</h3>
+            <table class="doc-table">
+                <thead><tr><th>常量</th><th>值</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code class="en">WS_BORDER</code></td><td><code class="nm">0x00800000</code></td><td>细边框</td></tr>
+                    <tr><td><code class="en">WS_DLGFRAME</code></td><td><code class="nm">0x00400000</code></td><td>对话框风格边框（无标题栏）</td></tr>
+                    <tr><td><code class="en">WS_VSCROLL</code></td><td><code class="nm">0x00200000</code></td><td>垂直滚动条</td></tr>
+                    <tr><td><code class="en">WS_HSCROLL</code></td><td><code class="nm">0x00100000</code></td><td>水平滚动条</td></tr>
+                    <tr><td><code class="en">WS_SYSMENU</code></td><td><code class="nm">0x00080000</code></td><td>标题栏带系统菜单</td></tr>
+                    <tr><td><code class="en">WS_THICKFRAME</code></td><td><code class="nm">0x00040000</code></td><td>可调整大小的边框</td></tr>
+                    <tr><td><code class="en">WS_CAPTION</code></td><td><code class="nm">0x00C00000</code></td><td>标题栏（= WS_BORDER | WS_DLGFRAME）</td></tr>
+                    <tr><td><code class="en">WS_OVERLAPPED</code></td><td><code class="nm">0x00000000</code></td><td>重叠窗口（默认）</td></tr>
+                    <tr><td><code class="en">WS_OVERLAPPEDWINDOW</code></td><td><code class="nm">0x00CF0000</code></td><td>标准主窗口（标题栏 + 边框 + 系统菜单 + 最大/最小化）</td></tr>
+                    <tr><td><code class="en">WS_POPUPWINDOW</code></td><td><code class="nm">0x80880000</code></td><td>弹出窗口（WS_POPUP + WS_BORDER + WS_SYSMENU）</td></tr>
+                </tbody>
+            </table>
+
+            <h3>常用组合（推荐）</h3>
+            <table class="doc-table">
+                <thead><tr><th>场景</th><th>推荐样式组合</th></tr></thead>
+                <tbody>
+                    <tr><td>无边框窗口</td><td><code class="en">WS_POPUP</code> | <code class="en">WS_VISIBLE</code></td></tr>
+                    <tr><td>标准窗口（默认）</td><td><code class="en">WS_OVERLAPPEDWINDOW</code> | <code class="en">WS_VISIBLE</code></td></tr>
+                    <tr><td>不可调整大小</td><td><code class="en">WS_OVERLAPPED</code> | <code class="en">WS_CAPTION</code> | <code class="en">WS_SYSMENU</code> | <code class="en">WS_VISIBLE</code></td></tr>
+                    <tr><td>全屏无边框</td><td><code class="en">WS_POPUP</code> | <code class="en">WS_VISIBLE</code> | <code class="en">WS_CLIPCHILDREN</code></td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ===== Win32 扩展样式参考 ===== -->
+        <section id="ws-ex-reference">
+            <h2>Win32 扩展样式参考（WS_EX_*）</h2>
+            <p>以下为可直接传给 <code>AddWindowExStyle</code> / <code>RemoveWindowExStyle</code> 的 <code>style</code> 参数值。</p>
+
+            <h3>外观与层级</h3>
+            <table class="doc-table">
+                <thead><tr><th>常量</th><th>值</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code class="en">WS_EX_DLGMODALFRAME</code></td><td><code class="nm">0x00000001</code></td><td>对话框模态边框</td></tr>
+                    <tr><td><code class="en">WS_EX_NOPARENTNOTIFY</code></td><td><code class="nm">0x00000004</code></td><td>子窗口不通知父窗口</td></tr>
+                    <tr><td><code class="en">WS_EX_TOPMOST</code></td><td><code class="nm">0x00000008</code></td><td>窗口置顶</td></tr>
+                    <tr><td><code class="en">WS_EX_ACCEPTFILES</code></td><td><code class="nm">0x00000010</code></td><td>接受拖放文件</td></tr>
+                    <tr><td><code class="en">WS_EX_TRANSPARENT</code></td><td><code class="nm">0x00000020</code></td><td>点击穿透（不接收鼠标消息）</td></tr>
+                    <tr><td><code class="en">WS_EX_MDICHILD</code></td><td><code class="nm">0x00000040</code></td><td>MDI 子窗口</td></tr>
+                    <tr><td><code class="en">WS_EX_TOOLWINDOW</code></td><td><code class="nm">0x00000080</code></td><td>工具窗口（不在 Alt+Tab 中显示）</td></tr>
+                    <tr><td><code class="en">WS_EX_WINDOWEDGE</code></td><td><code class="nm">0x00000100</code></td><td>窗口带凸起边框</td></tr>
+                    <tr><td><code class="en">WS_EX_CLIENTEDGE</code></td><td><code class="nm">0x00000200</code></td><td>窗口内凹边框</td></tr>
+                    <tr><td><code class="en">WS_EX_CONTEXTHELP</code></td><td><code class="nm">0x00000400</code></td><td>标题栏带问号按钮</td></tr>
+                </tbody>
+            </table>
+
+            <h3>分层与透明（常用）</h3>
+            <table class="doc-table">
+                <thead><tr><th>常量</th><th>值</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code class="en">WS_EX_LAYERED</code></td><td><code class="nm">0x00080000</code></td><td>分层窗口，支持透明度和 Alpha 混合（做半透明窗口必备）</td></tr>
+                    <tr><td><code class="en">WS_EX_NOACTIVATE</code></td><td><code class="nm">0x08000000</code></td><td>窗口不抢焦点（鼠标穿透 + 不激活）</td></tr>
+                </tbody>
+            </table>
+
+            <h3>高 DPI / 深色模式</h3>
+            <table class="doc-table">
+                <thead><tr><th>常量</th><th>值</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code class="en">WS_EX_NOREDIRECTIONBITMAP</code></td><td><code class="nm">0x00200000</code></td><td>无重定向位图（适用于 DWM 全屏翻转）</td></tr>
+                    <tr><td><code class="en">WS_EX_COMPOSITED</code></td><td><code class="nm">0x02000000</code></td><td>使用双缓冲绘制，减少闪烁</td></tr>
+                </tbody>
+            </table>
+
+                <thead><tr><th>场景</th><th>推荐扩展样式组合</th></tr></thead>
+                <tbody>
+                    <tr><td>半透明窗口</td><td><code class="en">WS_EX_LAYERED</code> | <code class="en">WS_EX_TRANSPARENT</code></td></tr>
+                    <tr><td>置顶工具窗口</td><td><code class="en">WS_EX_TOPMOST</code> | <code class="en">WS_EX_TOOLWINDOW</code></td></tr>
+                    <tr><td>不抢焦点的覆盖层</td><td><code class="en">WS_EX_NOACTIVATE</code> | <code class="en">WS_EX_LAYERED</code> | <code class="en">WS_EX_TRANSPARENT</code></td></tr>
+                    <tr><td>标准主窗口扩展</td><td><code class="en">WS_EX_WINDOWEDGE</code> | <code class="en">WS_EX_ACCEPTFILES</code></td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>另请参阅</h2>
+            <ul>
+                <li><a href="Window_All.html">Window 类总览</a></li>
+                <li><a href="Window_DWM.html">Window_DWM — DWM 特效</a></li>
+                <li><a href="index.html">返回首页</a></li>
+            </ul>
+        </section>
+    </main>
+</div>
+<script src="../js/toc.js"></script>
+</body>
+</html>

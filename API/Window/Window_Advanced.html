@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Window_Advanced - Xs 文档</title>
+    <link rel="stylesheet" href="../css/docs.css">
+</head>
+<body>
+<div class="layout">
+    <aside class="toc">
+        <nav class="toc-inner">
+            <div class="toc-title">WindowAdvanced</div>
+            <ul>
+                <li><a href="#aa">抗锯齿</a>
+                    <ul>
+                        <li><a href="#setwindowantialiasinglevel">SetWindowAntiAliasingLevel</a></li>
+                    </ul>
+                </li>
+                <li><a href="#depth">深度缓冲</a>
+                    <ul>
+                        <li><a href="#setdepthbits">SetDepthBits</a></li>
+                    </ul>
+                </li>
+                <li><a href="#stencil">模板缓冲</a>
+                    <ul>
+                        <li><a href="#setstencilbits">SetStencilBits</a></li>
+                    </ul>
+                </li>
+                <li><a href="#glversion">OpenGL 版本</a>
+                    <ul>
+                        <li><a href="#setopenglversion">SetOpenGLVersion</a></li>
+                    </ul>
+                </li>
+                <li><a href="#context">上下文属性</a>
+                    <ul>
+                        <li><a href="#setattributeflags">SetAttributeFlags</a></li>
+                    </ul>
+                </li>
+                <li><a href="#srgb">sRGB</a>
+                    <ul>
+                        <li><a href="#setsrgbcabable">SetSRgbCapable</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="container">
+        <nav class="breadcrumb">
+            <a href="../index.html">Xs 文档</a> / <a href="Window_All.html">Window 类</a> / Window_Advanced
+        </nav>
+
+        <header class="page-header">
+            <h1>Window_Advanced</h1>
+            <p class="metadata">命名空间：<code>xs</code>  | 所属类：<code>XWindow::Advanced</code></p>
+        </header>
+
+        <div class="warning">
+            本类所有设置必须在 <code>CreateGraphWindow</code> 之前调用，否则不会生效。
+        </div>
+
+        <!-- ===== 抗锯齿 ===== -->
+        <section id="aa">
+            <h2>抗锯齿</h2>
+
+            <h3 id="setwindowantialiasinglevel">SetWindowAntiAliasingLevel</h3>
+            <p>设置窗口的 OpenGL 多重采样抗锯齿（MSAA）等级。</p>
+            <pre><code><span class="kw">void</span> SetWindowAntiAliasingLevel(<span class="ty">unsigned int</span> level);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>level</code></td><td><code class="ty">unsigned int</code></td><td>抗锯齿采样等级。常见值为 <code class="nm">0</code>（关闭）、<code class="nm">2</code>、<code class="nm">4</code>、<code class="nm">8</code>（最高质量）。值越高画面越平滑，性能开销越大。</td></tr>
+                </tbody>
+            </table>
+            <div class="note">
+                注意：必须在 <code>CreateGraphWindow</code> 之前调用。
+            </div>
+        </section>
+
+        <!-- ===== 深度缓冲 ===== -->
+        <section id="depth">
+            <h2>深度缓冲</h2>
+
+            <h3 id="setdepthbits">SetDepthBits</h3>
+            <p>设置 OpenGL 深度缓冲的位数。</p>
+            <pre><code><span class="kw">void</span> SetDepthBits(<span class="ty">unsigned int</span> Bits);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>Bits</code></td><td><code class="ty">unsigned int</code></td><td>深度缓冲位数。常见值为 <code class="nm">16</code>、<code class="nm">24</code>（推荐）、<code class="nm">32</code>。位数越高深度精度越好，可避免 Z-fighting。</td></tr>
+                </tbody>
+            </table>
+            <div class="note">
+                注意：必须在 <code>CreateGraphWindow</code> 之前调用。
+            </div>
+        </section>
+
+        <!-- ===== 模板缓冲 ===== -->
+        <section id="stencil">
+            <h2>模板缓冲</h2>
+
+            <h3 id="setstencilbits">SetStencilBits</h3>
+            <p>设置 OpenGL 模板缓冲的位数。</p>
+            <pre><code><span class="kw">void</span> SetStencilBits(<span class="ty">unsigned int</span> Bits);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>Bits</code></td><td><code class="ty">unsigned int</code></td><td>模板缓冲位数。常见值为 <code class="nm">0</code>（不使用）、<code class="nm">8</code>（推荐）。用于模板测试实现遮罩效果。</td></tr>
+                </tbody>
+            </table>
+            <div class="note">
+                注意：必须在 <code>CreateGraphWindow</code> 之前调用。
+            </div>
+        </section>
+
+        <!-- ===== OpenGL 版本 ===== -->
+        <section id="glversion">
+            <h2>OpenGL 版本</h2>
+
+            <h3 id="setopenglversion">SetOpenGLVersion</h3>
+            <p>设置窗口要使用的 OpenGL 版本。</p>
+            <pre><code><span class="kw">void</span> SetOpenGLVersion(<span class="ty">unsigned int</span> version);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>version</code></td><td><code class="ty">unsigned int</code></td><td>OpenGL 版本号，格式为三位数。例如 <code class="nm">330</code> 表示 OpenGL 3.3，<code class="nm">410</code> 表示 OpenGL 4.1。</td></tr>
+                </tbody>
+            </table>
+            <div class="note">
+                注意：必须在 <code>CreateGraphWindow</code> 之前调用。
+            </div>
+        </section>
+
+        <!-- ===== 上下文属性 ===== -->
+        <section id="context">
+            <h2>上下文属性</h2>
+
+            <h3 id="setattributeflags">SetAttributeFlags</h3>
+            <p>设置 OpenGL 上下文属性标志位。</p>
+            <pre><code><span class="kw">void</span> SetAttributeFlags(<span class="tpl">ContextSettings::Attribute</span> flags);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>flags</code></td><td><code class="tpl">ContextSettings::Attribute</code></td><td>OpenGL 上下文属性标志位，用于启用调试上下文、核心配置等高级特性。</td></tr>
+                </tbody>
+            </table>
+            <div class="note">
+                注意：必须在 <code>CreateGraphWindow</code> 之前调用。
+            </div>
+        </section>
+
+        <!-- ===== sRGB ===== -->
+        <section id="srgb">
+            <h2>sRGB</h2>
+
+            <h3 id="setsrgbcabable">SetSRgbCapable</h3>
+            <p>设置是否启用 sRGB 色彩空间缓冲。</p>
+            <pre><code><span class="kw">void</span> SetSRgbCapable(<span class="kw">bool</span> enable);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>enable</code></td><td><code class="ty">bool</code></td><td><code class="kw">true</code> 启用 sRGB 色彩空间（推荐用于色彩准确的渲染），<code class="kw">false</code> 禁用。</td></tr>
+                </tbody>
+            </table>
+            <div class="note">
+                注意：必须在 <code>CreateGraphWindow</code> 之前调用。
+            </div>
+        </section>
+
+        <section>
+            <h2>另请参阅</h2>
+            <ul>
+                <li><a href="Window_All.html">Window 类总览</a></li>
+                <li><a href="Window_Basic.html">Window_Basic</a></li>
+                <li><a href="Window_DWM.html">Window_DWM</a></li>
+            </ul>
+        </section>
+    </main>
+</div>
+<script src="../js/toc.js"></script>
+</body>
+</html>

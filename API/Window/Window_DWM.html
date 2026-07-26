@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Window_DWM - Xs 文档</title>
+    <link rel="stylesheet" href="../css/docs.css">
+</head>
+<body>
+<div class="layout">
+    <aside class="toc">
+        <nav class="toc-inner">
+            <div class="toc-title">WindowDWM</div>
+            <ul>
+                <li><a href="#round">圆角</a>
+                    <ul>
+                        <li><a href="#setwindowroundcorner">SetWindowRoundCorner</a></li>
+                    </ul>
+                </li>
+                <li><a href="#border">边框颜色</a>
+                    <ul>
+                        <li><a href="#setwindowbordercolor">SetWindowBorderColor</a></li>
+                    </ul>
+                </li>
+                <li><a href="#titlebar">标题栏</a>
+                    <ul>
+                        <li><a href="#setwindowtitlebarcolor">SetWindowTitleBarColor</a></li>
+                        <li><a href="#setwindowtitletextcolor">SetWindowTitleTextColor</a></li>
+                    </ul>
+                </li>
+                <li><a href="#backtype">背景类型</a>
+                    <ul>
+                        <li><a href="#setwindowbacktype">SetWindowBackType</a></li>
+                    </ul>
+                </li>
+                <li><a href="#darkmode">深色模式</a>
+                    <ul>
+                        <li><a href="#setwindowdarkmode">SetWindowDarkMode</a></li>
+                    </ul>
+                </li>
+                <li><a href="#shadow">阴影</a>
+                    <ul>
+                        <li><a href="#enablewindowshadow">EnableWindowShadow</a></li>
+                    </ul>
+                </li>
+                <li><a href="#clientarea">客户区扩展</a>
+                    <ul>
+                        <li><a href="#extendintoclientarea">ExtendIntoClientArea</a></li>
+                    </ul>
+                </li>
+                <li><a href="#animation">动画</a>
+                    <ul>
+                        <li><a href="#disabletransitionanimation">DisableTransitionAnimation</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="container">
+        <nav class="breadcrumb">
+            <a href="../index.html">Xs 文档</a> / <a href="Window_All.html">Window 类</a> / Window_DWM
+        </nav>
+
+        <header class="page-header">
+            <h1>Window_DWM</h1>
+            <p class="metadata">命名空间：<code>xs</code> | 所属类：<code>XWindow::DWM</code></p>
+        </header>
+
+        <div class="note">
+            所有函数均提供两种重载：接受 <code>HWND</code> 句柄或 <code>RenWin&amp;</code> 渲染窗口。
+        </div>
+
+        <div class="warning">
+            只有Windows11+具有DWM特效，Windows10无效果。
+        </div>
+
+        <!-- ===== 圆角 ===== -->
+        <section id="round">
+            <h2>圆角</h2>
+
+            <h3 id="setwindowroundcorner">SetWindowRoundCorner</h3>
+            <p>设置窗口的圆角样式。</p>
+            <pre><code><span class="kw">void</span> SetWindowRoundCorner(<span class="ty">HWND</span> hwnd, <span class="tpl">WindowCorner</span> round);
+<span class="kw">void</span> SetWindowRoundCorner(<span class="tpl">RenWin</span>&amp; window, <span class="tpl">WindowCorner</span> round);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>hwnd</code></td><td><code class="ty">HWND</code></td><td>目标窗口句柄。</td></tr>
+                    <tr><td><code>window</code></td><td><code class="tpl">RenWin</code>&amp;</td><td>目标渲染窗口。</td></tr>
+                    <tr><td><code>round</code></td><td><code class="tpl">WindowCorner</code></td><td>圆角类型：<code class="en">CORNER_ROUND</code>（大圆角）、<code class="en">CORNER_SMALLROUND</code>（小圆角）、<code class="en">CORNER_NOROUND</code>（方角）。</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ===== 边框颜色 ===== -->
+        <section id="border">
+            <h2>边框颜色</h2>
+
+            <h3 id="setwindowbordercolor">SetWindowBorderColor</h3>
+            <p>设置窗口边框的颜色。</p>
+            <pre><code><span class="kw">void</span> SetWindowBorderColor(<span class="ty">HWND</span> hwnd, <span class="tpl">Color</span> color);
+<span class="kw">void</span> SetWindowBorderColor(<span class="tpl">RenWin</span>&amp; window, <span class="tpl">Color</span> color);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>hwnd</code></td><td><code class="ty">HWND</code></td><td>目标窗口句柄。</td></tr>
+                    <tr><td><code>window</code></td><td><code class="tpl">RenWin</code>&amp;</td><td>目标渲染窗口。</td></tr>
+                    <tr><td><code>color</code></td><td><code class="tpl">Color</code></td><td>边框颜色（RGBA）。设置为透明色可隐藏边框。</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ===== 标题栏 ===== -->
+        <section id="titlebar">
+            <h2>标题栏</h2>
+
+            <h3 id="setwindowtitlebarcolor">SetWindowTitleBarColor</h3>
+            <p>设置窗口标题栏的背景颜色。</p>
+            <pre><code><span class="kw">void</span> SetWindowTitleBarColor(<span class="ty">HWND</span> hwnd, <span class="tpl">Color</span> color);
+<span class="kw">void</span> SetWindowTitleBarColor(<span class="tpl">RenWin</span>&amp; window, <span class="tpl">Color</span> color);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>hwnd</code></td><td><code class="ty">HWND</code></td><td>目标窗口句柄。</td></tr>
+                    <tr><td><code>window</code></td><td><code class="tpl">RenWin</code>&amp;</td><td>目标渲染窗口。</td></tr>
+                    <tr><td><code>color</code></td><td><code class="tpl">Color</code></td><td>标题栏背景颜色（RGBA）。</td></tr>
+                </tbody>
+            </table>
+
+            <h3 id="setwindowtitletextcolor">SetWindowTitleTextColor</h3>
+            <p>设置窗口标题栏文字的颜色。</p>
+            <pre><code><span class="kw">void</span> SetWindowTitleTextColor(<span class="ty">HWND</span> hwnd, <span class="tpl">Color</span> color);
+<span class="kw">void</span> SetWindowTitleTextColor(<span class="tpl">RenWin</span>&amp; window, <span class="tpl">Color</span> color);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>hwnd</code></td><td><code class="ty">HWND</code></td><td>目标窗口句柄。</td></tr>
+                    <tr><td><code>window</code></td><td><code class="tpl">RenWin</code>&amp;</td><td>目标渲染窗口。</td></tr>
+                    <tr><td><code>color</code></td><td><code class="tpl">Color</code></td><td>标题栏文字颜色（RGBA）。通常配合深色/浅色模式使用。</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ===== 背景类型 ===== -->
+        <section id="backtype">
+            <h2>背景类型</h2>
+
+            <h3 id="setwindowbacktype">SetWindowBackType</h3>
+            <p>设置窗口的背景类型（模糊、云母等 Windows 11 特效）。</p>
+            <pre><code><span class="kw">void</span> SetWindowBackType(<span class="ty">HWND</span> hwnd, <span class="tpl">WindowBackType</span> type);
+<span class="kw">void</span> SetWindowBackType(<span class="tpl">RenWin</span>&amp; window, <span class="tpl">WindowBackType</span> type);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>hwnd</code></td><td><code class="ty">HWND</code></td><td>目标窗口句柄。</td></tr>
+                    <tr><td><code>window</code></td><td><code class="tpl">RenWin</code>&amp;</td><td>目标渲染窗口。</td></tr>
+                    <tr><td><code>type</code></td><td><code class="tpl">WindowBackType</code></td><td>背景类型：<code class="en">BACKTYPE_AUTO</code>（自动）、<code class="en">BACKTYPE_BLUR</code>（模糊）、<code class="en">BACKTYPE_MICA</code>（云母）、<code class="en">BACKTYPE_HEAVYMICA</code>（重度云母）、<code class="en">BACKTYPE_NULL</code>（无背景）。</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ===== 深色模式 ===== -->
+        <section id="darkmode">
+            <h2>深色模式</h2>
+
+            <h3 id="setwindowdarkmode">SetWindowDarkMode</h3>
+            <p>设置窗口是否启用深色模式。</p>
+            <pre><code><span class="kw">void</span> SetWindowDarkMode(<span class="ty">HWND</span> hwnd, <span class="kw">bool</span> EnableDarkMode);
+<span class="kw">void</span> SetWindowDarkMode(<span class="tpl">RenWin</span>&amp; window, <span class="kw">bool</span> EnableDarkMode);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>hwnd</code></td><td><code class="ty">HWND</code></td><td>目标窗口句柄。</td></tr>
+                    <tr><td><code>window</code></td><td><code class="tpl">RenWin</code>&amp;</td><td>目标渲染窗口。</td></tr>
+                    <tr><td><code>EnableDarkMode</code></td><td><code class="ty">bool</code></td><td><code class="kw">true</code> 启用深色模式，<code class="kw">false</code> 使用浅色模式。</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ===== 阴影 ===== -->
+        <section id="shadow">
+            <h2>阴影</h2>
+
+            <h3 id="enablewindowshadow">EnableWindowShadow</h3>
+            <p>启用或禁用窗口阴影效果。</p>
+            <pre><code><span class="kw">void</span> EnableWindowShadow(<span class="ty">HWND</span> hwnd, <span class="kw">bool</span> enable);
+<span class="kw">void</span> EnableWindowShadow(<span class="tpl">RenWin</span>&amp; window, <span class="kw">bool</span> enable);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>hwnd</code></td><td><code class="ty">HWND</code></td><td>目标窗口句柄。</td></tr>
+                    <tr><td><code>window</code></td><td><code class="tpl">RenWin</code>&amp;</td><td>目标渲染窗口。</td></tr>
+                    <tr><td><code>enable</code></td><td><code class="ty">bool</code></td><td><code class="kw">true</code> 启用窗口阴影，<code class="kw">false</code> 禁用。</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ===== 客户区扩展 ===== -->
+        <section id="clientarea">
+            <h2>客户区扩展</h2>
+
+            <h3 id="extendintoclientarea">ExtendIntoClientArea</h3>
+            <p>将客户区扩展到非客户区（标题栏区域），用于实现自定义标题栏。</p>
+            <pre><code><span class="kw">void</span> ExtendIntoClientArea(<span class="ty">HWND</span> hwnd, <span class="ty">int</span> top, <span class="ty">int</span> bottom, <span class="ty">int</span> left, <span class="ty">int</span> right);
+<span class="kw">void</span> ExtendIntoClientArea(<span class="tpl">RenWin</span>&amp; window, <span class="ty">int</span> top, <span class="ty">int</span> bottom, <span class="ty">int</span> left, <span class="ty">int</span> right);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>hwnd</code></td><td><code class="ty">HWND</code></td><td>目标窗口句柄。</td></tr>
+                    <tr><td><code>window</code></td><td><code class="tpl">RenWin</code>&amp;</td><td>目标渲染窗口。</td></tr>
+                    <tr><td><code>top</code></td><td><code class="ty">int</code></td><td>上边距扩展量（像素），将客户区向上延伸至标题栏。</td></tr>
+                    <tr><td><code>bottom</code></td><td><code class="ty">int</code></td><td>下边距扩展量（像素）。</td></tr>
+                    <tr><td><code>left</code></td><td><code class="ty">int</code></td><td>左边距扩展量（像素）。</td></tr>
+                    <tr><td><code>right</code></td><td><code class="ty">int</code></td><td>右边距扩展量（像素）。</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ===== 动画 ===== -->
+        <section id="animation">
+            <h2>动画</h2>
+
+            <h3 id="disabletransitionanimation">DisableTransitionAnimation</h3>
+            <p>禁用窗口的过渡动画效果（如最小化/还原动画）。</p>
+            <pre><code><span class="kw">void</span> DisableTransitionAnimation(<span class="ty">HWND</span> hwnd, <span class="kw">bool</span> disable);
+<span class="kw">void</span> DisableTransitionAnimation(<span class="tpl">RenWin</span>&amp; window, <span class="kw">bool</span> disable);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>hwnd</code></td><td><code class="ty">HWND</code></td><td>目标窗口句柄。</td></tr>
+                    <tr><td><code>window</code></td><td><code class="tpl">RenWin</code>&amp;</td><td>目标渲染窗口。</td></tr>
+                    <tr><td><code>disable</code></td><td><code class="ty">bool</code></td><td><code class="kw">true</code> 禁用过渡动画，<code class="kw">false</code> 恢复默认动画。</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>另请参阅</h2>
+            <ul>
+                <li><a href="Window_All.html">Window 类总览</a></li>
+                <li><a href="Window_Basic.html">Window_Basic</a></li>
+                <li><a href="Window_Style.html">Window_Style</a></li>
+            </ul>
+        </section>
+    </main>
+</div>
+<script src="../js/toc.js"></script>
+</body>
+</html>

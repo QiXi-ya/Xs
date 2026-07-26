@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Window_Basic - Xs 文档</title>
+    <link rel="stylesheet" href="../css/docs.css">
+</head>
+<body>
+<div class="layout">
+    <aside class="toc">
+        <nav class="toc-inner">
+            <div class="toc-title">WindowBasic</div>
+            <ul>
+                <li><a href="#enums">枚举</a>
+                    <ul>
+                        <li><a href="#windowcorner">WindowCorner</a></li>
+                        <li><a href="#windowbacktype">WindowBackType</a></li>
+                    </ul>
+                </li>
+                <li><a href="#basic">窗口基础</a>
+                    <ul>
+                        <li><a href="#setdpiaware">SetDPIAware</a></li>
+                        <li><a href="#creategraphwindow">CreateGraphWindow</a></li>
+                        <li><a href="#delayfps">DelayFps</a></li>
+                        <li><a href="#setbackgroundcolor">SetBackGroundColor</a></li>
+                        <li><a href="#isfocus">IsFocus</a></li>
+                    </ul>
+                </li>
+                <li><a href="#title-icon">标题与图标</a>
+                    <ul>
+                        <li><a href="#settitle">SetTitle</a></li>
+                        <li><a href="#seticon">SetIcon</a></li>
+                    </ul>
+                </li>
+                <li><a href="#size-pos">大小与位置</a>
+                    <ul>
+                        <li><a href="#movewindow">MoveWindow</a></li>
+                        <li><a href="#setwindowsize">SetWindowSize</a></li>
+                        <li><a href="#getwindowsize">GetWindowSize</a></li>
+                        <li><a href="#getwindowpos">GetWindowPos</a></li>
+                        <li><a href="#setwindowminsize">SetWindowMinSize</a></li>
+                    </ul>
+                </li>
+                <li><a href="#state">窗口状态</a>
+                    <ul>
+                        <li><a href="#maxwindow">MaxWindow</a></li>
+                        <li><a href="#minwindow">MinWindow</a></li>
+                        <li><a href="#restorewindow">RestoreWindow</a></li>
+                        <li><a href="#setwindowvisible">SetWindowVisible</a></li>
+                        <li><a href="#closewindow">CloseWIndow</a></li>
+                    </ul>
+                </li>
+                <li><a href="#mouse-sync">鼠标与同步</a>
+                    <ul>
+                        <li><a href="#setmousecursorvisible">SetMouseCursorVisible</a></li>
+                        <li><a href="#setmousevisible">SetMouseVisible</a></li>
+                        <li><a href="#setverticalsync">SetVerticalSync</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="container">
+        <nav class="breadcrumb">
+            <a href="../index.html">Xs 文档</a> / <a href="Window_All.html">Window 类</a> / Window_Basic
+        </nav>
+
+        <header class="page-header">
+            <h1>Window_Basic</h1>
+            <p class="metadata">命名空间：<code>xs</code> | 所属类：<code>XWindow</code></p>
+        </header>
+
+        <!-- ===== 枚举 ===== -->
+        <section id="enums">
+            <h2>枚举</h2>
+
+            <h3 id="windowcorner">WindowCorner — 窗口圆角类型</h3>
+            <table class="doc-table">
+                <thead><tr><th>值</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code class="en">CORNER_ROUND</code></td><td>大圆角</td></tr>
+                    <tr><td><code class="en">CORNER_SMALLROUND</code></td><td>小圆角</td></tr>
+                    <tr><td><code class="en">CORNER_NOROUND</code></td><td>方角（无圆角）</td></tr>
+                </tbody>
+            </table>
+
+            <h3 id="windowbacktype">WindowBackType — 窗口背景类型</h3>
+            <table class="doc-table">
+                <thead><tr><th>值</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code class="en">BACKTYPE_AUTO</code></td><td>自动选择背景类型</td></tr>
+                    <tr><td><code class="en">BACKTYPE_BLUR</code></td><td>模糊背景</td></tr>
+                    <tr><td><code class="en">BACKTYPE_MICA</code></td><td>云母背景（Windows 11）</td></tr>
+                    <tr><td><code class="en">BACKTYPE_HEAVYMICA</code></td><td>重度云母背景（更强效果）</td></tr>
+                    <tr><td><code class="en">BACKTYPE_NULL</code></td><td>无背景</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ===== 窗口基础 ===== -->
+        <section id="basic">
+            <h2>窗口基础</h2>
+
+            <h3 id="setdpiaware">SetDPIAware</h3>
+            <p>启用程序的高 DPI 感知，避免在高分辨率屏幕上界面模糊。</p>
+            <pre><code><span class="kw">void</span> SetDPIAware();</code></pre>
+
+            <h3 id="creategraphwindow">CreateGraphWindow</h3>
+            <p>创建一个图形渲染窗口。</p>
+            <pre><code><span class="kw">void</span> CreateGraphWindow(
+    <span class="tpl">RenWin</span>&amp; Dest,
+    <span class="ty">int</span> x, <span class="ty">int</span> y,
+    <span class="ty">int</span> w, <span class="ty">int</span> h,
+    std::<span class="ty">string</span> title = <span class="nm">"window"</span>,
+    <span class="ty">uint32_t</span> style = <span class="nm">7U</span>,
+    sf::<span class="tpl">State</span> state = <span class="en">State::Windowed</span>);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>Dest</code></td><td><code class="tpl">RenWin</code>&amp;</td><td>目标渲染窗口，函数将在此窗口上创建渲染上下文。</td></tr>
+                    <tr><td><code>x</code></td><td><code class="ty">int</code></td><td>窗口 X 坐标；小于 0 时使用系统默认位置。</td></tr>
+                    <tr><td><code>y</code></td><td><code class="ty">int</code></td><td>窗口 Y 坐标；小于 0 时使用系统默认位置。</td></tr>
+                    <tr><td><code>w</code></td><td><code class="ty">int</code></td><td>窗口宽度；小于 0 时使用系统默认尺寸。</td></tr>
+                    <tr><td><code>h</code></td><td><code class="ty">int</code></td><td>窗口高度；小于 0 时使用系统默认尺寸。</td></tr>
+                    <tr><td><code>title</code></td><td><code class="ty">std::string</code></td><td>窗口标题栏文字，默认为 <code class="nm">"window"</code>。</td></tr>
+                    <tr><td><code>style</code></td><td><code class="ty">uint32_t</code></td><td>窗口样式标志位组合，默认值为 <code class="nm">7U</code>。</td></tr>
+                    <tr><td><code>state</code></td><td><code class="tpl">sf::State</code></td><td>窗口初始状态，默认为 <code class="en">State::Windowed</code>（窗口化）。</td></tr>
+                </tbody>
+            </table>
+
+            <h3 id="delayfps">DelayFps</h3>
+            <p>以指定帧率上限刷新窗口，控制主循环节奏。</p>
+            <pre><code><span class="kw">void</span> DelayFps(<span class="ty">int</span> fps, <span class="tpl">RenWin</span>&amp; Dest);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>fps</code></td><td><code class="ty">int</code></td><td>帧率上限（每秒帧数）。</td></tr>
+                    <tr><td><code>Dest</code></td><td><code class="tpl">RenWin</code>&amp;</td><td>目标渲染窗口。</td></tr>
+                </tbody>
+            </table>
+
+            <h3 id="setbackgroundcolor">SetBackGroundColor</h3>
+            <p>设置窗口的清除背景颜色。</p>
+            <pre><code><span class="kw">void</span> SetBackGroundColor(<span class="tpl">Color</span> color);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>color</code></td><td><code class="tpl">Color</code></td><td>要设置的背景颜色（RGBA）。</td></tr>
+                </tbody>
+            </table>
+
+            <h3 id="isfocus">IsFocus</h3>
+            <p>判断指定窗口是否为当前焦点窗口。</p>
+            <pre><code><span class="kw">bool</span> IsFocus(<span class="tpl">RenWin</span>&amp; Dest);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>Dest</code></td><td><code class="tpl">RenWin</code>&amp;</td><td>目标渲染窗口。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>若窗口为当前焦点窗口则返回 <code class="kw">true</code>，否则返回 <code class="kw">false</code>。</p>
+        </section>
+
+        <!-- ===== 标题与图标 ===== -->
+        <section id="title-icon">
+            <h2>标题与图标</h2>
+
+            <h3 id="settitle">SetTitle</h3>
+            <p>设置窗口标题栏文字。</p>
+            <pre><code><span class="kw">void</span> SetTitle(<span class="tpl">RenWin</span>&amp; Dest, <span class="kw">const</span> <span class="tpl">String</span>&amp; title);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>Dest</code></td><td><code class="tpl">RenWin</code>&amp;</td><td>目标渲染窗口。</td></tr>
+                    <tr><td><code>title</code></td><td><code class="kw">const</code> <code class="tpl">String</code>&amp;</td><td>要设置的窗口标题文字。</td></tr>
+                </tbody>
+            </table>
+
+            <h3 id="seticon">SetIcon</h3>
+            <p>从文件中加载图标并设置为窗口图标。</p>
+            <pre><code><span class="kw">void</span> SetIcon(<span class="tpl">RenWin</span>&amp; Dest, <span class="kw">const</span> <span class="tpl">String</span>&amp; path);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>Dest</code></td><td><code class="tpl">RenWin</code>&amp;</td><td>目标渲染窗口。</td></tr>
+                    <tr><td><code>path</code></td><td><code class="kw">const</code> <code class="tpl">String</code>&amp;</td><td>图标文件路径（支持常见图片格式）。</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ===== 大小与位置 ===== -->
+        <section id="size-pos">
+            <h2>大小与位置</h2>
+
+            <h3 id="movewindow">MoveWindow</h3>
+            <p>将窗口移动到指定屏幕坐标。</p>
+            <pre><code><span class="kw">void</span> MoveWindow(<span class="tpl">RenWin</span>&amp; Dest, <span class="ty">int</span> x, <span class="ty">int</span> y);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>Dest</code></td><td><code class="tpl">RenWin</code>&amp;</td><td>目标渲染窗口。</td></tr>
+                    <tr><td><code>x</code></td><td><code class="ty">int</code></td><td>新的 X 坐标（屏幕坐标）。</td></tr>
+                    <tr><td><code>y</code></td><td><code class="ty">int</code></td><td>新的 Y 坐标（屏幕坐标）。</td></tr>
+                </tbody>
+            </table>
+
+            <h3 id="setwindowsize">SetWindowSize</h3>
+            <p>设置窗口的宽高。</p>
+            <pre><code><span class="kw">void</span> SetWindowSize(<span class="tpl">RenWin</span>&amp; Dest, <span class="ty">int</span> width, <span class="ty">int</span> height);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>Dest</code></td><td><code class="tpl">RenWin</code>&amp;</td><td>目标渲染窗口。</td></tr>
+                    <tr><td><code>width</code></td><td><code class="ty">int</code></td><td>要设置的窗口宽度（像素）。</td></tr>
+                    <tr><td><code>height</code></td><td><code class="ty">int</code></td><td>要设置的窗口高度（像素）。</td></tr>
+                </tbody>
+            </table>
+
+            <h3 id="getwindowsize">GetWindowSize</h3>
+            <p>获取窗口当前的宽高。</p>
+            <pre><code><span class="tpl">Vector2i</span> GetWindowSize(<span class="tpl">RenWin</span>&amp; Dest);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>Dest</code></td><td><code class="tpl">RenWin</code>&amp;</td><td>目标渲染窗口。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回包含窗口宽高的 <code class="tpl">Vector2i</code>。</p>
+
+            <h3 id="getwindowpos">GetWindowPos</h3>
+            <p>获取窗口当前在屏幕上的坐标。</p>
+            <pre><code><span class="tpl">Vector2i</span> GetWindowPos(<span class="tpl">RenWin</span>&amp; Dest);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>Dest</code></td><td><code class="tpl">RenWin</code>&amp;</td><td>目标渲染窗口。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>返回包含窗口 X/Y 坐标的 <code class="tpl">Vector2i</code>。</p>
+
+            <h3 id="setwindowminsize">SetWindowMinSize</h3>
+            <p>设置窗口允许的最小尺寸。</p>
+            <pre><code><span class="kw">void</span> SetWindowMinSize(<span class="tpl">RenWin</span>&amp; Dest, <span class="ty">int</span> width, <span class="ty">int</span> height);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>Dest</code></td><td><code class="tpl">RenWin</code>&amp;</td><td>目标渲染窗口。</td></tr>
+                    <tr><td><code>width</code></td><td><code class="ty">int</code></td><td>最小宽度（像素）。</td></tr>
+                    <tr><td><code>height</code></td><td><code class="ty">int</code></td><td>最小高度（像素）。</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ===== 窗口状态 ===== -->
+        <section id="state">
+            <h2>窗口状态</h2>
+
+            <h3 id="maxwindow">MaxWindow</h3>
+            <p>最大化指定窗口。</p>
+            <pre><code><span class="kw">void</span> MaxWindow(<span class="tpl">RenWin</span>&amp; window);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>window</code></td><td><code class="tpl">RenWin</code>&amp;</td><td>目标渲染窗口。</td></tr>
+                </tbody>
+            </table>
+
+            <h3 id="minwindow">MinWindow</h3>
+            <p>最小化指定窗口。</p>
+            <pre><code><span class="kw">void</span> MinWindow(<span class="tpl">RenWin</span>&amp; window);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>window</code></td><td><code class="tpl">RenWin</code>&amp;</td><td>目标渲染窗口。</td></tr>
+                </tbody>
+            </table>
+
+            <h3 id="restorewindow">RestoreWindow</h3>
+            <p>将最大化或最小化的窗口还原到正常状态。</p>
+            <pre><code><span class="kw">void</span> RestoreWindow(<span class="tpl">RenWin</span>&amp; window);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>window</code></td><td><code class="tpl">RenWin</code>&amp;</td><td>目标渲染窗口。</td></tr>
+                </tbody>
+            </table>
+
+            <h3 id="setwindowvisible">SetWindowVisible</h3>
+            <p>设置窗口是否可见。</p>
+            <pre><code><span class="kw">void</span> SetWindowVisible(<span class="tpl">RenWin</span>&amp; window, <span class="kw">bool</span> IsVisible);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>window</code></td><td><code class="tpl">RenWin</code>&amp;</td><td>目标渲染窗口。</td></tr>
+                    <tr><td><code>IsVisible</code></td><td><code class="ty">bool</code></td><td><code class="kw">true</code> 显示窗口，<code class="kw">false</code> 隐藏窗口。</td></tr>
+                </tbody>
+            </table>
+
+            <h3 id="closewindow">CloseWIndow</h3>
+            <p>关闭并销毁指定窗口。</p>
+            <pre><code><span class="kw">void</span> CloseWIndow(<span class="tpl">RenWin</span>&amp; window);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>window</code></td><td><code class="tpl">RenWin</code>&amp;</td><td>要关闭的目标窗口。</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ===== 鼠标与同步 ===== -->
+        <section id="mouse-sync">
+            <h2>鼠标与同步</h2>
+
+            <h3 id="setmousecursorvisible">SetMouseCursorVisible</h3>
+            <p>设置鼠标光标在指定窗口上是否可见。</p>
+            <pre><code><span class="kw">void</span> SetMouseCursorVisible(<span class="tpl">RenWin</span>&amp; Dest, <span class="kw">bool</span> visible);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>Dest</code></td><td><code class="tpl">RenWin</code>&amp;</td><td>目标渲染窗口。</td></tr>
+                    <tr><td><code>visible</code></td><td><code class="ty">bool</code></td><td><code class="kw">true</code> 显示光标，<code class="kw">false</code> 隐藏光标。</td></tr>
+                </tbody>
+            </table>
+
+            <h3 id="setmousevisible">SetMouseVisible</h3>
+            <p>设置鼠标在整个窗口范围内是否可见。</p>
+            <pre><code><span class="kw">void</span> SetMouseVisible(<span class="tpl">RenWin</span>&amp; window, <span class="kw">bool</span> visible);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>window</code></td><td><code class="tpl">RenWin</code>&amp;</td><td>目标渲染窗口。</td></tr>
+                    <tr><td><code>visible</code></td><td><code class="ty">bool</code></td><td><code class="kw">true</code> 可见，<code class="kw">false</code> 不可见。</td></tr>
+                </tbody>
+            </table>
+
+            <h3 id="setverticalsync">SetVerticalSync</h3>
+            <p>启用或禁用垂直同步（VSync）。</p>
+            <pre><code><span class="kw">void</span> SetVerticalSync(<span class="tpl">RenWin</span>&amp; window, <span class="kw">bool</span> enable);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>window</code></td><td><code class="tpl">RenWin</code>&amp;</td><td>目标渲染窗口。</td></tr>
+                    <tr><td><code>enable</code></td><td><code class="ty">bool</code></td><td><code class="kw">true</code> 启用垂直同步，<code class="kw">false</code> 禁用。</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>另请参阅</h2>
+            <ul>
+                <li><a href="Window_All.html">Window 类总览</a></li>
+                <li><a href="Window_Advanced.html">Window_Advanced</a></li>
+                <li><a href="Window_DWM.html">Window_DWM</a></li>
+                <li><a href="Window_Style.html">Window_Style</a></li>
+            </ul>
+        </section>
+    </main>
+</div>
+<script src="../js/toc.js"></script>
+</body>
+</html>
