@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>XShader - Xs 文档</title>
+    <link rel="stylesheet" href="../css/docs.css">
+</head>
+<body>
+<div class="layout">
+    <aside class="toc">
+        <nav class="toc-inner">
+            <div class="toc-title">XShader</div>
+            <ul>
+                <li><a href="#apply">ApplyShader — 应用着色器</a></li>
+                <li><a href="#load-file">load — 从文件加载</a></li>
+                <li><a href="#loadfragment-file">loadFragment — 从文件加载片段</a></li>
+                <li><a href="#loadvertex-file">loadVertex — 从文件加载顶点</a></li>
+                <li><a href="#load-source">load — 从源码加载</a></li>
+                <li><a href="#loadfragment-source">loadFragment — 从源码加载片段</a></li>
+                <li><a href="#loadvertex-source">loadVertex — 从源码加载顶点</a></li>
+                <li><a href="#getshader">GetShader — 获取着色器</a></li>
+                <li><a href="#hasshader">HasShader — 检查存在</a></li>
+                <li><a href="#removeshader">RemoveShader — 删除着色器</a></li>
+                <li><a href="#clearshader">ClearShader — 清除全部</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="container">
+        <nav class="breadcrumb">
+            <a href="../index.html">Xs 文档</a> / XShader
+        </nav>
+
+        <header class="page-header">
+            <h1>XShader</h1>
+            <p class="metadata">命名空间：<code>xs</code> | 着色器管理</p>
+        </header>
+
+        <!-- ===== ApplyShader ===== -->
+        <section id="apply">
+            <h2>ApplyShader — 应用着色器</h2>
+            <p>为指定纹理应用着色器效果，可选绑定 uniform 参数。</p>
+
+            <h3 id="applyshader">ApplyShader</h3>
+            <pre><code> <span class="kw">void</span> <span class="fn">ApplyShader</span>(
+    <span class="tpl">Texture</span>&amp; texture,
+    sf::<span class="tpl">Shader</span>&amp; shader,
+    std::<span class="ty">function</span>&lt;<span class="kw">void</span>(sf::<span class="tpl">Shader</span>&amp;)&gt; bind = <span class="kw">nullptr</span>
+);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>texture</code></td><td><code class="tpl">Texture</code>&amp;</td><td>要应用着色器效果的纹理对象。</td></tr>
+                    <tr><td><code>shader</code></td><td><code class="tpl">sf::Shader</code>&amp;</td><td>已编译链接的着色器对象。</td></tr>
+                    <tr><td><code>bind</code></td><td><code class="ty">std::function&lt;void(sf::Shader&amp;)&gt;</code></td><td>可选的 uniform 绑定回调，用于设置自定义参数；默认为 <code class="kw">nullptr</code>。</td></tr>
+                </tbody>
+            </table>
+            <div class="note">
+                调用前请确保着色器已成功加载。绑定回调中可设置纹理采样器、颜色、矩阵等 uniform 变量。
+            </div>
+        </section>
+
+        <!-- ===== load (file path) ===== -->
+        <section id="load-file">
+            <h2>load — 从文件加载（顶点+片段）</h2>
+            <p>从磁盘文件加载并编译顶点着色器和片段着色器。</p>
+
+            <h3 id="load-file">load</h3>
+            <pre><code> <span class="kw">bool</span> <span class="fn">load</span>(
+    <span class="kw">const</span> std::<span class="ty">string</span>&amp; key,
+    <span class="kw">const</span> std::<span class="ty">filesystem::path</span>&amp; vertPath,
+    <span class="kw">const</span> std::<span class="ty">filesystem::path</span>&amp; fragPath
+);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>key</code></td><td><code class="kw">const</code> std::<code class="ty">string</code>&amp;</td><td>着色器索引键，用于后续通过 <code>GetShader</code> 查找。</td></tr>
+                    <tr><td><code>vertPath</code></td><td><code class="kw">const</code> std::<code class="ty">filesystem::path</code>&amp;</td><td>顶点着色器源文件路径。</td></tr>
+                    <tr><td><code>fragPath</code></td><td><code class="kw">const</code> std::<code class="ty">filesystem::path</code>&amp;</td><td>片段着色器源文件路径。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>加载并编译成功返回 <code class="kw">true</code>，失败返回 <code class="kw">false</code>。</p>
+            <div class="note">
+                请使用 <code>GetShader</code> 函数通过 <code>key</code> 查找并使用已加载的着色器。
+            </div>
+        </section>
+
+        <!-- ===== loadFragment (file path) ===== -->
+        <section id="loadfragment-file">
+            <h2>loadFragment — 从文件加载（仅片段）</h2>
+            <p>仅从磁盘文件加载并编译片段着色器。</p>
+
+            <h3 id="loadfragment-file">loadFragment</h3>
+            <pre><code> <span class="kw">bool</span> <span class="fn">loadFragment</span>(
+    <span class="kw">const</span> std::<span class="ty">string</span>&amp; key,
+    <span class="kw">const</span> std::<span class="ty">filesystem::path</span>&amp; fragPath
+);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>key</code></td><td><code class="kw">const</code> std::<code class="ty">string</code>&amp;</td><td>着色器索引键。</td></tr>
+                    <tr><td><code>fragPath</code></td><td><code class="kw">const</code> std::<code class="ty">filesystem::path</code>&amp;</td><td>片段着色器源文件路径。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>加载并编译成功返回 <code class="kw">true</code>，失败返回 <code class="kw">false</code>。</p>
+        </section>
+
+        <!-- ===== loadVertex (file path) ===== -->
+        <section id="loadvertex-file">
+            <h2>loadVertex — 从文件加载（仅顶点）</h2>
+            <p>仅从磁盘文件加载并编译顶点着色器。</p>
+
+            <h3 id="loadvertex-file">loadVertex</h3>
+            <pre><code> <span class="kw">bool</span> <span class="fn">loadVertex</span>(
+    <span class="kw">const</span> std::<span class="ty">string</span>&amp; key,
+    <span class="kw">const</span> std::<span class="ty">filesystem::path</span>&amp; vertPath
+);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>key</code></td><td><code class="kw">const</code> std::<code class="ty">string</code>&amp;</td><td>着色器索引键。</td></tr>
+                    <tr><td><code>vertPath</code></td><td><code class="kw">const</code> std::<code class="ty">filesystem::path</code>&amp;</td><td>顶点着色器源文件路径。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>加载并编译成功返回 <code class="kw">true</code>，失败返回 <code class="kw">false</code>。</p>
+        </section>
+
+        <!-- ===== load (source string) ===== -->
+        <section id="load-source">
+            <h2>load — 从源码字符串加载（顶点+片段）</h2>
+            <p>直接从内存中的源码字符串编译顶点和片段着色器，无需读取文件。</p>
+
+            <h3 id="load-source">load</h3>
+            <pre><code> <span class="kw">bool</span> <span class="fn">load</span>(
+    <span class="kw">const</span> std::<span class="ty">string</span>&amp; key,
+    std::<span class="ty">string_view</span> vertSource,
+    std::<span class="ty">string_view</span> fragSource
+);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>key</code></td><td><code class="kw">const</code> std::<code class="ty">string</code>&amp;</td><td>着色器索引键。</td></tr>
+                    <tr><td><code>vertSource</code></td><td><code class="ty">std::string_view</code></td><td>顶点着色器源码字符串。</td></tr>
+                    <tr><td><code>fragSource</code></td><td><code class="ty">std::string_view</code></td><td>片段着色器源码字符串。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>编译成功返回 <code class="kw">true</code>，失败返回 <code class="kw">false</code>。</p>
+            <div class="note">
+                请使用 <code>GetShader</code> 函数通过 <code>key</code> 查找并使用已加载的着色器。
+            </div>
+        </section>
+
+        <!-- ===== loadFragment (source string) ===== -->
+        <section id="loadfragment-source">
+            <h2>loadFragment — 从源码字符串加载（仅片段）</h2>
+            <p>直接从内存中的源码字符串编译片段着色器。</p>
+
+            <h3 id="loadfragment-source">loadFragment</h3>
+            <pre><code> <span class="kw">bool</span> <span class="fn">loadFragment</span>(
+    <span class="kw">const</span> std::<span class="ty">string</span>&amp; key,
+    std::<span class="ty">string_view</span> fragSource
+);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>key</code></td><td><code class="kw">const</code> std::<code class="ty">string</code>&amp;</td><td>着色器索引键。</td></tr>
+                    <tr><td><code>fragSource</code></td><td><code class="ty">std::string_view</code></td><td>片段着色器源码字符串。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>编译成功返回 <code class="kw">true</code>，失败返回 <code class="kw">false</code>。</p>
+        </section>
+
+        <!-- ===== loadVertex (source string) ===== -->
+        <section id="loadvertex-source">
+            <h2>loadVertex — 从源码字符串加载（仅顶点）</h2>
+            <p>直接从内存中的源码字符串编译顶点着色器。</p>
+
+            <h3 id="loadvertex-source">loadVertex</h3>
+            <pre><code> <span class="kw">bool</span> <span class="fn">loadVertex</span>(
+    <span class="kw">const</span> std::<span class="ty">string</span>&amp; key,
+    std::<span class="ty">string_view</span> vertSource
+);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>key</code></td><td><code class="kw">const</code> std::<code class="ty">string</code>&amp;</td><td>着色器索引键。</td></tr>
+                    <tr><td><code>vertSource</code></td><td><code class="ty">std::string_view</code></td><td>顶点着色器源码字符串。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>编译成功返回 <code class="kw">true</code>，失败返回 <code class="kw">false</code>。</p>
+        </section>
+
+        <!-- ===== GetShader ===== -->
+        <section id="getshader">
+            <h2>GetShader — 获取着色器</h2>
+            <p>通过索引键查找已加载的着色器对象。</p>
+
+            <h3 id="getshader">GetShader</h3>
+            <pre><code> sf::<span class="tpl">Shader</span>* <span class="fn">GetShader</span>(<span class="kw">const</span> std::<span class="ty">string</span>&amp; key);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>key</code></td><td><code class="kw">const</code> std::<code class="ty">string</code>&amp;</td><td>着色器索引键。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>找到时返回着色器指针，未找到时返回 <code class="kw">nullptr</code>。</p>
+        </section>
+
+        <!-- ===== HasShader ===== -->
+        <section id="hasshader">
+            <h2>HasShader — 检查着色器是否存在</h2>
+            <p>判断指定索引键的着色器是否已加载。</p>
+
+            <h3 id="hasshader">HasShader</h3>
+            <pre><code> <span class="kw">bool</span> <span class="fn">HasShader</span>(<span class="kw">const</span> std::<span class="ty">string</span>&amp; key);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>key</code></td><td><code class="kw">const</code> std::<code class="ty">string</code>&amp;</td><td>着色器索引键。</td></tr>
+                </tbody>
+            </table>
+            <h4>返回值</h4>
+            <p>存在返回 <code class="kw">true</code>，否则返回 <code class="kw">false</code>。</p>
+        </section>
+
+        <!-- ===== RemoveShader ===== -->
+        <section id="removeshader">
+            <h2>RemoveShader — 删除着色器</h2>
+            <p>从管理器中移除并销毁指定着色器。</p>
+
+            <h3 id="removeshader">RemoveShader</h3>
+            <pre><code> <span class="kw">void</span> <span class="fn">RemoveShader</span>(<span class="kw">const</span> std::<span class="ty">string</span>&amp; key);</code></pre>
+            <h4>参数</h4>
+            <table class="doc-table">
+                <thead><tr><th>参数</th><th>类型</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>key</code></td><td><code class="kw">const</code> std::<code class="ty">string</code>&amp;</td><td>要删除的着色器索引键。</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ===== ClearShader ===== -->
+        <section id="clearshader">
+            <h2>ClearShader — 清除全部着色器</h2>
+            <p>销毁并移除所有已加载的着色器。</p>
+
+            <h3 id="clearshader">ClearShader</h3>
+            <pre><code> <span class="kw">void</span> <span class="fn">ClearShader</span>();</code></pre>
+            <div class="warning">
+                调用后所有已加载的着色器均会被销毁，通过 <code>GetShader</code> 获取的旧指针将变为悬空指针，请勿继续使用。
+            </div>
+        </section>
+
+        <section>
+            <h2>另请参阅</h2>
+            <ul>
+                <li><a href="../index.html">返回首页</a></li>
+                <li><a href="../Batch/Batch.html">XBatch — 批处理渲染</a></li>
+                <li><a href="../Graph/Graph_Image.html">XImage — 图片绘制</a></li>
+            </ul>
+        </section>
+    </main>
+</div>
+<script src="../js/toc.js"></script>
+</body>
+</html>
