@@ -170,3 +170,35 @@ ul { padding-left: 20px; text-align: left; }
 ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
 ::selection { background: var(--accent); color: #1a1620; }
+
+/* ============================================================
+   响应式：手机版（≤ 768px）隐藏 TOC
+   ============================================================ */
+@media (max-width: 768px) {
+    /* 隐藏左侧目录 */
+    .toc {
+        display: none;
+    }
+
+    /* 布局改为单列，让主内容占满宽度 */
+    .layout {
+        display: block;
+    }
+
+    /* 主内容区去掉多余内边距，节省手机屏幕空间 */
+    .container {
+        padding: 16px 18px;
+        max-width: 100%;
+    }
+
+    /* 面包屑缩小一点，避免溢出 */
+    .breadcrumb {
+        font-size: 11px;
+        padding: 8px 12px;
+    }
+
+    /* 标题适当缩小 */
+    .page-header h1 { font-size: 22px; }
+    h2 { font-size: 18px; margin: 28px 0 10px; }
+    h3 { font-size: 15px; }
+}
